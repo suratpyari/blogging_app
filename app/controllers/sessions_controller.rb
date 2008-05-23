@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
       redirect_to admin_users_url
     end
   end
-
+  #status 0 if user is enabled and 1 if disabled
   def create
     user = User.authenticate(params[:email], params[:password])
     if user && user.status==0

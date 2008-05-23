@@ -2,7 +2,6 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
 
   ROLE = [["Admin", 1], ["User", 2]]
-  STATUS = [["Enable", 0], ["Disable", 2]]
 
   attr_protected :username
   validates_presence_of :first_name, :email, :username
