@@ -1,5 +1,6 @@
 <div id="new_form">
   <h3> Add a new user </h3>
+  <%= error_messages_for 'user' %>
   <% form_for [:admin,@user], :html => {:id => "user_form", :multipart => true} do |f|%>
     <%= render :partial=> 'form' %>
     <div class ="divitem"><%= submit_tag "Add" %></div>

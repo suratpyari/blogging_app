@@ -10,7 +10,7 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def show
-    @user=User.find(params[:id]) rescue nil
+    @user=validate_user
   end
 
   def new
@@ -18,34 +18,32 @@ class Admin::UsersController < Admin::BaseController
   end
   
   def edit
-    @user=User.find(params[:id].to_i) rescue nil
+    @user=validate_user
   end
 
   def create
-    @user = User.new(params[:user])
+    @user = validate_user
     @user.username=params[:user][:username]
     if @user.save 
       flash[:notice] = "New user created"
       redirect_to admin_user_path(@user)
     else
-      flash[:msg]=@user.errors.full_messages.join("<br />")
       render :action => 'new'
     end   
   end
 
   def update
-    @user=User.find(params[:id])
+    @user=validate_user
     if @user.update_attributes(params[:user])
       flash[:msg]="user updated"
       redirect_to admin_user_path(@user)
     else
-      flash[:msg]=@user.errors.full_messages.join("<br />")
       render :action => 'new'
     end
   end
 
   def destroy
-    @user=User.find(params[:id]) rescue nil
+    @user=validate_user
     if current_user.role==1 && @user != current_user
       @user.destroy
       flash[:msg]="user is deleted"
@@ -55,4 +53,15 @@ class Admin::UsersController < Admin::BaseController
     redirect_to admin_users_path
   end
 
+  private
+
+  def validate_user
+    user=(User.find(params[:id]) rescue nil)
+    if user.nil?
+      flash[:msg] = "User does not exists"
+      redirect_to admin_users_path
+    else
+      return user
+    end
+  end
 end

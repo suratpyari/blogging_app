@@ -15,10 +15,10 @@ class ApplicationController < ActionController::Base
   protected
 
   def find_admin
-    admin=(User.find_by id_and_role(session[:user_id],1) rescue nil)
-    if !admin
-      flash[:notice] = "You are not an admin user"
-      redirect_to users_url
+    admin = User.find_by_id_and_role(session[:user_id],1)
+    unless admin
+      flash[:msg] = "You are not an admin user"
+      redirect_to admin_users_url
     end
   end
 
@@ -29,8 +29,8 @@ class ApplicationController < ActionController::Base
   def find_user
     user=(User.find(session[:user_id]) rescue nil)
       unless user
-      flash[:notice] = "Please log in"
-      redirect_to(:controller => "users" , :action => "login" )
+      flash[:msg] = "Please log in"
+      redirect_to new_session_path
     end
   end
 

@@ -15,13 +15,9 @@ class User < ActiveRecord::Base
   
   def self.authenticate(username, password)
     user = self.find_by_username(username)
-    if user
-      expected_password = encrypted_password(password, user.salt)
-      if user.hashed_password != expected_password
-        user = nil
-      end
-    end
-    user
+    return false unless user
+    user = nil unless user.hashed_password == encrypted_password(password, user.salt)
+    return user
   end
   
   def password
@@ -44,6 +40,10 @@ class User < ActiveRecord::Base
       new_file="public/images/#{self.username}.jpg"
       img.write(new_file)
     end
+  end
+
+  def after_destroy
+    File.delete("public/images/#{self.username}.jpg") if File.exist?("public/images/#{self.username}.jpg")
   end
 
   private
