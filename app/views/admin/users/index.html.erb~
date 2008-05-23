@@ -1,0 +1,17 @@
+<h3>List of Users</h3>
+
+<% for @user in @users %>
+  <div id='list-#{@user.id}'>
+    <%= h(@user.first_name) %> <%= h(@user.last_name) %>
+    <%= link_to "Show", admin_user_path(@user) %>
+    <% if current_user.role==1 %>
+      <%= link_to "delete", admin_user_path(@user), :method => :delete %>
+    <% end %>
+  </div>
+<% end %>
+<hr />
+<% if current_user.role==1 %>
+  <%= link_to "Add New User", new_admin_user_path %> |
+<% end %>
+
+  <%= link_to "Logout", sessions_path, :method => :delete %>

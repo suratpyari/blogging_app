@@ -1,0 +1,11 @@
+.divitem, .divfield{
+  width: 30%;
+  margin: 0;
+  padding: 1%;
+  float: left;
+}
+.divitem{
+  clear :both;
+  width: 20%;
+}
+

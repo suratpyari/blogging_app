@@ -1,0 +1,26 @@
+.divitem, .divfield{
+  width: 30%;
+  margin: 0;
+  padding: 1%;
+  float: left;
+}
+.divitem{
+  clear :both;
+  width: 20%;
+}
+.name{
+  clear: both;
+  width: 20%;
+}
+.show, .delete{
+  width: 10%;
+}
+.name, .show, .delete{
+  margin: 0;
+  padding: 1%;
+  float:left;
+}
+#new_form{
+  width: 40%;
+  float:left;
+}

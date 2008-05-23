@@ -1,0 +1,6 @@
+<div id="edit_form">
+  <h3> Edit user </h3>
+  <% form_for @user, :html => {:id => "user_form"} do |f|%>
+    <%= render :partial=> 'form' %>
+  <% end %>
+</div>

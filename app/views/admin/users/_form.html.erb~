@@ -1,0 +1,30 @@
+<div class ="divitem">First name:</div>
+  <div class ="divfield"><%= text_field :user, :first_name %></div>
+
+<div class ="divitem">Last name:</div>
+  <div class ="divfield"><%= text_field :user, :last_name %></div>
+
+<% if controller.action_name == 'new' ||  controller.action_name == 'create'%>
+  <div class ="divitem">Username:</div>
+    <div class ="divfield"><%= text_field :user, :username %></div>
+<% end %>
+
+<div class ="divitem">E-Mail:</div>
+  <div class ="divfield"><%= text_field :user, :email %></div>
+
+<div class ="divitem">Password:</div>
+  <div class ="divfield"><%= password_field :user, :password %></div>
+
+<div class ="divitem">Confirm password:</div>
+  <div class ="divfield"><%= password_field :user, :password_confirmation %></div>
+
+<div class ="divitem">Role:</div>
+  <div class ="divfield">
+    <%= select :user, :role, (User::ROLE) %></div>
+
+
+<div class ="divitem">Upload file:</div>
+  <div class ="divfield"><%= file_field :user, 'uploaded_pic_file' %></div>
+
+<%= radio_button( :user, :status, 0 )%> Enable
+<%= radio_button( :user, :status, 1 )%> Disable

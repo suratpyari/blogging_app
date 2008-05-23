@@ -1,0 +1,9 @@
+<div id="login">
+  <% form_tag do %>
+    <div class="divitem">Username:</div>
+      <div class="divfield"><%= text_field_tag :email, params[:email] %></div>
+    <div class="divitem">Password:</div>
+      <div class="divfield"> <%= password_field_tag :password, params[:password] %></div>
+    <div class="divitem"><%= submit_tag "Login" %></div>
+  <% end %>
+</div>

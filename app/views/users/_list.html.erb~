@@ -1,0 +1,5 @@
+<div id='list-#{@user.id}'>
+  <div class="name"><%= h(@user.first_name) %> <%= h(@user.last_name) %></div>
+  <div class="show"><%= link_to "Show", :action => :show, :id => @user.id %></div>
+  <div class="delete"><%= link_to "delete", :action => :delete, :id => @user.id %></div>
+</div>
