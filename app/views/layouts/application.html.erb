@@ -4,6 +4,16 @@
     <%= javascript_include_tag :defaults %>
   </head>
   <body>
+    <div id="menu">
+      <% if session[:user_id] %>
+        <%= link_to "List of users", admin_users_path %>
+        | <%= link_to "logout", session_path, :method => :delete %>
+        <% if current_user.role==1 %>
+          | <%= link_to "Add new user", new_admin_user_path %>
+        <% end %>
+      <hr />
+      <% end %>
+    </div>
     <div id="flash">
       <%= flash[:msg] %>
     </div>

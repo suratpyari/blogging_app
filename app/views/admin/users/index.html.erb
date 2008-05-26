@@ -10,8 +10,3 @@
   </div>
 <% end %>
 <hr />
-<% if current_user.role==1 %>
-  <%= link_to "Add New User", new_admin_user_path %> |
-<% end %>
-
-  <%= link_to "Logout", session_path, :method => :delete %>
