@@ -65,11 +65,11 @@ class Admin::UsersController < Admin::BaseController
     user=User.find_by_email(params[:email])
     if user
       user.update_attribute('token',Digest::SHA1.hexdigest(rand.to_s))
-      email_confirm = PasswordMailer.create_confirm(user)
-      email = PasswordMailer.create_sent(user)
+      url = edit_password_admin_users_path(:token => user.token, :only_path => false)
+      email = PasswordMailer.create_sent(user, url)
       email.set_content_type("text/html" )
       PasswordMailer.deliver(email)
-      render(:text => "<pre>"+email_confirm.encoded+"<pre>")
+      redirect_to new_session_path
     else
       flash[:msg]="user does not exist"
       render :action => 'forgot_password'
