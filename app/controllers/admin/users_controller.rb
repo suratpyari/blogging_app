@@ -22,10 +22,10 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def create
-    @user = validate_user
+    @user = User.new(params[:user])
     @user.username=params[:user][:username]
     if @user.save 
-      flash[:notice] = "New user created"
+      flash[:msg] = "New user created"
       redirect_to admin_user_path(@user)
     else
       render :action => 'new'
@@ -64,4 +64,5 @@ class Admin::UsersController < Admin::BaseController
       return user
     end
   end
+
 end

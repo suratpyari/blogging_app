@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   def find_admin
     admin = User.find_by_id_and_role(session[:user_id],1)
     unless admin
-      flash[:msg] = "You are not an admin user"
+      flash[:msg] = "You are not an administrator"
       redirect_to admin_users_url
     end
   end
