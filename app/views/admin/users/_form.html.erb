@@ -18,15 +18,19 @@
 <div class ="divitem">Confirm password:</div>
   <div class ="divfield"><%= password_field :user, 'password_confirmation' %></div>
 
-<div class ="divitem">Role:</div>
-  <div class ="divfield">
-    <%= select :user, :role, (User::ROLE) %></div>
+<% if current_user.role == 1 %>
 
+  <div class ="divitem">Role:</div>
+    <div class ="divfield">
+      <%= select :user, :role, (User::ROLE) %>
+    </div>
+
+  <div class ="divitem">
+    <%= radio_button( :user, :status, 0 )%> Enable
+    <%= radio_button( :user, :status, 1 )%> Disable
+  </div>
+
+<% end %>
 
 <div class ="divitem">Upload file:</div>
   <div class ="divfield"><%= file_field :user, 'uploaded_pic_file' %></div>
-
-<div class ="divitem">
-  <%= radio_button( :user, :status, 0 )%> Enable
-  <%= radio_button( :user, :status, 1 )%> Disable
-</div>

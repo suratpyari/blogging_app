@@ -1,0 +1,3 @@
+PasswordMailer#confirm
+
+Find me in app/views/password_mailer/confirm.erb

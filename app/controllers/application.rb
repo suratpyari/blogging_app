@@ -3,6 +3,7 @@
 
 require 'ftools'
 require 'RMagick'
+require 'digest/sha1'
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
 

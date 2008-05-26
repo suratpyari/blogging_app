@@ -56,4 +56,11 @@ Rails::Initializer.run do |config|
 
   # Make Active Record use UTC-base instead of local time
   # config.active_record.default_timezone = :utc
+config.action_mailer.smtp_settings = {             
+  :address =>        "smtp.gmail.com",
+  :port =>           587,
+  :domain =>         "gmail.com",
+  :authentication => :plain,
+}
 end
+

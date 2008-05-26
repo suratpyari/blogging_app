@@ -1,0 +1,3 @@
+PasswordMailer#sent
+
+Find me in app/views/password_mailer/sent.erb

@@ -1,9 +1,10 @@
 <div id="login">
   <% form_tag session_path do %>
     <div class="divitem">Username:</div>
-      <div class="divfield"><%= text_field_tag :email, params[:email] %></div>
+      <div class="divfield"><%= text_field_tag :username, params[:username] %></div>
     <div class="divitem">Password:</div>
       <div class="divfield"> <%= password_field_tag :password, params[:password] %></div>
     <div class="divitem"><%= submit_tag "Login" %></div>
   <% end %>
+  <%= link_to "Forgot your password?", forgot_password_admin_users_path %>
 </div>

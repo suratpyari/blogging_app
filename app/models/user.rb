@@ -1,4 +1,4 @@
-require 'digest/sha1'
+
 class User < ActiveRecord::Base
 
   ROLE = [["Admin", 1], ["User", 2]]
