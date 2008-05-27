@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
   ROLE = [["Admin", 1], ["User", 2]]
 
   attr_protected :username
-  validates_presence_of :first_name, :email, :username
-  validates_uniqueness_of :username, :email
+  #validates_presence_of :first_name, :email, :username
+  #validates_uniqueness_of :username, :email
   attr_accessor :password_confirmation
   validates_confirmation_of :password
 
