@@ -1,9 +1,0 @@
-<%= image_tag("#{@user.username}.jpg") %>
-Name:<%= h(@user.first_name) %> <%= h(@user.last_name) %><br>
-Username: <%= h(@user.username) %><br>
-Email: <%= h(@user.email) %><br>
-Role: <%= User::ROLE.find{|b| b=@user.role}[0] %><br>
-<% if current_user.role==1 %>
-  <%= link_to "Edit", edit_admin_user_path(@user) %> | 
-<% end %>
-<%= link_to "Back", admin_users_path %>

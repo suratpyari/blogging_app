@@ -1,5 +1,0 @@
-Dear <%= @user.first_name %> <%= @user.last_name %> <br />
-You have a new account having 
-Username : <%= @user.username %><br />
-Role : <%= @user.role %>
- 

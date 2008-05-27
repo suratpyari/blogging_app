@@ -1,8 +1,0 @@
-if @user.id 
-  page.insert_html :bottom, :list, :partial => 'list'
-  page.replace_html :flash, "new user created"
-  page.replace_html :error, ""
-  page.replace_html :user_form, :partial => 'form'
-else 
-  page.replace_html :error, @user.errors.full_messages.join("<br />")
-end

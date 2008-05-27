@@ -1,7 +1,0 @@
-<div id="edit_form">
-  <h3> Edit user </h3>
-  <% form_for [:admin,@user], :method => 'put', :html => {:id => "user_form"} do |f|%>
-    <%= render :partial=> 'form' %>
-    <div class ="divitem"><%= submit_tag "Edit" %></div>
-  <% end %>
-</div>
