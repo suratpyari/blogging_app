@@ -9,11 +9,11 @@ class SessionsController < ApplicationController
   #status 0 if user is enabled and 1 if disabled
   def create
     user = User.authenticate(params[:username], params[:password])
-    if user && user.status==0
+    if user && user.status == 0
       session[:user_id] = user.id
       redirect_to admin_users_url
     else
-      flash.now[:msg] = "You cannot login" if user
+      flash.now[:msg] = "You cannot login. Your account id disabled. Please contact to administrator" if user
       flash.now[:msg] = "Invalid user/password combination" if !user
       render :action => 'new'
     end
@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
 
   def destroy
     reset_session
-    flash[:msg]="Thanks for your visit"
+    flash[:msg] = "Thanks for your visit"
     redirect_to new_session_url
   end
 

@@ -1,0 +1,13 @@
+<% if @posts.empty? %>
+  <div> There is no post</div>
+<% else %>
+  <div>
+    <% for post in @posts %>
+      <%= link_to post.title, post_path(post) %>
+      <%= link_to "delete", post_path(post), :method => :delete %>
+    <% end %>
+  </div>
+<% end %>
+<% if current_user.role == 1 %>
+  <%= link_to "new post", new_post_path %>
+<% end %>

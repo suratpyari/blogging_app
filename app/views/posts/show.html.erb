@@ -1,0 +1,12 @@
+<div id="title">Title: <%= h @post.title %></div>
+<div>Content: <%= h @post.content %></div>
+<div>Author: <%= h @post.user.first_name %> <%= h @post.user.last_name %></div>
+<div>status: <%= Post::STATUS[@post.status][0] %> </div>
+<div>categories:
+  <% for cat in @post.categories %>
+    <%= cat.category_name %>,
+  <% end %>
+</div>
+<div>ctrated_at: <%= @post.created_at %></div>
+<div>updated_at: <%= @post.updated_at %></div>
+<div><%= link_to "Edit", edit_post_path(@post) %></div>

@@ -1,11 +1,13 @@
 
 class User < ActiveRecord::Base
+  
+  has_many :posts
 
   ROLE = [["Admin", 1], ["User", 2]]
 
   attr_protected :username
-  #validates_presence_of :first_name, :email, :username
-  #validates_uniqueness_of :username, :email
+  validates_presence_of :first_name, :email, :username
+  validates_uniqueness_of :username, :email
   attr_accessor :password_confirmation
   validates_confirmation_of :password
 
@@ -37,7 +39,7 @@ class User < ActiveRecord::Base
       img.change_geometry!('100x100'){ |cols, rows, im|
         im.resize!(cols, rows)
       }
-      new_file="public/images/#{self.username}.jpg"
+      new_file = "public/images/#{self.username}.jpg"
       img.write(new_file)
     end
   end

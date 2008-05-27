@@ -1,0 +1,8 @@
+<div id="new_post">
+  <h3> New post </h3>
+  <%= error_messages_for 'post' %>
+  <% form_for @post do |f|%>
+    <%= render :partial=> 'form' %>
+    <div class ="divitem"><%= submit_tag "Create" %></div>
+  <% end %>
+</div>
