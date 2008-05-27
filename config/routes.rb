@@ -30,7 +30,8 @@ ActionController::Routing::Routes.draw do |map|
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.
-  map.resources :users
+  
+  map.resources :posts
   map.resource :session
   map.connect '', :controller => 'sessions', :action => 'new'
   map.connect ':controller/:id/:action/'
