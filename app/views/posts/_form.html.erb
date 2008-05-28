@@ -1,18 +1,16 @@
 <div class ="divitem">Title:</div>
-  <div class ="divfield"><%= text_field :post, 'title' %></div>
+  <div class ="divfield"><%= text_field :post, :title %></div>
 
 <div class ="divitem">Content:</div>
-  <div class ="divfield"><%= text_area :post, 'content' %></div>
+  <div class ="divfield"><%= text_area :post, :content %></div>
 
 <div class ="divitem">Status:</div>
-  <div class ="divfield"><%= select :post, 'status', (Post::STATUS) %></div>
+  <div class ="divfield"><%= select :post, :status, (Post::STATUS) %></div>
 
 <div class ="divitem">Categories:</div>
   <div class ="divfield">
-    <% @category = Category.find(:all) %>
+    <% @category = Category.find(:all, :conditions => ["category_name != 'Uncategorized'"]) %>
     <% for cat in @category %>
-      <% if cat.category_name != 'Uncategorized' %>
-        <%= check_box_tag "post[category_ids][]", "#{cat.id}" %><%= cat.category_name %><br />
-      <% end %>
+      <%= check_box_tag "post[category_ids][]", "#{cat.id}" %><%= cat.category_name %><br />
     <% end %>
   </div>

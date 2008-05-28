@@ -1,17 +1,17 @@
 class PostsController < ApplicationController
 
-  before_filter :find_admin, :only => ['new', 'create']
+  before_filter :find_user, :only => [:new, :create]
+  before_filter :verify_post, :only => [:show, :edit, :update, :destroy]
   
   def index
     if current_user.role == 1
       @posts = Post.find(:all)
     else
-      @posts = find_by_status(1)
+      @posts = Post.find_all_by_status(1)
     end
   end
 
   def show
-    @post = verify_post
   end
 
   def new
@@ -34,11 +34,9 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = verify_post
   end
 
   def update
-    @post = verify_post
     if @post.update_attributes(params[:post])
       if @post.categories.empty?
         @post.categories << Category.find_by_category_name('Uncategorized')
@@ -53,7 +51,6 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = verify_post
     if @post.user_id == current_user.id
       @post.destroy
       flash[:msg] = "#{@post.title} deleted"
@@ -66,12 +63,10 @@ class PostsController < ApplicationController
   private
 
   def verify_post
-    post = (Post.find(params[:id]) rescue nil)
-    if post.nil?
+    @post = (Post.find(params[:id]) rescue nil)
+    if @post.nil?
       flash[:msg] = "Post with id #{params[:id]} does not exist"
       redirect_to posts_path :id => current_user.id
-    else
-      return post
     end
   end
 
