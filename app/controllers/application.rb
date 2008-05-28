@@ -32,11 +32,7 @@ class ApplicationController < ActionController::Base
 
   # returns true if current user is administrator
   def is_admin?
-    if current_user.role == 1
-      true
-    else
-      false
-    end
+    current_user.role == 1
   end
 
   # checks is there any user logged in

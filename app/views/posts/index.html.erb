@@ -1,34 +1,29 @@
 <% if @posts.empty? %>
   <div> There is no post</div>
 <% else %>
-  <hr />
-  <div>
-    <div id="head" %>
-      <div class="title">Title</div>
-      <div class="author">Author</div>
-      <div class="status">Status</div>
-      <div class="created">Created at</div>
-      <div class="updated">Updated at</div>
-    </div>
-    <hr />
-    <% for post in @posts %>
-      <div>
-        <div class="title"><%= link_to h(post.title), post_path(post) %></div>
-        <div class="author"><%= h post.user.first_name %> <%= h post.user.last_name %></div>
-        <div class="status"><%= Post::STATUS[post.status][0] %></div>
-        <div class="created"><%= post.created_at.strftime("%m-%d-%Y") %></div>
-        <div class="updated"><%= post.updated_at.strftime("%m-%d-%Y") %></div>
-        <div class="del">
-        <% if session[:user_id] %>
-          <% if is_admin? || post.user.id == current_user.id %>
-            <%= link_to "delete", post_path(post), :method => :delete %>
-          <% end %>
-        <% end %>
-        </div>
+  <% for post in @posts %>
+    <div id = "post"+<%= post.id %> >
+      <div class="title">
+        <h1><%= link_to h(post.title), post_path(post) %></h1>
       </div>
-        <hr />
-    <% end %>
-  </div>
+      <div class="created">
+        <%= post.created_at.strftime("%m-%d-%Y") %>
+      </div>
+      <div class="post">
+        <%= truncate(post.content, 500) %>
+      </div>
+      <div class="author">posted by
+        <%= h post.user.first_name %> <%= h post.user.last_name %>
+      </div>
+      <div class="del">
+      <% if session[:user_id] %>
+        <% if is_admin? || post.user.id == current_user.id %>
+          <%= link_to "delete", post_path(post), :method => :delete %>
+        <% end %>
+      <% end %>
+      </div>
+    </div>
+  <% end %>
 <% end %>
 <% if session[:user_id] %>
   <%= link_to "new post", new_post_path %>

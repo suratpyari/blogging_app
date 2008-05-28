@@ -8,13 +8,9 @@
   clear :both;
   width: 20%;
 }
-.title{
-  clear : both;
+.post {
+  margin-top : 3%;
+  margin-bottom : 3%;
 }
-.title, .author, .status, .created, .updated, .del{
-  float : left;
-  width : 16%;
-}
-hr{
-  clear : both;
-}
+
+

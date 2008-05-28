@@ -1,18 +1,22 @@
-<div id="title">Title: <%= h @post.title %></div>
-<div>Content: <%= h @post.content %></div>
-<div>Author: <%= h @post.user.first_name %> <%= h @post.user.last_name %></div>
-<div>status: <%= Post::STATUS[@post.status][0] %> </div>
-<div>categories:
- <%= @post.categories.collect{|c| c.category_name}.join(', ') %>
-</div>
-<div>created_at: <%= @post.created_at %></div>
-<div>updated_at: <%= @post.updated_at %></div>
-<hr />
-<% if session[:user_id] %>
-  <% if @post.user.id == current_user.id || is_admin? %>
-    <div>
-      <%= link_to "Edit", edit_post_path(@post) %>
-      <%= link_to "Delete", post_path(@post), :method => :delete %>
-    </div>
+<div id = "@post"+<%= @post.id %> >
+  <div class="title">
+    <h1><%= link_to h(@post.title), post_path(@post) %></h1>
+  </div>
+  <div class="created">
+    <%= @post.created_at.strftime("%m-%d-%Y") %>
+  </div>
+  <div class="post">
+    <%= @post.content %>
+  </div>
+  <div class="author">
+    posted by <%= h @post.user.first_name %> <%= h @post.user.last_name %>
+  </div>
+  <% if session[:user_id] %>
+    <% if @post.user.id == current_user.id || is_admin? %>
+      <div>
+        <%= link_to "Edit", edit_post_path(@post) %>
+        <%= link_to "Delete", post_path(@post), :method => :delete %>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>

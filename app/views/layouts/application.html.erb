@@ -7,15 +7,15 @@
     <div id="menu">
       <% if session[:user_id] %>
         <%= link_to "Users", admin_users_path %>
-        | <%= link_to "Posts", posts_path %>
         | <%= link_to "logout", session_path, :method => :delete %>
         <% if is_admin? %>
           | <%= link_to "Add new user", new_admin_user_path %>
         <% end %>
-      <hr />
       <% else %>
           <%= link_to "login", new_session_path %>
       <% end %>
+      | <%= link_to "Posts", posts_path %>      
+      <hr />
     </div>
     <div id="flash">
       <%= flash[:msg] %>
