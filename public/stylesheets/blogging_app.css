@@ -8,4 +8,13 @@
   clear :both;
   width: 20%;
 }
-
+.title{
+  clear : both;
+}
+.title, .author, .status, .created, .updated, .del{
+  float : left;
+  width : 16%;
+}
+hr{
+  clear : both;
+}

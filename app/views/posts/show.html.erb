@@ -7,4 +7,12 @@
 </div>
 <div>created_at: <%= @post.created_at %></div>
 <div>updated_at: <%= @post.updated_at %></div>
-<div><%= link_to "Edit", edit_post_path(@post) %></div>
+<hr />
+<% if session[:user_id] %>
+  <% if @post.user.id == current_user.id || is_admin? %>
+    <div>
+      <%= link_to "Edit", edit_post_path(@post) %>
+      <%= link_to "Delete", post_path(@post), :method => :delete %>
+    </div>
+  <% end %>
+<% end %>

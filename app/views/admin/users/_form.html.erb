@@ -18,7 +18,7 @@
 <div class ="divitem">Confirm password:</div>
   <div class ="divfield"><%= password_field :user, 'password_confirmation' %></div>
 
-<% if current_user.role == 1 %>
+<% if is_admin? %>
 
   <div class ="divitem">Role:</div>
     <div class ="divfield">

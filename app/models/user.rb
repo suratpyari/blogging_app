@@ -43,6 +43,10 @@ class User < ActiveRecord::Base
       img.write(new_file)
     end
   end
+  
+  def image?
+    File.exist?("public/images/#{self.username}.jpg")
+  end
 
   def after_destroy
     File.delete("public/images/#{self.username}.jpg") if File.exist?("public/images/#{self.username}.jpg")

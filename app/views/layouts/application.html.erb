@@ -9,10 +9,12 @@
         <%= link_to "Users", admin_users_path %>
         | <%= link_to "Posts", posts_path %>
         | <%= link_to "logout", session_path, :method => :delete %>
-        <% if current_user.role==1 %>
+        <% if is_admin? %>
           | <%= link_to "Add new user", new_admin_user_path %>
         <% end %>
       <hr />
+      <% else %>
+          <%= link_to "login", new_session_path %>
       <% end %>
     </div>
     <div id="flash">

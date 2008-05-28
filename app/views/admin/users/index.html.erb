@@ -4,7 +4,7 @@
   <div id='list-#{@user.id}'>
     <%= h(@user.first_name) %> <%= h(@user.last_name) %>
     <%= link_to "Show", admin_user_path(@user) %>
-    <% if current_user.role==1  && @user != current_user%>
+    <% if is_admin?  && @user != current_user%>
       <%= link_to "delete", admin_user_path(@user), :method => :delete %>
     <% end %>
   </div>

@@ -33,7 +33,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :posts
   map.resource :session
-  map.connect '', :controller => 'sessions', :action => 'new'
+  map.connect '', :controller => 'posts', :action => 'index'
   map.connect ':controller/:id/:action/'
   map.connect ':controller/:id/:action.:format'
 end
