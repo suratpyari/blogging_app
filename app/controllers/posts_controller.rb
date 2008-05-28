@@ -31,6 +31,7 @@ class PostsController < ApplicationController
   def create
     @post=Post.new(params[:post])
     @post.user_id = current_user.id
+    # category of post is uncategorized if it is not set by user
     @post.categories << Category.find_by_category_name('Uncategorized') if @post.categories.empty?
     if @post.save
       flash[:msg] = "new post created"
@@ -41,7 +42,7 @@ class PostsController < ApplicationController
     end
   end
 
-  
+  # updates the post
   def update
     if @post.update_attributes(params[:post])
       @post.categories << Category.find_by_category_name('Uncategorized') if @post.categories.empty?
@@ -54,18 +55,21 @@ class PostsController < ApplicationController
     end
   end
 
+  # destroy the post when either post is created by current user or user id an administrator
+  # else redirects to posts/index
   def destroy
-    if @post.user_id == current_user.id
+    if @post.user_id == current_user.id || is_admin?
       @post.destroy
       flash[:msg] = "#{@post.title} deleted"
     else
       flash[:msg] = "Cannot delete this post. This is not created by you"
     end
-    redirect_to posts_path :id => current_user.id
+    redirect_to posts_path
   end
 
   private
 
+  # if post with given id exists it returns post of that id else redirects to posts/index
   def verify_post
     @post = (Post.find(params[:id]) rescue nil)
     if @post.nil?

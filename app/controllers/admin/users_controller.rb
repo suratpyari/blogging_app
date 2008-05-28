@@ -28,7 +28,7 @@ class Admin::UsersController < Admin::BaseController
   # Creates a new user and send a email to the user about his account.
   def create
     @user = User.new(params[:user])
-    @user.username = params[:user][:username]
+    @user.username = params[:user][:username] 
     if @user.save 
       flash[:msg] = "New user created"
       email = AccountMailer.create_sent(@user)
@@ -100,7 +100,7 @@ class Admin::UsersController < Admin::BaseController
 
   private
 
-  # if user with given id exists the returns user of that id else redirect to
+  # if user with given id exists it returns user of that id else redirects to
   # admin/users/index
   def validate_user
     user = (User.find(params[:id]) rescue nil)
@@ -114,7 +114,7 @@ class Admin::UsersController < Admin::BaseController
 
   # If user with given id is editable by current user then returns user and if
   # user with given id does not exists or current user is not an administrator then
-  # redirect to admin/users/index
+  # redirects to admin/users/index
   def validate_edit_user
     user = (User.find(params[:id]) rescue nil)
     if (user.nil?)&&( !is_admin?)

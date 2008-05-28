@@ -5,16 +5,20 @@ class User < ActiveRecord::Base
 
   ROLE = [["Admin", 1], ["User", 2]]
 
+  # username can not be changed
   attr_protected :username
   validates_presence_of :first_name, :email, :username
   validates_uniqueness_of :username, :email
   attr_accessor :password_confirmation
   validates_confirmation_of :password
 
+  # validates if password is blank or not 
   def validate
-    errors.add_to_base("password can't be blank") if hashed_password.blank?
+    errors.add_to_base("password cannot be blank") if hashed_password.blank?
   end
-  
+
+  # When user tries to login checks user with given username and password exists or not
+  # and returns user else return false  
   def self.authenticate(username, password)
     user = self.find_by_username(username)
     return false unless user
@@ -29,10 +33,11 @@ class User < ActiveRecord::Base
   def password=(pwd)
     @password = pwd
     return if pwd.blank?
-    self.salt = rand.to_s
+    self.salt = rand.to_s #creates salt by generating random number
     self.hashed_password = User.encrypted_password(self.password, self.salt)
   end
 
+  # saves uploaded picture in public/images with name of username
   def uploaded_pic_file=(pic_file)
     if !pic_file.blank?
       img = Magick::Image.from_blob(pic_file.read).first
@@ -44,16 +49,19 @@ class User < ActiveRecord::Base
     end
   end
   
+  # returns true if picture of user exists else return false
   def image?
     File.exist?("public/images/#{self.username}.jpg")
   end
 
+  # deletes the picture of user in public/images when user is deleted
   def after_destroy
     File.delete("public/images/#{self.username}.jpg") if File.exist?("public/images/#{self.username}.jpg")
   end
 
   private
-  
+
+  # encrypt password using salt  
   def self.encrypted_password(password, salt)
     new_string = password+salt
     Digest::SHA1.hexdigest(new_string)
