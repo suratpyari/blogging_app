@@ -5,7 +5,11 @@
   </head>
   <body>
     <div id="menu">
-      <%= link_to "login", new_session_path %>
+      <%= link_to "Users", admin_users_path %>
+      <%= link_to "logout", session_path, :method => :delete %>
+      <% if is_admin? %>
+        | <%= link_to "Add new user", new_admin_user_path %>
+      <% end %>
       | <%= link_to "Posts", posts_path %>      
       <hr />
     </div>

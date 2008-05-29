@@ -1,5 +1,6 @@
 class Admin::UsersController < Admin::BaseController
-
+  
+  layout 'admin'
   # Logged user must be an administrator for these actions
   before_filter :find_admin, :only => ['new', 'create', 'destroy'] 
 
