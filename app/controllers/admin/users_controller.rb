@@ -48,7 +48,7 @@ class Admin::UsersController < Admin::BaseController
       flash[:msg] = "username: #{@user.username} updated"
       redirect_to admin_user_path(@user)
     else # If user is not updated
-      render :action => 'Edit'
+      render :action => 'edit'
     end
   end
 

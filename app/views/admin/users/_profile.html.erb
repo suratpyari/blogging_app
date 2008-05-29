@@ -4,6 +4,6 @@ Username: <%= h(@user.username) %><br>
 Email: <%= h(@user.email) %><br>
 <%  if @user.biodata %>
   Biodata :<br>
-  <%= h @user.biodata %><br />
+  <%=  @user.biodata %><br />
 <% end %>
 Role: <%= User::ROLE[@user.role-1][0] %><br>

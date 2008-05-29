@@ -9,14 +9,16 @@ class PostsController < ApplicationController
     # lists only those post which are published
     # and status is 1 for published and 0 for unpublished posts.
     if !session[:user_id]
-      @posts = Post.paginate :page => params[:page], :per_page => 1
+      @posts = Post.paginate :page => params[:page], :condition => 'status = 1', :per_page => 1
       #@posts = Post.find_all_by_status(1)
 
     # when current user is an administrator then lists all the posts
     # else lists only those posts which are either published or created by current user
     else if is_admin?
-      @posts = Post.find(:all)
+      @posts = Post.paginate :page => params[:page], :per_page => 1
+      #@posts = Post.find(:all)
       else
+        @posts = Post.paginate :page => params[:page], :condition => ["status = 1 or user_id = ?", current_user.id] , :per_page => 1
         @posts = (Post.find_all_by_status(1)+current_user.posts).uniq!
       end
     end
