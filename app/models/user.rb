@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
     end
   end
   
-  # returns true if picture of user exists else return false
+  # returns path of picture of picture exists else return path of default picture
   def image
     if File.exist?("public/images/profile_images/#{self.username}.jpg")
       img_path = "/images/profile_images/#{self.username}.jpg"
@@ -62,6 +62,10 @@ class User < ActiveRecord::Base
   # deletes the picture of user in public/images when user is deleted
   def after_destroy
     File.delete("public/images/#{self.username}.jpg") if File.exist?("public/images/#{self.username}.jpg")
+  end
+
+  def name
+    self.first_name+' '+self.last_name
   end
 
   private

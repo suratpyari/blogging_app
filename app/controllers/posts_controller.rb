@@ -16,7 +16,7 @@ class PostsController < ApplicationController
       @posts = Post.find(:all)
       else
         @posts = (Post.find_all_by_status(1)+current_user.posts).uniq!
-    end
+      end
     end
   end
 

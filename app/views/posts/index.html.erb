@@ -13,7 +13,7 @@
         <%= truncate(post.content, 500) %>
       </div>
       <div class="author">posted by
-        <%= h post.user.first_name %> <%= h post.user.last_name %>
+        <%= link_to post.user.name, user_path(post.user.username)%>
       </div>
       <div class="del">
       <% if session[:user_id] %>

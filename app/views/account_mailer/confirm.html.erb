@@ -1,6 +1,0 @@
-Dear <%= @user.first_name %> <%= @user.last_name %>
-You have a new account having 
-Username : <%= @user.username %>
-Role : <%= User::ROLE[@user.role-1][0] %>
-Password : <%= @user.password %>
-<%= link_to "show profile", admin_user_path(@user) %>

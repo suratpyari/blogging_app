@@ -32,6 +32,7 @@ ActionController::Routing::Routes.draw do |map|
   # Install the default routes as the lowest priority.
   
   map.resources :posts
+  map.resources :users
   map.resource :session
   map.connect '', :controller => 'posts', :action => 'index'
   map.connect ':controller/:id/:action/'

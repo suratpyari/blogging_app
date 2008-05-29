@@ -9,7 +9,7 @@
     <%= @post.content %>
   </div>
   <div class="author">
-    posted by <%= h @post.user.first_name %> <%= h @post.user.last_name %>
+    posted by <%= h @post.user.name %>
   </div>
   <% if session[:user_id] %>
     <% if @post.user.id == current_user.id || is_admin? %>

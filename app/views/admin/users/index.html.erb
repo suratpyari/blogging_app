@@ -2,7 +2,7 @@
 
 <% for @user in @users %>
   <div id='list-#{@user.id}'>
-    <%= h(@user.first_name) %> <%= h(@user.last_name) %>
+    <%= h(@user.name) %>
     <%= link_to "Show", admin_user_path(@user) %>
     <% if is_admin?  && @user != current_user%>
       <%= link_to "delete", admin_user_path(@user), :method => :delete, :confirm => 'Are you sure?' %>
