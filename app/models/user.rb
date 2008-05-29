@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username, :email
   attr_accessor :password_confirmation
   validates_confirmation_of :password
+  validates_format_of :email, :with => /^[^-_\.][-_\.\w]{1,64}@(([-_\w]{2,}\.)+[a-z]{2,})$/i
 
   # validates if password is blank or not 
   def validate
