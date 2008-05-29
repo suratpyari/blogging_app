@@ -1,5 +1,9 @@
+<%= h(@user.name) %>'s Profile<br>
 <%= image_tag(@user.image) %><br/>
-Name:<%= h(@user.name) %><br>
 Username: <%= h(@user.username) %><br>
 Email: <%= h(@user.email) %><br>
+<%  if @user.biodata %>
+  Biodata :<br>
+  <%= h @user.biodata %><br />
+<% end %>
 Role: <%= User::ROLE[@user.role-1][0] %><br>

@@ -18,6 +18,9 @@
 <div class ="divitem">Confirm password:</div>
   <div class ="divfield"><%= password_field :user, 'password_confirmation' %></div>
 
+<div class ="divitem">Biodata:</div>
+  <div class ="divfield"><%= text_area :user, :biodata %></div>
+
 <% if is_admin? %>
 
   <div class ="divitem">Role:</div>
