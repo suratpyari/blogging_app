@@ -44,17 +44,17 @@ class User < ActiveRecord::Base
       img.change_geometry!('100x100'){ |cols, rows, im|
         im.resize!(cols, rows)
       }
-      new_file = "public/images/#{self.username}.jpg"
+      new_file = "public/images/profile_images/#{self.username}.jpg"
       img.write(new_file)
     end
   end
   
   # returns true if picture of user exists else return false
   def image
-    if File.exist?("public/images/#{self.username}.jpg")
-      img_path = "/images/#{self.username}.jpg"
+    if File.exist?("public/images/profile_images/#{self.username}.jpg")
+      img_path = "/images/profile_images/#{self.username}.jpg"
     else
-      img_path = "/images/default.jpg"
+      img_path = "/images/profile_images/default.jpg"
     end
     return img_path
   end
