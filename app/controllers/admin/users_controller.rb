@@ -36,7 +36,7 @@ class Admin::UsersController < Admin::BaseController
       email.set_content_type("text/html" )
       AccountMailer.deliver(email)      
       redirect_to admin_user_path(@user)
-    else #if new user is not created
+    else # If new user is not created
       render :action => 'new'
     end   
   end
@@ -52,10 +52,10 @@ class Admin::UsersController < Admin::BaseController
     end
   end
 
-  #destroy a user by administrator only ans shows the modified list of users (index)
+  # Destroy a user by administrator only ans shows the modified list of users (index)
   def destroy
     @user = validate_user
-    # only administrator can destroy other user but also cannot destroy his self
+    # Only administrator can destroy other user but also cannot destroy his self
     if is_admin? && @user != current_user
       @user.destroy
       flash[:msg] = "username: #{@user.username} deleted"
@@ -94,14 +94,14 @@ class Admin::UsersController < Admin::BaseController
     if @user.update_attributes(params[:user])
       flash[:msg] = "password updated"
       redirect_to new_session_path
-    else # if not modified
+    else # If not modified
       render :action => 'edit_password'
     end
   end
 
   private
 
-  # if user with given id exists it returns user of that id else redirects to
+  # If user with given id exists it returns user of that id else redirects to
   # admin/users/index
   def validate_user
     user = (User.find(params[:id]) rescue nil)

@@ -34,9 +34,9 @@ uses_tiny_mce(:options => {:theme => 'advanced',
 
   protected
 
-  # if current user is administrator then return user else redirect to admin/users/index
+  # If current user is administrator then return user else redirect to admin/users/index
   def find_admin
-    # role is 1 if user is administrator else role is 2 
+    # Role is 1 if user is administrator else role is 2 
     admin = current_user if current_user.role == 1 
     unless admin
       flash[:msg] = "You are not an administrator"
@@ -44,12 +44,21 @@ uses_tiny_mce(:options => {:theme => 'advanced',
     end
   end
 
-  # returns current user
+  # If user is logged in then layout is admin else application 
+  def determine_layout
+    if session[:user_id]
+      "admin"
+    else
+      "application"
+    end
+  end
+
+  # Returns current user
   def current_user
     @current_user ||= User.find(session[:user_id])
   end
 
-  # returns true if current user is administrator
+  # Returns true if current user is administrator
   def is_admin?
     current_user.role == 1
   end

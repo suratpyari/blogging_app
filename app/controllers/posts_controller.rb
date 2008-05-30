@@ -1,25 +1,23 @@
 class PostsController < ApplicationController
 
-  before_filter :find_user, :except => [:index, :show] # login is required except these actions
+  layout :determine_layout
+
+  before_filter :find_user, :except => [:index, :show] # Login is required except these actions
   before_filter :verify_post, :only => [:show, :edit, :update, :destroy] 
 
-  # lists the posts  
+  # Lists the posts  
   def index
-    # when no user is logged in,
+    # When no user is logged in,
     # lists only those post which are published
     # and status is 1 for published and 0 for unpublished posts.
     if !session[:user_id]
-      @posts = Post.paginate :page => params[:page], :condition => 'status = 1', :per_page => 1
-      #@posts = Post.find_all_by_status(1)
-
-    # when current user is an administrator then lists all the posts
+      @posts = Post.paginate :page => params[:page], :conditions => 'status = 1', :per_page => 1
+    # When current user is an administrator then lists all the posts
     # else lists only those posts which are either published or created by current user
     else if is_admin?
       @posts = Post.paginate :page => params[:page], :per_page => 1
-      #@posts = Post.find(:all)
       else
-        @posts = Post.paginate :page => params[:page], :condition => ["status = 1 or user_id = ?", current_user.id] , :per_page => 1
-        @posts = (Post.find_all_by_status(1)+current_user.posts).uniq!
+        @posts = Post.paginate :page => params[:page], :conditions => ["status = 1 or user_id = ?", current_user.id] , :per_page => 1
       end
     end
   end

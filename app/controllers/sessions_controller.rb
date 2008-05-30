@@ -6,8 +6,8 @@ class SessionsController < ApplicationController
     redirect_to admin_users_url if session[:user_id]
   end
 
-  # status is 0 if user is enabled and 1 if disabled
-  # creates a new session
+  # Status is 0 if user is enabled and 1 if disabled
+  # Creates a new session
   def create
     user = User.authenticate(params[:username], params[:password])
     if user && user.status == 0
@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
     end
   end
 
-  # deletes the session
+  # Deletes the session
   def destroy
     reset_session
     flash[:msg] = "Thanks for your visit"
