@@ -7,8 +7,8 @@
   </head>
   <body>
     <div id="menu">
-      <%= link_to "Users", admin_users_path %>
-      <%= link_to "logout", session_path, :method => :delete %>
+      <%= link_to "logout", session_path, :method => :delete %> 
+      |<%= link_to "Users", admin_users_path %>
       <% if is_admin? %>
         | <%= link_to "Add new user", new_admin_user_path %>
       <% end %>

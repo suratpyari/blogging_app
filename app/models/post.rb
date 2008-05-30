@@ -1,3 +1,17 @@
+# == Schema Information
+# Schema version: 11
+#
+# Table name: posts
+#
+#  id         :integer(11)     not null, primary key
+#  title      :string(255)     
+#  content    :text            
+#  user_id    :integer(11)     
+#  status     :integer(11)     
+#  created_at :datetime        
+#  updated_at :datetime        
+#
+
 class Post < ActiveRecord::Base
 
   belongs_to :user

@@ -1,3 +1,23 @@
+# == Schema Information
+# Schema version: 11
+#
+# Table name: users
+#
+#  id              :integer(11)     not null, primary key
+#  first_name      :string(255)     
+#  last_name       :string(255)     
+#  email           :string(255)     
+#  hashed_password :string(255)     
+#  salt            :string(255)     
+#  role            :integer(11)     default(2), not null
+#  created_at      :datetime        
+#  updated_at      :datetime        
+#  username        :string(255)     
+#  status          :integer(11)     default(0)
+#  token           :string(255)     
+#  biodata         :text            
+#
+
 
 class User < ActiveRecord::Base
   
@@ -55,7 +75,7 @@ class User < ActiveRecord::Base
     if File.exist?("public/images/profile_images/#{self.username}.jpg")
       img_path = "/images/profile_images/#{self.username}.jpg"
     else
-      img_path = "/images/profile_images/default.jpg"
+      img_path = "/images/default.jpg"
     end
     return img_path
   end
