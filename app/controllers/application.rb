@@ -12,6 +12,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # :secret => 'b5d8f1af109a7e17c969d221dcfdf677'
 
 uses_tiny_mce(:options => {:theme => 'advanced',
+                           :mode => "specific_textareas",
+                           :editor_selector => "mce-editor",
                            :browsers => %w{msie gecko},
                            :theme_advanced_toolbar_location => "top",
                            :theme_advanced_toolbar_align => "left",

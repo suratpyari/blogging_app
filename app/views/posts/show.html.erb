@@ -1,22 +1,56 @@
-<div id = "@post"+<%= @post.id %> >
-  <div class="title">
+<div id = 'post'>
+  <div class='title'>
     <h1><%= link_to h(@post.title), post_path(@post) %></h1>
   </div>
-  <div class="created">
-    <%= @post.created_at.strftime("%m-%d-%Y") %>
+  <div class='created'>
+    <%= @post.created_at.strftime('%m-%d-%Y') %>
   </div>
-  <div class="post">
+  <div class='post'>
     <%= @post.content %>
   </div>
-  <div class="author">
+  <div class='author'>
     posted by <%= h @post.user.name %>
   </div>
   <% if session[:user_id] %>
     <% if @post.user.id == current_user.id || is_admin? %>
       <div>
-        <%= link_to "Edit", edit_post_path(@post) %>
-        <%= link_to "Delete", post_path(@post), :method => :delete, :confirm => 'Are you sure?' %>
+        <%= link_to 'Edit', edit_post_path(@post) %>
+        <%= link_to 'Delete', post_path(@post), :method => :delete, :confirm => 'Are you sure?' %>
       </div>
     <% end %>
   <% end %>
+
+  <h2>Comments</h2>
+  <% for comment in @comments %>
+      <div id='comment-<%= comment.id %>' >
+      <%= h comment.content %><br />
+      by <%= h comment.author %><br />
+      <% if comment.author_url %>
+        Website: <%= comment.author_url %><br />
+      <% end %>
+      email: <%= comment.email %><br />
+      on <%= comment.created_at.strftime('%m-%d-%Y') %>
+      <% if @change_status == true %>
+        <div id='status-<%= comment.id %>' >
+          <%= link_to_remote comment.comment_status, :url => accept_post_comment_path(@post, comment) %>
+        </div>
+        <%= link_to_remote "Delete", :url => post_comment_path(@post, comment), :method => :delete, :confirm => 'Are you sure?' %>
+      <% end %>
+      <hr />
+    </div>
+  <% end %>
+
+  <h3> Leave a comment </h3>  
+  <div>
+    <div id='comment_errors'></div>
+      <% remote_form_for [@post, @comment], :html => { :id => 'comment_form' } do |f| %>
+        <%= hidden_field(:comment, :commentable_type) %>
+        <%= hidden_field(:comment, :commentable_id) %>
+        Comment:<br /> <%= f.text_area :content %><br />
+        Your name: <%= f.text_field :author %><br />
+        Website: <%= f.text_field :author_url %><br />
+        Email: <%= f.text_field :email %><br />
+        <%= f.submit 'post' %>
+      <% end %>
+  </div>
 </div>

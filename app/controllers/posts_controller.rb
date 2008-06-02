@@ -17,12 +17,24 @@ class PostsController < ApplicationController
     else if is_admin?
       @posts = Post.paginate :page => params[:page], :per_page => 1
       else
-        @posts = Post.paginate :page => params[:page], :conditions => ["status = 1 or user_id = ?", current_user.id] , :per_page => 1
+        @posts = Post.paginate :page => params[:page], :conditions => ['status = 1 or user_id = ?', current_user.id] , :per_page => 1
       end
     end
   end
 
+  # display selected post and comments given on that
   def show
+      if session[:user_id] && (is_admin? || @post.user.id == current_user.id)
+        @comments = @post.comments
+        @change_status = true
+      else if @post.status == 0
+        flash[:msg] = 'This poat is Unpublished'
+        redirect_to posts_path
+        else
+          @comments = Comment.find_all_by_commentable_id_and_commentable_type_and_status(@post.id, "post", 1)
+        end
+      end
+      @comment = @post.comments.new
   end
 
   def new
@@ -36,11 +48,11 @@ class PostsController < ApplicationController
     # category of post is uncategorized if it is not set by user
     @post.categories << Category.find_by_category_name('Uncategorized') if @post.categories.empty?
     if @post.save
-      flash[:msg] = "new post created"
+      flash[:msg] = 'new post created'
       redirect_to post_path(@post)
     else
-      flash[:msg] = "new post not created"
-      render :action => 'new'
+      flash[:msg] = 'new post not created'
+      render :action => :new
     end
   end
 
@@ -49,11 +61,11 @@ class PostsController < ApplicationController
     if @post.update_attributes(params[:post])
       @post.categories << Category.find_by_category_name('Uncategorized') if @post.categories.empty?
       @post.save
-      flash[:msg] = "Post updated"
+      flash[:msg] = 'Post updated'
       redirect_to post_path(@post)
     else
-      flash[:msg] = "Post not updated"
-      render :action => 'Edit'
+      flash[:msg] = 'Post not updated'
+      render :action => :Edit
     end
   end
 
@@ -62,9 +74,9 @@ class PostsController < ApplicationController
   def destroy
     if @post.user_id == current_user.id || is_admin?
       @post.destroy
-      flash[:msg] = "#{@post.title} deleted"
+      flash[:msg] = '#{@post.title} deleted'
     else
-      flash[:msg] = "Cannot delete this post. This is not created by you"
+      flash[:msg] = 'Cannot delete this post. This is not created by you'
     end
     redirect_to posts_path
   end
@@ -75,7 +87,7 @@ class PostsController < ApplicationController
   def verify_post
     @post = (Post.find(params[:id]) rescue nil)
     if @post.nil?
-      flash[:msg] = "Post with id #{params[:id]} does not exist"
+      flash[:msg] = 'Post with this id does not exist'
       redirect_to posts_path
     end
   end
