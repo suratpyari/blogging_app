@@ -1,0 +1,28 @@
+<% if @posts.empty? %>
+  <div> There is no post</div>
+<% else %>
+  <% for post in @posts %>
+    <div id = "post"+<%= post.id %> >
+      <div class="title">
+        <h1><%= link_to h(post.title), post_path(post) %></h1>
+      </div>
+      <div class="created">
+        <%= post.created_at.strftime("%m-%d-%Y") %>
+      </div>
+      <div class="post">
+        <%= truncate(post.content, 500) %>
+      </div>
+      <div class="author">posted by
+        <%= link_to post.user.name, user_path(post.user.username)%>
+      </div>
+      <div class="del">
+      <% if session[:user_id] %>
+        <% if is_admin? || post.user.id == current_user.id %>
+          <%= link_to "delete", post_path(post), :method => :delete, :confirm => 'Are you sure?' %>
+        <% end %>
+      <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+

@@ -35,6 +35,7 @@ ActionController::Routing::Routes.draw do |map|
     post.resources :comments, :member => {:accept => :post}
   end
   map.resources :users
+  map.resources :tags
   map.resource :session
   map.connect '', :controller => 'posts', :action => 'index'
   map.connect 'sessions', :controller=>'sessions', :action=>'new'

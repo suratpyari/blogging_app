@@ -1,0 +1,8 @@
+<% if @tags %>
+  <h3> Tags </h3>
+  <% for tag in @tags %>
+    <%= link_to tag.name, tag_path(tag) %><br />
+  <% end %>
+<% else %>
+  There is no tag
+<% end %> 

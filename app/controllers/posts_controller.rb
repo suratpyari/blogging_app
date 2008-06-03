@@ -52,11 +52,12 @@ class PostsController < ApplicationController
 
   # creates a new post
   def create
-    @post=Post.new(params[:post])
+    @post = Post.new(params[:post])
     @post.user_id = current_user.id
     # category of post is uncategorized if it is not set by user
     @post.categories << Category.find_by_category_name('Uncategorized') if @post.categories.empty?
     if @post.save
+      @post.tag_with params[:tag][:name]
       flash[:msg] = "new post created"
       redirect_to post_path(@post)
     else

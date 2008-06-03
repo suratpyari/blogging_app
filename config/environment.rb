@@ -65,3 +65,5 @@ config.action_mailer.smtp_settings = {
 end
 
   require 'will_paginate'
+
+require 'tagging_extensions'
