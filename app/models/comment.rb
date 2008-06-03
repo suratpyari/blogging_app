@@ -7,11 +7,38 @@ class Comment < ActiveRecord::Base
   validates_format_of :email, :with => %r{^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$}
 
   def comment_status
-    if self.status == 0 # rejected => 0 and accepted => 1
+    if self.status == 0
       'Accept'
     else
-      ''
+      self.status == 2 ? 'Accept spam':''
     end
+  end
+
+  def after_save
+    if check_comment_for_spam(self.author, self.content)
+      self.status == 2
+    else
+      self.status == 0
+    end
+  end
+
+  protected
+
+  def check_comment_for_spam(author, text)
+    @akismet = Akismet.new('a11d50c9d2ef', 'suratpyari.wordpress.com') 
+
+    return true unless @akismet.verifyAPIKey 
+       
+    return @akismet.commentCheck(request.remote_ip,
+                                 request.user_agent,
+                                 request.env['HTTP_REFERER'],
+                                 '',
+                                 'comment',
+                                 author,
+                                 '',
+                                 '',
+                                 text,
+                                 {})
   end
 
 end

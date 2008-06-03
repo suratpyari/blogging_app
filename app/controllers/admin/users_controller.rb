@@ -4,7 +4,12 @@ class Admin::UsersController < Admin::BaseController
   # Logged user must be an administrator for these actions
   before_filter :find_admin, :only => ['new', 'create', 'destroy'] 
 
-  before_filter :find_user, :only => ['index', 'show', 'edit', 'update'] # Login is required for these actions
+  # Login is required for these actions
+  before_filter :find_user, :only => ['index', 'show', 'edit', 'update'] 
+
+  verify :method => :post, :only => [:create, :send_email], :redirect_to => {:action => 'index'}
+  verify :method => :put, :only => [:update, :updaet_password], :redirect_to => {:action => 'index'}
+  verify :method => :delete, :only => :destroy, :redirect_to => {:action => 'index'}
 
   # Lists all the users added by administrator and
   def index

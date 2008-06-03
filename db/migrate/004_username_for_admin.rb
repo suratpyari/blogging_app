@@ -1,7 +1,7 @@
 class UsernameForAdmin < ActiveRecord::Migration
   def self.up
-    User.destroy_all "email = 'admin@gmail.com'"
-    User.create(:first_name => "admin", :last_name => "" ,:username => "admin", :email => "admin@gmail.com", :role => 1, :password => "admin", :password_confirmation => "admin")
+    user=User.find_by_email("admin@gmail.com")
+    user.update_attribute('username', 'admin')
   end
 
   def self.down

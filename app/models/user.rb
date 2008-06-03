@@ -27,13 +27,13 @@ class User < ActiveRecord::Base
 
   # username can not be changed
   attr_protected :username
-  validates_presence_of :first_name, :email, :username
+  validates_presence_of :first_name, :username
   validates_uniqueness_of :username, :email
   attr_accessor :password_confirmation
   validates_confirmation_of :password
-  validates_format_of :email, :with => %r{^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$}
+  validates_format_of :email, :with => %r{^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$}, :message => "is missing or invalid"
 
-  # validates if password is blank or not 
+
   def validate
     errors.add_to_base("password cannot be blank") if hashed_password.blank?
   end

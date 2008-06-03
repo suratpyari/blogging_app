@@ -1,21 +1,30 @@
 class CommentsController < ApplicationController
-
+#include ActionView::Helpers::ActiveRecordHelper
   # Creates a new comment and set status as 0
+
+  verify :method => :post, :only => [:create, :accept], :redirect_to => {:controller => 'post', :action => 'index'}
+  verify :method => :delete, :only => :destroy, :redirect_to => {:controller => 'post', :action => 'index'}
+
   def create
     @comment = Comment.new(params[:comment])
     render :update do |page|
       if @comment.save
-        flash[:msg] = 'New comment created'
         page.replace_html :comment_errors , ''
         page.form.reset('comment_form')
       else
-        flash[:msg] = 'New comment not created'
-        page.replace_html :comment_errors , @comment.errors.full_messages.join('<br />')
+        page.replace_html :comment_errors ,
+                          @comment.errors.full_messages.join('<br />')
+      end
+      if @comment.status == 2
+        flash[:msg] = "This spam has been subbmitted"
+      else
+        flash[:msg] = "This comment has been subbmitted"
       end
       page.replace_html :flash , flash[:msg]
     end
   end
 
+  # Accepts comment
   def accept
     comment = Comment.find(params[:id])
     comment.status = 1
@@ -26,6 +35,7 @@ class CommentsController < ApplicationController
     end
   end
 
+  # Destroy comment 
   def destroy
     comment = Comment.find(params[:id])
     render :update do |page|
