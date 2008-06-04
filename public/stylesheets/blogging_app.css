@@ -5,8 +5,11 @@
   float: left;
 }
 
-a{
+a, h2, h3{
   color: 449744;
+}
+a {
+  text-decoration: none
 }
 
 .divitem{
@@ -55,8 +58,10 @@ a{
 
 #application #ad {
   width: 15%;
+  height: 100%;
   padding: 3%;
   float: left;
+  border-right: 2px solid #449744;
 }
 
 #application #tags{
@@ -84,10 +89,16 @@ a{
   border-bottom: 2px solid #0044aa;
 }
 
-.post .postcontent {
-  padding: 3%;
-}
-.post {
+.post, .comments {
   padding: 3%;
   border: 1px solid #449744;
+}
+
+.edit_del, .author, .tags, .created {
+  font-size: 13px;
+}
+
+.postcontent {
+  padding-top: 2%;
+  padding-bottom: 2%;
 }

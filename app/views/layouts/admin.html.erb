@@ -11,8 +11,7 @@
       <ul id="navbar">
         <li><%= link_to "logout", session_path, :method => :delete %> </li>
         <li id = <%= current('users') %> ><%= link_to "Users", admin_users_path %></li>
-        <li id = <%= current('posts') %>><%= link_to "Posts", posts_path %></li>      
-        <li id = <%= current('tags') %>><%= link_to "Tags", tags_path %></li>
+        <li id = <%= current('posts') %>><%= link_to "Posts", posts_path %></li>
       </ul>
       <div id="notext"></div>
 

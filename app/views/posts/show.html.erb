@@ -1,11 +1,11 @@
-<div id = 'post'>
+<div class = 'post'>
   <div class='title'>
     <h1><%= link_to h(@post.title), post_path(@post) %></h1>
   </div>
   <div class='created'>
     <%= @post.created_at.strftime('%m-%d-%Y') %>
   </div>
-  <div class='post'>
+  <div class='postcontent'>
     <%= @post.content %>
   </div>
   <div class='author'>
@@ -19,16 +19,20 @@
       </div>
     <% end %>
   <% end %>
-
+</div>
   <%= textilize("h2. Comments") %>
   <% for comment in @comments %>
     <div id='comment-<%= comment.id %>' >
       <%= textilize(comment.content) %>
-      <%= textilize("by **"+comment.author+"**\n") %>
+      <% if session[:user_id] %>
+        <%= textilize("by **"+comment.author+"**\n") %>
+      <% end %>
       <% if !comment.author_url.empty? %>
         <%= textilize("Website: _"+comment.author_url+"_\n") %>
       <% end %>
-      <%= textilize("Email: _"+comment.email+"_\n") %>
+      <% if session[:user_id] %>
+        <%= textilize("Email: _"+comment.email+"_\n") %>
+      <% end %>
       on <%= comment.created_at.strftime('%m-%d-%Y') %>
       <% if @change_status == true %>
         <div id='status-<%= comment.id %>' >
@@ -53,4 +57,4 @@
         <%= f.submit 'post' %>
       <% end %>
   </div>
-</div>
+

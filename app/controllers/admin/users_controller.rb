@@ -86,9 +86,13 @@ class Admin::UsersController < Admin::BaseController
       render :action => 'forgot_password'
     end
   end
-
+  
+  def forgot_password
+    render :layout => 'application'
+  end
   # Edits the password
   def edit_password
+    render :layout => 'application'
     @user = User.find_by_token(params[:token])
   end
 
