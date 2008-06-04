@@ -1,6 +1,4 @@
 class TagsController < ApplicationController
-  
-  layout :determine_layout
 
   def index
     @tags=Tag.find(:all)

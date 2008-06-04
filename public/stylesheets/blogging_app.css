@@ -5,6 +5,10 @@
   float: left;
 }
 
+a{
+  color: 449744;
+}
+
 .divitem{
   clear: both;
   width: 40%;
@@ -15,31 +19,28 @@
   margin-bottom: 3%;
 }
 
-#navbar ul {
+#navbar {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-#navbar ul li {
+#navbar li {
   width: 15%;
   margin: 0.1%; 
   float: left;
-  background: black;
+  background: #d5ddf3;
   text-align: center;
+  border: 2px solid #0044aa;
 }
 
-#navbar ul a{
-  color: white;
-}
-
-#navbar ul a:hover {
-  color: #cccccc;
+#navbar a{
+  color: #0044aa;
 }
 
 #navbar #current, #navbar #current a{
-    background-color: #fff;
-    color: #000;
+    background-color: white;
+    color: #0044aa;
 }
 
 #notext{
@@ -48,35 +49,45 @@
 
 #application #main {
   width: 55%;
-  background: #F4F4F4;
   padding: .5%;
   float: left;
 }
 
 #application #ad {
-  width: 20%;
-  padding: .5%;
+  width: 15%;
+  padding: 3%;
   float: left;
 }
 
 #application #tags{
-  padding: .5%;
-  width: 20%;
-  background: #F4F4F4;
+  padding: 3%;
+  width: 15%;
   float: right;
 }
 #application #tags ul{
   list-style: none;
 }
 
-#application #footer, #heading {
+#footer,#footer a, #heading {
   clear: both;
   background: #D5DDF3;
   text-align: center;
   color: #0044aa;
-}
-a{
-  color: 449744;
+  padding: 1%;
 }
 
+#footer {
+  border-top: 2px solid #0044aa;
+}
 
+#heading {
+  border-bottom: 2px solid #0044aa;
+}
+
+.post .postcontent {
+  padding: 3%;
+}
+.post {
+  padding: 3%;
+  border: 1px solid #449744;
+}

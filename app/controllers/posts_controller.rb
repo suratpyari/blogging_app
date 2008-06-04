@@ -1,7 +1,5 @@
 class PostsController < ApplicationController
 
-  layout :determine_layout
-
    # Login is required except these actions
   before_filter :find_user, :except => [:index, :show]
 
