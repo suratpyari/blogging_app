@@ -10,3 +10,6 @@
   </div>
 <% end %>
 <hr />
+<% if is_admin? %>
+  <%= link_to "Add new user", new_admin_user_path %>
+<% end %>

@@ -12,7 +12,7 @@ class PostsController < ApplicationController
   verify :method => :delete, :only => :destroy, :redirect_to => {:action => 'index'}
 
   cattr_reader :per_page
-  @@per_page = 1
+  @@per_page = 2
 
   # Lists the posts  
   def index

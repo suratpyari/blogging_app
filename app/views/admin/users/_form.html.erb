@@ -19,7 +19,7 @@
   <div class ="divfield"><%= password_field :user, 'password_confirmation' %></div>
 
 <div class ="divitem">Biodata:</div>
-  <div class ="divfield"><%= text_area :user, :biodata %></div>
+  <div class ="divfield"><%= text_area :user, :biodata, :class => "mce-editor" %></div>
 
 <% if is_admin? %>
 

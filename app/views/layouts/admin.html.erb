@@ -5,17 +5,17 @@
     <%= tiny_mce if using_tiny_mce? %>
     <%= javascript_include_tag :defaults %>
   </head>
-  <body>
-    <div id="menu">
-      <%= link_to "logout", session_path, :method => :delete %> 
-      |<%= link_to "Users", admin_users_path %>
-      <% if is_admin? %>
-        | <%= link_to "Add new user", new_admin_user_path %>
-      <% end %>
-      | <%= link_to "Posts", posts_path %>          
-      | <%= link_to "Tags", tags_path %>     
-      <hr />
-    </div>
+  <body id="admin">
+    <div id="heading"><h1>Surat's Blog</h1></div>
+
+      <ul id="navbar">
+        <li><%= link_to "logout", session_path, :method => :delete %> </li>
+        <li id = <%= current('users') %> ><%= link_to "Users", admin_users_path %></li>
+        <li id = <%= current('posts') %>><%= link_to "Posts", posts_path %></li>      
+        <li id = <%= current('tags') %>><%= link_to "Tags", tags_path %></li>
+      </ul>
+      <div id="notext"></div>
+
     <div id="flash">
       <%= flash[:msg] %>
     </div>
