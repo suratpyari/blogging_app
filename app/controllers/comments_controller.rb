@@ -11,14 +11,14 @@ class CommentsController < ApplicationController
       if @comment.save
         page.replace_html :comment_errors , ''
         page.form.reset('comment_form')
+        if @comment.status == 2
+          flash[:msg] = "Your comment looks like spam and will show up once admin approves"
+        else
+          flash[:msg] = "This comment has been submitted"
+        end
       else
-        page.replace_html :comment_errors ,
-                          @comment.errors.full_messages.join('<br />')
-      end
-      if @comment.status == 2
-        flash[:msg] = "This spam has been subbmitted"
-      else
-        flash[:msg] = "This comment has been subbmitted"
+        page.replace_html :comment_errors , @comment.errors.full_messages.join('<br />')
+        flash[:msg] = ""
       end
       page.replace_html :flash , flash[:msg]
     end
@@ -27,9 +27,7 @@ class CommentsController < ApplicationController
   # Accepts comment
   def accept
     comment = Comment.find(params[:id])
-    comment.status = 1
-    comment.save
-    p comment.status
+    comment.update_attribute(status, 1)
     render :update do |page|
       page.replace_html 'status-'+comment.id.to_s, ''
     end

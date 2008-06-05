@@ -46,15 +46,6 @@ uses_tiny_mce(:options => {:theme => 'advanced',
     end
   end
 
-  # If user is logged in then layout is admin else application 
-  def determine_layout
-    if session[:user_id]
-      "admin"
-    else
-      "application"
-    end
-  end
-
   # Returns current user
   def current_user
     @current_user ||= User.find(session[:user_id])
@@ -67,10 +58,9 @@ uses_tiny_mce(:options => {:theme => 'advanced',
 
   # checks is there any user logged in
   def find_user
-    user=(User.find(session[:user_id]) rescue nil)
-      unless user
+      unless current_user
       flash[:msg] = "Please log in"
-      redirect_to new_session_path
+      redirect_to login_path
     end
   end
 

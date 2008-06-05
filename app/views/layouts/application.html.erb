@@ -6,15 +6,12 @@
     <%= javascript_include_tag :defaults %>
   </head>
   <body id="application">
-    <div id="heading"><h1>Surat's Blog</h1></div>
+    <div id="heading"><h1> <%= link_to "Surat's Blog", posts_path %> </h1></div>
     <div id="main">
       <div id="flash">
         <%= flash[:msg] %>
       </div>
       <%= yield :layout %>
-    </div>
-    <div id="ad">
-      advertisements<br />
     </div>
     <div id="tags">
       Tags:<br />
@@ -26,9 +23,9 @@
     </div>
     <div id="footer">
       <% if session[:user_id] %>
-        <%= link_to "logout", session_path, :method => :delete %>
+        <%= link_to "logout", logout_url %>
       <% else %>
-        <%= link_to "login", new_session_path %>
+        <%= link_to "login", login_url %>
       <% end %>
     </div>
   </body>

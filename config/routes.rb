@@ -22,6 +22,7 @@ ActionController::Routing::Routes.draw do |map|
      map.namespace :admin do |admin|
        # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
        admin.resources :users, :collection => { :forgot_password => :get, :send_email => :post, :update_password => :put, :edit_password => :get}
+        admin.resources :base
      end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
@@ -38,6 +39,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :tags
   map.resource :session
   map.connect '', :controller => 'posts', :action => 'index'
+  map.login 'login', :controller => 'sessions', :action => 'new'
+  map.logout 'logout', :controller => 'sessions', :action => 'destroy', :method => :delete
+  map.admin 'admin', :controller => 'admin/base', :action => 'index'
+  map.dashboard 'admin/dashboard', :controller => 'admin/base', :action => 'index'
   map.connect ':controller/:id/:action/'
   map.connect ':controller/:id/:action.:format'
 end

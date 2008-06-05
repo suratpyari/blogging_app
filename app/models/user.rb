@@ -27,11 +27,12 @@ class User < ActiveRecord::Base
 
   # username can not be changed
   attr_protected :username
-  validates_presence_of :first_name, :username
+  validates_presence_of :first_name, :username, :email
   validates_uniqueness_of :username, :email
   attr_accessor :password_confirmation
   validates_confirmation_of :password
-  validates_format_of :email, :with => %r{^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$}, :message => "is missing or invalid"
+  validates_format_of :email, :with => %r{^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$}, :if => Proc.new{|comment| !comment.email.empty?}
+
 
 
   def validate

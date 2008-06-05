@@ -10,16 +10,12 @@ class Comment < ActiveRecord::Base
     if self.status == 0
       'Accept'
     else
-      self.status == 2 ? 'Accept spam':''
+      self.status == 2 ? 'Not spam':''
     end
   end
 
   def after_save
-    if check_comment_for_spam(self.author, self.content)
-      self.status == 2
-    else
-      self.status == 0
-    end
+    self.update_attribute(status, 2) if check_comment_for_spam(self.author, self.content)
   end
 
   protected

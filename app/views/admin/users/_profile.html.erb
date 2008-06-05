@@ -1,9 +1,9 @@
-<%= h(@user.name) %>'s Profile<br>
-<%= image_tag(@user.image) %><br/>
-Username: <%= h(@user.username) %><br>
-Email: <%= h(@user.email) %><br>
-<%  if @user.biodata %>
-  Biodata :<br>
-  <%=  @user.biodata %><br />
-<% end %>
-Role: <%= User::ROLE[@user.role-1][0] %><br>
+<%= image_tag(@user.image, :class => 'user_pic') %><br/>
+<div class = "profile">
+  <h2><%= h(@user.name) %>'s Profile<br></h2>
+  Email: <%= h(@user.email) %><br>
+  <%  if @user.biodata %>
+    Biodata :<br>
+    <%=  @user.biodata %><br />
+  <% end %>
+</div>

@@ -2,59 +2,74 @@
   <div class='title'>
     <h1><%= link_to h(@post.title), post_path(@post) %></h1>
   </div>
-  <div class='created'>
-    <%= @post.created_at.strftime('%m-%d-%Y') %>
+  <div class="created">on
+    <%= @post.created_at.strftime("%B %d, %Y") %> 
+    by <%= link_to @post.user.username, user_path(@post.user.username)%>
   </div>
-  <div class='postcontent'>
+  <div class="edit_del">
+    <% if session[:user_id] %>
+      <% if is_admin? || @post.user.id == current_user.id %>
+        <%= link_to "edit /", edit_post_path(@post) %>
+        <%= link_to "delete", post_path(@post), :method => :delete,
+                                               :confirm => 'Are you sure?' %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="postcontent">
     <%= @post.content %>
   </div>
-  <div class='author'>
-    posted by <%= h @post.user.name %>
-  </div>
-  <% if session[:user_id] %>
-    <% if @post.user.id == current_user.id || is_admin? %>
-      <div>
-        <%= link_to 'Edit', edit_post_path(@post) %>
-        <%= link_to 'Delete', post_path(@post), :method => :delete, :confirm => 'Are you sure?' %>
-      </div>
+  <div class="tags">Tags:
+    <% if !@post.tags.empty? %>
+      <% for tag in @post.tags %>
+        <%= link_to tag.name, tag_path(tag) %>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
+  <div class="no_of_comment">
+    <%= link_to "#{@post.comments.size} comments", post_path(@post) %>
+  </div>
 </div>
   <%= textilize("h2. Comments") %>
   <% for comment in @comments %>
-    <div id='comment-<%= comment.id %>' >
+    <div class = 'comment' id='comment-<%= comment.id %>' >
+      <div class="created">
+        <h3><%= comment.author %></h3> on
+        <%= @post.created_at.strftime("%B %d, %Y") %> 
+      </div>
       <%= textilize(comment.content) %>
       <% if session[:user_id] %>
         <%= textilize("by **"+comment.author+"**\n") %>
       <% end %>
       <% if !comment.author_url.empty? %>
-        <%= textilize("Website: _"+comment.author_url+"_\n") %>
+        <h3><%= textilize("Website: _"+comment.author_url+"_\n") %><h3>
       <% end %>
       <% if session[:user_id] %>
         <%= textilize("Email: _"+comment.email+"_\n") %>
       <% end %>
-      on <%= comment.created_at.strftime('%m-%d-%Y') %>
       <% if @change_status == true %>
         <div id='status-<%= comment.id %>' >
           <%= link_to_remote comment.comment_status, :url => accept_post_comment_path(@post, comment) %>
         </div>
         <%= link_to_remote "Delete", :url => post_comment_path(@post, comment), :method => :delete, :confirm => 'Are you sure?' %>
       <% end %>
-      <hr />
     </div>
   <% end %>
 
+  <div class="postcomment">
   <h3> Leave a comment </h3>  
-  <div>
-    <div id='comment_errors'></div>
+    <div class = 'error' id='comment_errors'></div>
       <% remote_form_for [@post, @comment], :html => { :id => 'comment_form' } do |f| %>
         <%= hidden_field(:comment, :commentable_type) %>
         <%= hidden_field(:comment, :commentable_id) %>
-        Comment:<br /> <%= f.text_area :content %><br />
-        Your name: <%= f.text_field :author %><br />
-        Website: <%= f.text_field :author_url %><br />
-        Email: <%= f.text_field :email %><br />
-        <%= f.submit 'post' %>
+        <div class ="divitem">Comment:</div>
+          <div class ="divfield"><%= f.text_area :content, :rows => 10, :cols => 50 %></div>
+        <div class ="divitem">Your name:</div>
+          <div class ="divfield"><%= f.text_field :author %></div>
+        <div class ="divitem">Website:</div>
+          <div class ="divfield"><%= f.text_field :author_url %></div>
+        <div class ="divitem">Email:</div>
+          <div class ="divfield"><%= f.text_field :email %></div>
+        <div class ="divitem"><%= f.submit 'post' %></div>
       <% end %>
   </div>
 

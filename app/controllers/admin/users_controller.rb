@@ -80,7 +80,7 @@ class Admin::UsersController < Admin::BaseController
       email = PasswordMailer.create_sent(user, url)
       email.set_content_type("text/html" )
       PasswordMailer.deliver(email)
-      redirect_to new_session_path
+      redirect_to login_path
     else # When email address given by user does not exists
       flash[:msg] = "user with this email does not exist"
       render :action => 'forgot_password'
@@ -101,7 +101,7 @@ class Admin::UsersController < Admin::BaseController
     @user = User.find_by_token(params[:token])
     if @user.update_attributes(params[:user])
       flash[:msg] = "password updated"
-      redirect_to new_session_path
+      redirect_to login_path
     else # If not modified
       render :action => 'edit_password'
     end
