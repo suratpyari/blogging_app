@@ -123,10 +123,18 @@ a {
 }
 
 #dashboard li {
-  width: 25%;
-  margin: 0.1%;
+  margin-top: 4%;
+  margin-left: 5%;
   color: #449744;
-  text-align: center;
-  border: 2px solid #449744;
   list-style: none;
+}
+
+#edit_del {
+  clear: both;
+}
+
+#back_dashboard {
+  float: right;
+  margin: 3%;
+  text-align: left;
 }

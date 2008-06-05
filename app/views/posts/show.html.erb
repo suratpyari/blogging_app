@@ -9,8 +9,8 @@
   <div class="edit_del">
     <% if session[:user_id] %>
       <% if is_admin? || @post.user.id == current_user.id %>
-        <%= link_to "edit /", edit_post_path(@post) %>
-        <%= link_to "delete", post_path(@post), :method => :delete,
+        <%= link_to "edit /", edit_admin_post_path(@post) %>
+        <%= link_to "delete", admin_post_path(@post), :method => :delete,
                                                :confirm => 'Are you sure?' %>
       <% end %>
     <% end %>
@@ -30,29 +30,31 @@
   </div>
 </div>
   <%= textilize("h2. Comments") %>
-  <% for comment in @comments %>
-    <div class = 'comment' id='comment-<%= comment.id %>' >
-      <div class="created">
-        <h3><%= comment.author %></h3> on
-        <%= @post.created_at.strftime("%B %d, %Y") %> 
-      </div>
-      <%= textilize(comment.content) %>
-      <% if session[:user_id] %>
-        <%= textilize("by **"+comment.author+"**\n") %>
-      <% end %>
-      <% if !comment.author_url.empty? %>
-        <h3><%= textilize("Website: _"+comment.author_url+"_\n") %><h3>
-      <% end %>
-      <% if session[:user_id] %>
-        <%= textilize("Email: _"+comment.email+"_\n") %>
-      <% end %>
-      <% if @change_status == true %>
-        <div id='status-<%= comment.id %>' >
-          <%= link_to_remote comment.comment_status, :url => accept_post_comment_path(@post, comment) %>
+  <% if @comments %>
+    <% for comment in @comments %>
+      <div class = 'comment' id='comment-<%= comment.id %>' >
+        <div class="created">
+          <h3><%= comment.author %></h3> on
+          <%= @post.created_at.strftime("%B %d, %Y") %> 
         </div>
-        <%= link_to_remote "Delete", :url => post_comment_path(@post, comment), :method => :delete, :confirm => 'Are you sure?' %>
-      <% end %>
-    </div>
+        <%= textilize(comment.content) %>
+        <% if session[:user_id] %>
+          <%= textilize("by **"+comment.author+"**\n") %>
+        <% end %>
+        <% if !comment.author_url.empty? %>
+          <h3><%= textilize("Website: _"+comment.author_url+"_\n") %><h3>
+        <% end %>
+        <% if session[:user_id] %>
+          <%= textilize("Email: _"+comment.email+"_\n") %>
+        <% end %>
+        <% if @change_status == true %>
+          <div id='status-<%= comment.id %>' >
+            <%= link_to_remote comment.comment_status, :url => accept_post_comment_path(@post, comment) %>
+          </div>
+          <%= link_to_remote "Delete", :url => post_comment_path(@post, comment), :method => :delete, :confirm => 'Are you sure?' %>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
 
   <div class="postcomment">

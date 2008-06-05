@@ -4,6 +4,6 @@
   Email: <%= h(@user.email) %><br>
   <%  if @user.biodata %>
     Biodata :<br>
-    <%=  @user.biodata %><br />
+    <%=  textilize(@user.biodata) %>
   <% end %>
 </div>

@@ -5,7 +5,7 @@ class TagsController < ApplicationController
   end
 
   def show
-    tag=Tag.find(params[:id]) rescue nil
+    tag=Tag.find_by_name(params[:id]) rescue nil
     @posts=tag.taggables
   end
 

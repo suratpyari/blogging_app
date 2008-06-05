@@ -64,4 +64,14 @@ uses_tiny_mce(:options => {:theme => 'advanced',
     end
   end
 
+  # if post with given id exists it returns post of that id else redirects to posts/index
+  def verify_post
+    @post = (Post.find(params[:id]) rescue nil)
+    if @post.nil?
+      flash[:msg] = "Post with this id does not exist"
+      redirect_to posts_path
+    end
+  end
+
+
 end

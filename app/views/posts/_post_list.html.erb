@@ -13,8 +13,8 @@
       <div class="edit_del">
       <% if session[:user_id] %>
         <% if is_admin? || post.user.id == current_user.id %>
-          <%= link_to "edit /", edit_post_path(post) %>
-          <%= link_to "delete", post_path(post), :method => :delete, :confirm => 'Are you sure?' %>
+          <%= link_to "edit /", edit_admin_post_path(post) %>
+          <%= link_to "delete", admin_post_path(post), :method => :delete, :confirm => 'Are you sure?' %>
         <% end %>
       <% end %>
       </div>

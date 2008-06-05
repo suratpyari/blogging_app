@@ -1,6 +1,6 @@
 <%= render :partial => 'post_list' %>
 <% if session[:user_id] %>
-  <%= link_to "new post", new_post_path %>
+  <%= link_to "new post", new_admin_post_path %>
 <% end %>
   <%= will_paginate @posts %>
 
