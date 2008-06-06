@@ -22,14 +22,14 @@ class PostsController < ApplicationController
 
   # display selected post and comments given on that
   def show
-    if session[:user_id] && (is_admin? || @post.user.id == current_user.id)
+    if session[:user_id] && (is_admin? || @post.user_id == current_user.id)
       @comments = @post.comments
       @change_status = true
     else if @post.status == 0
       flash[:msg] = "This poat is Unpublished"
       redirect_to posts_path
       else
-        @comments = Comment.find_all_by_commentable_id_and_commentable_type_and_status(@post.id, "post", 1)
+        @comments = @post.accepted_comments
       end
     end
     @comment = @post.comments.new

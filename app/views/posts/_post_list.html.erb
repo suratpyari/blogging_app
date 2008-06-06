@@ -30,7 +30,7 @@
         <% end %>
       </div>
       <div class="no_of_comment">
-        <%= link_to "#{post.comments.size} comments", post_path(post) %>
+        <%= link_to "#{post.comments.size} comments", post_path(post, :anchor => 'comment') %>
       </div>
     </div>
   <% end %>

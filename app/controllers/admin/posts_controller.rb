@@ -1,7 +1,8 @@
 class Admin::PostsController < Admin::BaseController
   
-  before_filter :find_user
-  before_filter :verify_post, :only => [:edit, :update, :destroy]
+  before_filter :find_user, :only => [:new, :create]
+  before_filter :validate_user, :only => [:edit, :update, :destroy]
+  
 
 #  verify :method => :post, :only => :create, :redirect_to => 'dashboard'
 #  verify :method => :put, :only => :update, :redirect_to => 'dashboard'
@@ -40,8 +41,6 @@ class Admin::PostsController < Admin::BaseController
   end
   
   def edit
-    @post = Post.find(params[:id])
-    
   end
 
   # updates the post
@@ -55,6 +54,17 @@ class Admin::PostsController < Admin::BaseController
       flash[:msg] = "Post not updated"
       render :action => :Edit
     end
+  end
+
+  private 
+
+  def validate_user
+    verify_post
+    if current_user != @post.user && !is_admin?
+      flash[:msg] = 'You can not edit/ destroy this post as it is not created by you'
+      redirect_to post_path(@post)
+    end
+    @post
   end
 
 end

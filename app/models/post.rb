@@ -17,7 +17,6 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_and_belongs_to_many :categories
   has_many :comments, :as => :commentable
-  has_many :visible_post_comments, :class_name => 'Comment' , :conditions => 'commentable_type = post and status = 1'
 
   cattr_reader :per_page
   @@per_page = 2
@@ -26,5 +25,12 @@ class Post < ActiveRecord::Base
   validates_uniqueness_of :title
 
   STATUS = [["Unpublished", 0],["Published", 1]]
+
+  def accepted_comments
+    @comments = self.comments.find_by_status(1)
+    if @comments.nil?
+      @comment = [];
+    end
+  end
 
 end

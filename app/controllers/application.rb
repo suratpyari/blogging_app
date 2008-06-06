@@ -39,10 +39,10 @@ uses_tiny_mce(:options => {:theme => 'advanced',
   # If current user is administrator then return user else redirect to admin/users/index
   def find_admin
     # Role is 1 if user is administrator else role is 2 
-    admin = current_user if current_user.role == 1 
+    admin = current_user if is_admin?
     unless admin
       flash[:msg] = "You are not an administrator"
-      redirect_to admin_users_url
+      redirect_to dashboard_path
     end
   end
 

@@ -2,7 +2,7 @@
 <div class = "profile">
   <h2><%= h(@user.name) %>'s Profile<br></h2>
   Email: <%= h(@user.email) %><br>
-  <%  if @user.biodata %>
+  <% if @user.biodata %>
     Biodata :<br>
     <%=  textilize(@user.biodata) %>
   <% end %>

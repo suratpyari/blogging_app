@@ -1,6 +1,8 @@
 <ul id="dashboard">
+  <li><%= link_to "Home", posts_path %></li>
   <% if is_admin? %>
     <li><%= link_to "Add New user", new_admin_user_path %></li>
   <% end %>
-  <li><%= link_to "Post a new article", new_admin_post_path %></li>
+  <li><%= link_to "New post", new_admin_post_path %></li>
+  <li><%= link_to "Categories", admin_categories_path %></li>
 </ul>

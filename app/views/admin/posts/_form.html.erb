@@ -5,7 +5,7 @@
   <div class ="divfield"><%= text_area :post, :content, :class => "mce-editor" %></div>
 
 <div class ="divitem">Tags:</div>
-  <div class ="divfield"><%= text_field :tag, :name %></div>
+  <div class ="divfield"><%= text_field :tag, :name, :value => "#{@post.tag_list rescue ''}" %></div>
 
 <div class ="divitem">Status:</div>
   <div class ="divfield"><%= select :post, :status, (Post::STATUS) %></div>
