@@ -7,11 +7,14 @@
   </head>
   <body id="application">
     <div id="heading">
-      <% if session[:user_id] %>
-        <div id="back_dashboard">
-          <%= link_to "back to dashboard", admin_base_index_path %><br/>
-        </div>
-      <% end %>
+      <div id="back_dashboard">
+        <% if session[:user_id] %>
+          <%= link_to "Logout", logout_url %> / 
+          <%= link_to "Dashboard", dashboard_path %><br/>
+        <% else %>
+          <%= link_to "Login", login_url %>
+        <% end %>
+      </div>
       <h1> <%= link_to "Surat's Blog", posts_path %> </h1></div>
     <div id="main">
       <div id="flash">
@@ -28,11 +31,7 @@
       <ul>
     </div>
     <div id="footer">
-      <% if session[:user_id] %>
-        <%= link_to "logout", logout_url %>
-      <% else %>
-        <%= link_to "login", login_url %>
-      <% end %>
+      Surat Blog &#169 2008
     </div>
   </body>
 </html>

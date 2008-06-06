@@ -51,7 +51,6 @@ class Admin::PostsController < Admin::BaseController
       flash[:msg] = "Post updated"
       redirect_to post_path(@post)
     else
-      flash[:msg] = "Post not updated"
       render :action => :Edit
     end
   end

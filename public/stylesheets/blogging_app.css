@@ -68,7 +68,7 @@ a {
   list-style: none;
 }
 
-#footer,#footer a, #heading, #heading a {
+#footer, #heading, #heading a {
   clear: both;
   background: #D5DDF3;
   text-align: center;
@@ -82,6 +82,14 @@ a {
 
 #heading {
   border-bottom: 2px solid #0044aa;
+}
+
+#heading #back_dashboard {
+  width: 20%;
+  float: right;
+  margin: 0;
+  padding: 0;
+  text-align: right;
 }
 
 .post, .comment {
