@@ -56,6 +56,10 @@ class Admin::PostsController < Admin::BaseController
     end
   end
 
+  def cancel
+    redirect_to admin_posts_path
+  end
+
   private 
 
   def validate_user

@@ -21,7 +21,7 @@
   <div class="tags">Tags:
     <% if !@post.tags.empty? %>
       <% for tag in @post.tags %>
-        <%= link_to tag.name, tag_path(tag) %>
+        <%= link_to tag.name, tag_path(tag.name) %>
       <% end %>
     <% end %>
   </div>
