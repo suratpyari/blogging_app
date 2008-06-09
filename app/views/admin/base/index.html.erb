@@ -1,5 +1,5 @@
 <ul id="dashboard">
-  <li><%= link_to "Home", posts_path %></li>
+  <li><%= link_to "Home", "http://localhost:3000/" %></li>
   <% if is_admin? %>
     <li><%= link_to "Add New user", new_admin_user_path %></li>
   <% end %>

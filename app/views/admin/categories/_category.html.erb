@@ -1,6 +1,7 @@
 <li id = "category-<%= @cat.id %>">
   <% if is_admin? %>
-    <%= link_to_remote "[X]", :url => admin_category_path(@cat), :method => :delete, :confirm => 'Are you sure?' %>
+    <%= check_box_tag 'selected[]', @cat.id.to_s %>
   <% end %>
   <%= @cat.category_name %>
 </li>
+

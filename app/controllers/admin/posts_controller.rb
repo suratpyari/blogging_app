@@ -37,7 +37,7 @@ class Admin::PostsController < Admin::BaseController
     else
       flash[:msg] = "Cannot delete this post. This is not created by you"
     end
-    redirect_to posts_path
+    redirect_to "http://localhost:3000/"
   end
   
   def edit

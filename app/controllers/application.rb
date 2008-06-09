@@ -69,7 +69,7 @@ uses_tiny_mce(:options => {:theme => 'advanced',
     @post = (Post.find(params[:id]) rescue nil)
     if @post.nil?
       flash[:msg] = "Post with this id does not exist"
-      redirect_to posts_path
+      redirect_to "http://localhost:3000/"
     end
   end
 

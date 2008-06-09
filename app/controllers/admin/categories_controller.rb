@@ -24,21 +24,20 @@ class Admin::CategoriesController < Admin::BaseController
     end
   end
 
-  def destroy
-    @category = Category.find(params[:id]) rescue nil
-    render :update do |page|
-      if @category && @category.category_name != 'Uncategorized'
-        @category.destroy
-        flash[:msg] = "#{@category.category_name} deleted"
-        page.replace_html "category-#{@category.id}", ''
-      else if @category.nil?
-          flash[:msg] = "This category does not exists"
-        else 
-          flash[:msg] = "You can not delete this category"
-        end
+  def delete
+    categories = params[:selected]
+    msg = ""
+    for category in categories
+      cat = Category.find(category.to_i) rescue nil
+      if cat.category_name == 'Uncategorized'
+        msg = msg+"can not delete category Uncategorized<br />"
+      else
+        cat.destroy
+        msg = msg+"#{cat.category_name} deleted<br />"
       end
-      page.replace_html :flash, flash[:msg]
     end
+    flash[:msg] = msg
+    redirect_to admin_categories_path
   end
 
 end

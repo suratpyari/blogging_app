@@ -27,7 +27,7 @@ class PostsController < ApplicationController
       @change_status = true
     else if @post.status == 0
       flash[:msg] = "This poat is Unpublished"
-      redirect_to posts_path
+      redirect_to "http://localhost:3000/"
       else
         @comments = @post.accepted_comments
       end
