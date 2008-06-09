@@ -1,0 +1,10 @@
+Tags:<br />
+
+<% cloud = Tag.cloud %>
+<% if cloud.length > 0 %>
+  <% build_tag_cloud(cloud) do |tag, size| %>
+    <%= link_to(truncate("#{tag}", 15), tag_url(tag), {:style => "font-size: #{size}" } ) %>
+  <% end %>
+<% else %>
+  No tags found.
+<% end %>

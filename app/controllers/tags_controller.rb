@@ -1,7 +1,7 @@
 class TagsController < ApplicationController
 
   def index
-    @tags=Tag.find(:all)
+    @tags=Tag.cloud
   end
 
   def show

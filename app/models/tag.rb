@@ -30,6 +30,16 @@ class Tag < ActiveRecord::Base
     self.name = name.downcase.strip.squeeze(" ")
   end
   
+
+  def self.cloud
+    find(:all, :select => 'tags.*, count(*) as popularity',
+    :limit => 10,
+    :joins => "JOIN taggings ON taggings.tag_id = tags.id",
+    :group => "taggings.tag_id",
+    :order => "popularity DESC" )
+  end
+
+
   # Tag::Error class. Raised by ActiveRecord::Base::TaggingExtensions if something goes wrong.
   class Error < StandardError
   end

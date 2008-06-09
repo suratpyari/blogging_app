@@ -23,12 +23,7 @@
       <%= yield :layout %>
     </div>
     <div id="tags">
-      Tags:<br />
-      <ul>
-      <% for tag in tags %>
-        <li><%= link_to tag.name, tag_path(tag.name) %><br /></li>
-      <% end %>
-      <ul>
+      <%= render(:partial => "shared/tag_cloud") %>
     </div>
     <div id="footer">
       Surat Blog &#169 2008
