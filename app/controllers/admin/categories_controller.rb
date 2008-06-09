@@ -40,4 +40,17 @@ class Admin::CategoriesController < Admin::BaseController
     redirect_to admin_categories_path
   end
 
+  def edit
+    @category = Category.find(params[:id])
+    render :update do |page|
+      page.replace :catform, :partial => 'edit_form'
+    end
+  end
+
+  def update
+    @category = Category.find(params[:id])
+    @category.update_attributes(params[:category])
+    redirect_to admin_categories_path
+  end
+
 end

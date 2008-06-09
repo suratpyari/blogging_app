@@ -1,0 +1,7 @@
+<h2>Edit category </h2>
+  <div class = "error" id = "category_error"></div>
+  <br />
+<% form_for [:admin, @category], :method=> :put, :html => {:id => 'category_form'} do |f| %>
+  <%= f.text_field :category_name %>
+  <%= f.submit "Edit" %>
+<% end %>

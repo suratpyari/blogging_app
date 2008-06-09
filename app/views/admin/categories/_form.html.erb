@@ -1,0 +1,7 @@
+<h2>Add new category </h2>
+  <div class = "error" id = "category_error"></div>
+  <br />
+<% remote_form_for [:admin, @category], :html => {:id => 'category_form'} do |f| %>
+  <%= f.text_field :category_name %>
+  <%= f.submit "Add" %>
+<% end %>
