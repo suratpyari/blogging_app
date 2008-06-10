@@ -23,7 +23,6 @@ class Admin::PostsController < Admin::BaseController
       flash[:msg] = "new post created"
       redirect_to post_path(@post)
     else
-      flash[:msg] = "new post not created"
       render :action => :new
     end
   end
@@ -37,7 +36,7 @@ class Admin::PostsController < Admin::BaseController
     else
       flash[:msg] = "Cannot delete this post. This is not created by you"
     end
-    redirect_to "http://localhost:3000/"
+    redirect_to "/"
   end
   
   def edit

@@ -45,18 +45,34 @@ class Admin::CategoriesController < Admin::BaseController
     @category = Category.find(params[:id])
     render :update do |page|
       page.replace :catform, :partial => 'edit_form'
-      page.replace "category-#{@category.id}", ""
+      page.replace "category-#{@category.id}", "<div id=category-#{@category.id}></div>"
     end
   end
 
   def update
-    @category = Category.find(params[:id])
-    @category.update_attributes(params[:category])
-    redirect_to admin_categories_path
+    @cat = Category.find(params[:id])
+    @cat.update_attributes(params[:category])
+    @category = Category.new
+    render :update do |page|
+      page.replace :catform, :partial => 'form'
+      page.replace "category-#{@cat.id}", :partial => 'category'
+    end
   end
 
-  def cancel
-    redirect_to admin_categories_path
+  def cancel_edit_form
+    @cat = Category.find(params[:id])
+    @category = Category.new
+    render :update do |page|
+      page.replace "category-#{@cat.id}", :partial => 'category'
+      page.replace :catform, :partial => 'form'
+    end
+  end
+
+  def cancel_new_form
+    @category = Category.new
+    render :update do |page|
+      page.replace :catform, :partial => 'form'
+    end
   end
 
 end
