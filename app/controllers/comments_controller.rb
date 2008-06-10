@@ -7,20 +7,23 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(params[:comment])
-    render :update do |page|
-      if @comment.save
-        page.replace_html :comment_errors , ''
-        page.form.reset('comment_form')
-        if @comment.status == 2
-          flash[:msg] = "Your comment looks like spam and will show up once admin approves"
-        else
-          flash[:msg] = "This comment has been submitted"
-        end
+    if @comment.save
+      if @comment.status == 2
+        msg = "Your comment looks like spam and will show up once admin approves"
       else
-        page.replace_html :comment_errors , @comment.errors.full_messages.join('<br />')
-        flash[:msg] = ""
+        msg = "This comment has been submitted"
       end
-      page.replace_html :flash , flash[:msg]
+      render :update do |page|
+        page.replace_html :comment_errors, ''
+        page.form.reset('comment_form')
+        page.replace_html :flash , msg
+      end
+    else
+      render :update do |page|
+        page.replace_html :comment_errors, @comment.errors.full_messages.join('<br />')
+        msg = ""
+       page.replace_html :flash , msg
+      end
     end
   end
 
@@ -46,5 +49,4 @@ class CommentsController < ApplicationController
       end
     end
   end
-
 end

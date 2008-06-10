@@ -39,7 +39,7 @@ uses_tiny_mce(:options => {:theme => 'advanced',
   # If current user is administrator then return user else redirect to admin/users/index
   def find_admin
     # Role is 1 if user is administrator else role is 2 
-    admin = current_user if is_admin?
+    admin = current_user if session[:user_id] && is_admin?
     unless admin
       flash[:msg] = "You are not an administrator"
       redirect_to dashboard_path
@@ -48,7 +48,7 @@ uses_tiny_mce(:options => {:theme => 'advanced',
 
   # Returns current user
   def current_user
-    @current_user ||= User.find(session[:user_id])
+    @current_user ||= User.find_by_id(session[:user_id])
   end
 
   # Returns true if current user is administrator
@@ -58,9 +58,9 @@ uses_tiny_mce(:options => {:theme => 'advanced',
 
   # checks is there any user logged in
   def find_user
-      unless current_user
-      flash[:msg] = "Please log in"
-      redirect_to login_path
+    unless session[:user_id]
+      flash[:msg] = "Login required"
+      redirect_to "/"
     end
   end
 
@@ -69,7 +69,7 @@ uses_tiny_mce(:options => {:theme => 'advanced',
     @post = (Post.find(params[:id]) rescue nil)
     if @post.nil?
       flash[:msg] = "Post with this id does not exist"
-      redirect_to "http://localhost:3000/"
+      redirect_to "/"
     end
   end
 

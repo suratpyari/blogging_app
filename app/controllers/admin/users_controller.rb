@@ -1,13 +1,13 @@
 class Admin::UsersController < Admin::BaseController
   
   # Logged user must be an administrator for these actions
-  before_filter :find_admin, :only => ['new', 'create', 'destroy'] 
+  before_filter :find_admin, :only => [:new, :create, :destroy] 
 
   # Login is required for these actions
-  before_filter :find_user, :only => ['index', 'show', 'edit', 'update'] 
+  before_filter :find_user, :only => [:index, :show, :edit, :update] 
 
   verify :method => :post, :only => [:create, :send_email], :redirect_to => {:action => 'index'}
-  verify :method => :put, :only => [:update, :updaet_password], :redirect_to => {:action => 'index'}
+  verify :method => :put, :only => [:update, :update_password], :redirect_to => {:action => 'index'}
   verify :method => :delete, :only => :destroy, :redirect_to => {:action => 'index'}
 
   # Lists all the users added by administrator and
@@ -17,17 +17,17 @@ class Admin::UsersController < Admin::BaseController
 
   # Shows details of a user
   def show
-    @user = validate_user
+    validate_user
   end
 
   # New user
   def new
-    @user = User.new
+    @user=User.new
   end
   
   # Edits a user
   def edit
-    @user = validate_edit_user
+    validate_edit_user
   end
 
   # Creates a new user and send a email to the user about his account.
@@ -47,7 +47,7 @@ class Admin::UsersController < Admin::BaseController
 
   # Updates user account
   def update
-    @user = validate_edit_user
+    validate_edit_user
     if @user.update_attributes(params[:user])
       flash[:msg] = "username: #{@user.username} updated"
       redirect_to admin_user_path(@user)
@@ -58,7 +58,7 @@ class Admin::UsersController < Admin::BaseController
 
   # Destroy a user by administrator only ans shows the modified list of users (index)
   def destroy
-    @user = validate_user
+    validate_user
     # Only administrator can destroy other user but also cannot destroy his self
     if is_admin? && @user != current_user
       @user.destroy
@@ -80,10 +80,11 @@ class Admin::UsersController < Admin::BaseController
       email = PasswordMailer.create_sent(user, url)
       email.set_content_type("text/html" )
       PasswordMailer.deliver(email)
+      flash.now[:msg] = "An email has been sent"
       redirect_to login_path
     else # When email address given by user does not exists
-      flash[:msg] = "user with this email does not exist"
-      render :action => 'forgot_password'
+      flash.now[:msg] = "user with this email does not exist"
+      render :action => 'forgot_password', :layout => 'application'
     end
   end
   
@@ -92,8 +93,8 @@ class Admin::UsersController < Admin::BaseController
   end
   # Edits the password
   def edit_password
-    render :layout => 'application'
     @user = User.find_by_token(params[:token])
+    render :layout => 'application'
   end
 
   # Updates the password
@@ -101,10 +102,15 @@ class Admin::UsersController < Admin::BaseController
     @user = User.find_by_token(params[:token])
     if @user.update_attributes(params[:user])
       flash[:msg] = "password updated"
+      @user.token = nil
       redirect_to login_path
     else # If not modified
       render :action => 'edit_password'
     end
+  end
+
+  def cancel
+    redirect_to admin_users_path
   end
 
   private
@@ -112,12 +118,10 @@ class Admin::UsersController < Admin::BaseController
   # If user with given id exists it returns user of that id else redirects to
   # admin/users/index
   def validate_user
-    user = (User.find(params[:id]) rescue nil)
-    if user.nil?
+    @user = (User.find(params[:id]) rescue nil)
+    if @user.nil?
       flash[:msg] = "User with id #{params[:id]} does not exist"
       redirect_to admin_users_path
-    else
-      return user
     end
   end
 
@@ -125,12 +129,10 @@ class Admin::UsersController < Admin::BaseController
   # user with given id does not exists or current user is not an administrator then
   # redirects to admin/users/index
   def validate_edit_user
-    user = (User.find(params[:id]) rescue nil)
-    if (user.nil?)&&( !is_admin?)
+    @user = (User.find(params[:id]) rescue nil)
+    if (@user.nil?)&&( !is_admin?)
       flash[:msg] = "You cannot edit this user"
       redirect_to admin_users_path
-    else
-      return user
     end
   end
 

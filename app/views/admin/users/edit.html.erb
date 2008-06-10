@@ -3,6 +3,7 @@
   <div class = 'error'><%= error_messages_for 'user' %></div>
   <% form_for [:admin,@user], :method => 'put', :html => {:id => "user_form", :multipart => true} do |f|%>
     <%= render :partial=> 'form' %>
+    <div class ="divitem"><%= link_to "cancel", cancel_admin_users_path %></div>
     <div class ="divitem"><%= submit_tag "Edit" %></div>
   <% end %>
 </div>

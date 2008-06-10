@@ -49,13 +49,13 @@ a {
   clear: both;
 }
 
-#application #main {
+#application_body #main {
   width: 75%;
   padding: .5%;
   float: left;
 }
 
-#application #tags {
+#application_body #tags {
   width: 15%;
   padding: 3%;
   margin-top: 3%;
@@ -64,7 +64,7 @@ a {
   float: right;
 }
 
-#application #tags ul{
+#application_body #tags ul{
   list-style: none;
 }
 

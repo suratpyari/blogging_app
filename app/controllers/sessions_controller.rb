@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
   def destroy
     reset_session
     flash[:msg] = "Thanks for your visit"
-    redirect_to login_path
+    redirect_to posts_path
   end
 
 end

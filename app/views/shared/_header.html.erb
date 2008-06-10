@@ -1,0 +1,11 @@
+<div id="heading">
+  <div id="back_dashboard">
+    <% if session[:user_id] %>
+      <%= link_to "Logout", logout_url %> /
+      <%= link_to "Dashboard", dashboard_path %>
+    <% else %>
+      <%= link_to "Login", login_url %>
+    <% end %>
+  </div>
+  <h1> <%= link_to "Surat's Blog", "/" %> </h1>
+</div>

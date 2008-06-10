@@ -14,8 +14,8 @@ class Comment < ActiveRecord::Base
     end
   end
 
-  def after_save
-    self.update_attribute(status, 2) if check_comment_for_spam(self.author, self.content)
+  def after_create
+    self.update_attribute('status', 2) if check_comment_for_spam(self.author, self.content)
   end
 
   protected
