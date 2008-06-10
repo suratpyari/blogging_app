@@ -1,3 +1,14 @@
+# == Schema Information
+# Schema version: 13
+#
+# Table name: taggings
+#
+#  id            :integer(11)     not null, primary key
+#  tag_id        :integer(11)     not null
+#  taggable_id   :integer(11)     not null
+#  taggable_type :string(255)     default(""), not null
+#
+
 
 # The Tagging join model. This model is automatically generated and added to your app if you run the tagging generator included with has_many_polymorphs.
 

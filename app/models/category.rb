@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 11
+# Schema version: 13
 #
 # Table name: categories
 #
@@ -16,5 +16,13 @@ class Category < ActiveRecord::Base
 
   validates_presence_of :category_name
   validates_uniqueness_of :category_name
+
+  def before_destroy
+    for post in self.posts
+      if post.categories.size == 1
+        post.categories << Category.find_by_category_name('Uncategorized')
+      end
+    end    
+  end
 
 end

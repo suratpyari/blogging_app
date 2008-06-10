@@ -1,3 +1,12 @@
+# == Schema Information
+# Schema version: 13
+#
+# Table name: tags
+#
+#  id   :integer(11)     not null, primary key
+#  name :string(255)     default(""), not null
+#
+
 
 # The Tag model. This model is automatically generated and added to your app if you run the tagging generator included with has_many_polymorphs.
 

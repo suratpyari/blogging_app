@@ -33,7 +33,7 @@ class Admin::CategoriesController < Admin::BaseController
           msg = "Can not delete category Uncategorized.<br />"
         else
           cat.destroy
-          msg = msg+"Selected categories has been deleted.<br />"
+          msg = "Selected categories has been deleted.<br />"
         end
       end
     end

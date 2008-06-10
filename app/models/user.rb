@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 11
+# Schema version: 13
 #
 # Table name: users
 #
@@ -88,6 +88,13 @@ class User < ActiveRecord::Base
 
   def name
     self.first_name+' '+self.last_name
+  end
+
+  def before_destroy
+    for post in self.posts
+      post.user = User.find_by_username("admin")
+      post.save
+    end
   end
 
   private

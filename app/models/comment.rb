@@ -1,3 +1,20 @@
+# == Schema Information
+# Schema version: 13
+#
+# Table name: comments
+#
+#  id               :integer(11)     not null, primary key
+#  content          :string(255)     
+#  author           :string(255)     
+#  author_url       :string(255)     
+#  email            :string(255)     
+#  commentable_type :string(255)     
+#  commentable_id   :integer(11)     
+#  status           :integer(11)     default(0)
+#  created_at       :datetime        
+#  updated_at       :datetime        
+#
+
 class Comment < ActiveRecord::Base
 
   belongs_to :commentable, :polymorphic => true

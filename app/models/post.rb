@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 11
+# Schema version: 13
 #
 # Table name: posts
 #
@@ -30,6 +30,17 @@ class Post < ActiveRecord::Base
     @comments = self.comments.find_by_status(1)
     if @comments.nil?
       @comment = [];
+    end
+  end
+
+  def before_destroy
+    for comment in self.comments
+      comment.destroy
+    end
+    for tag in self.tags
+      if tag.posts.size < 2
+        tag.destroy
+      end
     end
   end
 
