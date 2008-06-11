@@ -25,3 +25,52 @@
 #
 # two:
 #   column: value
+
+surat_pyari:
+ id:              1
+ first_name:      surat
+ last_name:       pyari
+ email:           suratpyari@gmail.com
+ salt:            0384345845
+ hashed_password: <%= User.encrypted_password("suratpyari", "0384345845") %>
+ role:            1 #for admin
+ username:        suratpyari
+ status:          0 #enable
+ biodata :        suratpyari
+
+surat_disable:
+ id:              2
+ first_name:      surat
+ last_name:       pyari
+ email:           surat@gmail.com
+ salt:            0384345845
+ hashed_password: <%= User.encrypted_password("surat", "0384345845") %>
+ role:            2 #for other user
+ username:        surat
+ status:          1 #disable
+ biodata :        suratpyari
+
+admin:
+ id:              3
+ first_name:      admin
+ last_name:       
+ email:           admin@gmail.com
+ salt:            0384345845
+ hashed_password: <%= User.encrypted_password("admin", "0384345845") %>
+ role:            1 #for admin
+ username:        admin
+ status:          0 #enable
+ biodata :        admin
+
+not_admin:
+ id:              4
+ first_name:      not
+ last_name:       admin
+ email:           not_admin@gmail.com
+ salt:            0384345845
+ hashed_password: <%= User.encrypted_password("not_admin", "0384345845") %>
+ role:            2 #for admin
+ username:        notadmin
+ status:          0 #enable
+ biodata :        not_admin
+

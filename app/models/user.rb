@@ -18,6 +18,7 @@
 #  biodata         :text            
 #
 
+# status is 0 for enable and 1 for disable
 
 class User < ActiveRecord::Base
   
@@ -31,7 +32,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username, :email
   attr_accessor :password_confirmation
   validates_confirmation_of :password
-  validates_format_of :email, :with => %r{^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$}, :if => Proc.new{|comment| !comment.email.empty?}
+  validates_format_of :email, :with => %r{^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$}, :if => Proc.new{|user| user.email && !user.email.empty?}
 
 
 

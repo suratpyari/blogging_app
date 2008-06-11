@@ -21,7 +21,7 @@ class Comment < ActiveRecord::Base
   
   attr_protected :status
   validates_presence_of :content, :author, :email
-  validates_format_of :email, :with => %r{^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$}, :if => Proc.new{|comment| !comment.email.empty?}
+  validates_format_of :email, :with => %r{^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$}, :if => Proc.new{|comment| comment.email && !comment.email.empty?}
 
   def comment_status
     if self.status == 0

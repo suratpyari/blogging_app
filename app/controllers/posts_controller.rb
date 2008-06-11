@@ -32,7 +32,7 @@ class PostsController < ApplicationController
         @comments = @post.accepted_comments
       end
     end
-    @comment = @post.comments.new
+    @comment = Comment.new
   end
 
 end

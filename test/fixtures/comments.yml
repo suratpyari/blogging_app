@@ -22,3 +22,12 @@
 #
 # two:
 #   column: value
+
+comment1_for_post1 :
+ id:               1
+ content:          some content in comment
+ author:           surat
+ email:            surat@vinsol.com
+ commentable_type: post
+ commentable_id:   1
+ 

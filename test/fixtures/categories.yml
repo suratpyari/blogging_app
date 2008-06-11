@@ -17,3 +17,7 @@
 #
 # two:
 #   column: value
+
+category1:
+ id:            1
+ category_name: categoryname

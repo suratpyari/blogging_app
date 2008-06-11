@@ -1,8 +1,24 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class PostTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  def test_truth
-    assert true
+
+  fixtures :posts
+
+  def test_invalid_with_empty_attributes
+    post = Post.new()
+    assert !post.valid?
+    assert post.errors.invalid?(:title)
+    assert post.errors.invalid?(:content)
   end
+
+  def test_unique_postname
+    post = Post.new(:title => posts(:post1).title,
+                    :content => "some content",
+                    :user_id => 1,
+                    :status => 1)
+    assert !post.save
+    assert post.errors.invalid?(:title)
+    assert_equal "has already been taken" , post.errors.on(:title)
+  end
+
 end

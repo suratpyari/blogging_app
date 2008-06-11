@@ -91,6 +91,7 @@ class Admin::UsersController < Admin::BaseController
   def forgot_password
     render :layout => 'application'
   end
+
   # Edits the password
   def edit_password
     @user = User.find_by_token(params[:token])
@@ -102,7 +103,7 @@ class Admin::UsersController < Admin::BaseController
     @user = User.find_by_token(params[:token])
     if @user.update_attributes(params[:user])
       flash[:msg] = "password updated"
-      @user.token = nil
+      @user.update_attribute('token', nil)
       redirect_to login_path
     else # If not modified
       render :action => 'edit_password'

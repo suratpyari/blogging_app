@@ -2,11 +2,13 @@ class CommentsController < ApplicationController
 #include ActionView::Helpers::ActiveRecordHelper
   # Creates a new comment and set status as 0
 
-  verify :method => :post, :only => [:create, :accept], :redirect_to => {:controller => 'post', :action => 'index'}
-  verify :method => :delete, :only => :destroy, :redirect_to => {:controller => 'post', :action => 'index'}
+  verify :method => :post, :only => [:create, :accept], :redirect_to => {:controller => 'posts', :action => 'index'}
+  verify :method => :delete, :only => :destroy, :redirect_to => {:controller => 'posts', :action => 'index'}
 
   def create
     @comment = Comment.new(params[:comment])
+    @comment.commentable_type = "post"
+    @comment.commentable_id = params[:post_id]
     if @comment.save
       if @comment.status == 2
         msg = "Your comment looks like spam and will show up once admin approves"
@@ -30,7 +32,7 @@ class CommentsController < ApplicationController
   # Accepts comment
   def accept
     comment = Comment.find(params[:id])
-    comment.update_attribute(status, 1)
+    comment.update_attribute('status', 1)
     render :update do |page|
       page.replace_html 'status-'+comment.id.to_s, ''
     end

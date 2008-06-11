@@ -1,6 +1,4 @@
 class SessionsController < ApplicationController
-  
-  before_filter :find_user, :only => 'logout'
 
   def new
     redirect_to admin_users_url if session[:user_id]
@@ -14,8 +12,8 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to dashboard_path
     else
-      flash.now[:msg] = "You cannot login. Your account id disabled. Please contact to administrator" if user
-      flash.now[:msg] = "Invalid user/password combination" if !user
+      flash[:msg] = "You cannot login. Your account id disabled. Please contact to administrator" if user
+      flash[:msg] = "Invalid user/password combination" if !user
       render :action => 'new'
     end
   end
