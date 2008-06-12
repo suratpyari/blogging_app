@@ -33,7 +33,7 @@ surat_pyari:
  email:           suratpyari@gmail.com
  salt:            0384345845
  hashed_password: <%= User.encrypted_password("suratpyari", "0384345845") %>
- role:            1 #for admin
+ role:            2 #for admin
  username:        suratpyari
  status:          0 #enable
  biodata :        suratpyari

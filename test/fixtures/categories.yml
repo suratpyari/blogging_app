@@ -4,10 +4,10 @@
 # Table name: categories
 #
 #  id            :integer(11)     not null, primary key
-#  category_name :string(255)     
-#  description   :string(255)     
-#  created_at    :datetime        
-#  updated_at    :datetime        
+#  category_name :string(255)
+#  description   :string(255)
+#  created_at    :datetime
+#  updated_at    :datetime
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
@@ -21,3 +21,12 @@
 category1:
  id:            1
  category_name: categoryname
+
+category2:
+ id:            2
+ category_name: categoryname
+
+category_uncategorized:
+ id:            1
+ category_name: categoryname
+

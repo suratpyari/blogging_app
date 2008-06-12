@@ -37,14 +37,16 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :posts do |post|
     post.resources :comments, :member => {:accept => :post}
   end
+
   map.resources :users
   map.resources :tags
   map.resource :session
-  map.connect '', :controller => 'posts', :action => 'index'
+  
   map.login 'login', :controller => 'sessions', :action => 'new'
   map.logout 'logout', :controller => 'sessions', :action => 'destroy', :method => :delete
   map.admin 'admin', :controller => 'admin/base', :action => 'index'
   map.dashboard 'admin/dashboard', :controller => 'admin/base', :action => 'index'
+  map.connect '', :controller => '/posts', :action => 'index'
   map.connect ':controller/:id/:action/'
   map.connect ':controller/:id/:action.:format'
 end

@@ -1,7 +1,7 @@
 class Admin::CategoriesController < Admin::BaseController
-
+  skip_before_filter :find_user, :except => 'index'
   before_filter :find_admin, :except => 'index'
-  before_filter :find_user, :only => :index
+  #before_filter :find_user, :only => :index
 
   def index
     @categories = Category.find(:all)
@@ -30,10 +30,10 @@ class Admin::CategoriesController < Admin::BaseController
       for category in categories
         cat = Category.find(category.to_i)
         if cat.category_name == 'Uncategorized'
-          msg = "Can not delete category Uncategorized.<br />"
+          msg = "Can not delete category Uncategorized"
         else
           cat.destroy
-          msg = "Selected categories has been deleted.<br />"
+          msg = "Selected categories has been deleted"
         end
       end
     end

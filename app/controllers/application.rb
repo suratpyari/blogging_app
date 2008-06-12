@@ -42,7 +42,15 @@ uses_tiny_mce(:options => {:theme => 'advanced',
     admin = current_user if session[:user_id] && is_admin?
     unless admin
       flash[:msg] = "You are not an administrator"
-      redirect_to dashboard_path
+      respond_to do |format|
+        format.html{
+          redirect_to dashboard_path}
+        format.js{
+          render :update do |page|
+            p dashboard_path.to_s
+            page.redirect_to dashboard_path
+          end}
+      end
     end
   end
 
@@ -60,7 +68,14 @@ uses_tiny_mce(:options => {:theme => 'advanced',
   def find_user
     unless session[:user_id]
       flash[:msg] = "Login required"
-      redirect_to "/"
+      respond_to do |format|
+        format.html{
+          redirect_to "/"}
+        format.js{
+          render :update do |page|
+            page.redirect_to "/"
+          end}
+      end
     end
   end
 

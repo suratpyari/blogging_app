@@ -1,13 +1,8 @@
 class Admin::PostsController < Admin::BaseController
   
-  before_filter :find_user, :only => [:new, :create]
+  #before_filter :find_user
   before_filter :validate_user, :only => [:edit, :update, :destroy]
   
-
-#  verify :method => :post, :only => :create, :redirect_to => 'dashboard'
-#  verify :method => :put, :only => :update, :redirect_to => 'dashboard'
-#  verify :method => :delete, :only => :destroy, :redirect_to => 'dashboard'
-
   def new
     @post = Post.new
   end
@@ -30,12 +25,8 @@ class Admin::PostsController < Admin::BaseController
   # destroy the post when either post is created by current user or user id an administrator
   # else redirects to posts/index
   def destroy
-    if @post.user_id == current_user.id || is_admin?
-      @post.destroy
-      flash[:msg] = "#{@post.title} deleted"
-    else
-      flash[:msg] = "Cannot delete this post. This is not created by you"
-    end
+    @post.destroy
+    flash[:msg] = "#{@post.title} deleted"
     redirect_to "/"
   end
   
@@ -50,7 +41,7 @@ class Admin::PostsController < Admin::BaseController
       flash[:msg] = "Post updated"
       redirect_to post_path(@post)
     else
-      render :action => :Edit
+      render :action => 'edit'
     end
   end
 
@@ -65,8 +56,9 @@ class Admin::PostsController < Admin::BaseController
     if current_user != @post.user && !is_admin?
       flash[:msg] = 'You can not edit/ destroy this post as it is not created by you'
       redirect_to post_path(@post)
+    else
+      @post
     end
-    @post
   end
 
 end
