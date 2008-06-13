@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
 
-  # Login is required except these actions
   before_filter :verify_post, :only => :show
 
   # Lists the posts  

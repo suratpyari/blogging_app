@@ -3,7 +3,7 @@ class Admin::PostsController < Admin::BaseController
 
   before_filter :verify_post, :except => [:new, :create, :cancel, :index, :validate_user]
   before_filter :validate_user, :except => [:new, :create, :cancel, :index]
-
+  
   def new
     @post = Post.new
   end

@@ -21,7 +21,7 @@ ActionController::Routing::Routes.draw do |map|
   # Sample resource route within a namespace:
      map.namespace :admin do |admin|
        # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
-       admin.resources :users, :collection => { :forgot_password => :get, :send_email => :post, :update_password => :put, :edit_password => :get, :cancel => :get}
+       admin.resources :users, :collection => {:cancel => :get}
        admin.resources :base
        admin.resources :posts, :collection => {:cancel => :get}
        admin.resources :categories, :collection => {:delete => :post, :cancel_new_form => :post}, :member => {:cancel_edit_form => :post}
@@ -38,7 +38,7 @@ ActionController::Routing::Routes.draw do |map|
     post.resources :comments, :member => {:accept => :post}
   end
 
-  map.resources :users
+  map.resources :users, :collection => { :forgot_password => :get, :send_email => :post, :update_password => :put, :edit_password => :get}
   map.resources :tags
   map.resource :session
   

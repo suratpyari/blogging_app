@@ -87,5 +87,26 @@ uses_tiny_mce(:options => {:theme => 'advanced',
     end
   end
 
+  # If user with given id exists it returns user of that id else redirects to
+  # admin/users/index
+  def validate_user
+    @user = (User.find(params[:id]) rescue nil)
+    if @user.nil?
+      flash[:msg] = "User with id #{params[:id]} does not exist"
+      redirect_to admin_users_path
+    end
+  end
+
+  def put_method
+    if params["_method"] != "put"
+      redirect_to dashboard_path
+    end
+  end
+
+  def delete_method
+    if params["_method"] != "delete"
+      redirect_to dashboard_path
+    end
+  end
 
 end

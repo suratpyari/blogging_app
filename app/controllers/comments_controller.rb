@@ -23,8 +23,6 @@ class CommentsController < ApplicationController
     else
       render :update do |page|
         page.replace_html :comment_errors, @comment.errors.full_messages.join('<br />')
-        msg = ""
-       page.replace_html :flash , msg
       end
     end
   end
