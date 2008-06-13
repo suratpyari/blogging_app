@@ -33,6 +33,7 @@
   <% if @comments %>
     <% for comment in @comments %>
       <div class = 'comment' id='comment-<%= comment.id %>' >
+        <%= image_tag(gravatar_url_for(comment.email)) %>
         <div class="created">
           <h3><%= comment.author %></h3> on
           <%= @post.created_at.strftime("%B %d, %Y") %> 

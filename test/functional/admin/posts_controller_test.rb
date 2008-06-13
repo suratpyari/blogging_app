@@ -58,11 +58,11 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_redirected_to '/'
   end
 
-#  def test_destroy_wrong_post
- #   post :destroy, {:id => posts(:wrongpost).id}, {:user_id => users(:admin).id}
-  #  assert_equal "Post with this id does not exist", flash[:msg]
-   # assert_redirected_to '/'
-  #end
+  def test_destroy_wrong_post
+    post :destroy, {:id => 89088}, {:user_id => users(:admin).id}
+    assert_equal "Post with this id does not exist", flash[:msg]
+    assert_redirected_to '/'
+  end
 
   def test_edit_without_user
     get :edit, {:id => posts(:post1).id}
@@ -85,11 +85,11 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_template 'edit'
   end
 
-#  def test_edit_wrong_post
- #   get :edit, {:id => posts(:wrongpost).id}, {:user_id => users(:admin).id}
-  #  assert_equal "Post with this id does not exist", flash[:msg]
-   # assert_redirected_to '/'
-  #end
+  def test_edit_wrong_post
+    get :edit, {:id => 89798}, {:user_id => users(:admin).id}
+    assert_equal "Post with this id does not exist", flash[:msg]
+    assert_redirected_to '/'
+  end
 
   def test_update_without_user
     post :update,  {:id => posts(:post1).id, :post => {:title => "Changed post title", :content => "Changed post content"}}
@@ -115,6 +115,12 @@ class Admin::PostsControllerTest < ActionController::TestCase
   def test_update_without_post
     post :update, {:id => posts(:post1).id, :post => {:title => ""}}, {:user_id => users(:surat_pyari).id}
     assert_template 'edit'
+  end
+
+  def test_update_wrong_post
+    post :update, {:id => 89798}, {:user_id => users(:admin).id}
+    assert_equal "Post with this id does not exist", flash[:msg]
+    assert_redirected_to '/'
   end
 
   def test_cancel_without_user

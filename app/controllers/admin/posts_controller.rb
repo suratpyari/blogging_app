@@ -1,8 +1,9 @@
 class Admin::PostsController < Admin::BaseController
-  
-  #before_filter :find_user
-  before_filter :validate_user, :only => [:edit, :update, :destroy]
-  
+ 
+
+  before_filter :verify_post, :except => [:new, :create, :cancel, :index, :validate_user]
+  before_filter :validate_user, :except => [:new, :create, :cancel, :index]
+
   def new
     @post = Post.new
   end
@@ -52,7 +53,6 @@ class Admin::PostsController < Admin::BaseController
   private 
 
   def validate_user
-    verify_post
     if current_user != @post.user && !is_admin?
       flash[:msg] = 'You can not edit/ destroy this post as it is not created by you'
       redirect_to post_path(@post)

@@ -13,11 +13,11 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     assert :success
   end
 
-  def test_create_without_user
-    xhr :post, :create, {:category => {:category_name => 'category to test'}}
-    assert_equal "Login required", flash[:msg]
-    assert_response :success
-  end
+#  def test_create_without_user
+ #   xhr :post, :create, {:category => {:category_name => 'category to test'}}
+  #  assert_equal "Login required", flash[:msg]
+   # assert_response :success
+ # end
 
   def test_create_with_user_not_admin
     xhr :post, :create, {:category => {:category_name => 'category_to_test'}}, {:user_id => users(:not_admin).id}

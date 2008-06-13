@@ -6,8 +6,7 @@ class Admin::UsersController < Admin::BaseController
   # Login is required for these actions
   before_filter :find_user, :only => [:index, :show, :edit, :update] 
 
-  verify :method => :post, :only => [:create, :send_email], :redirect_to => {:action => 'index'}
-  verify :method => :put, :only => [:update, :update_password], :redirect_to => {:action => 'index'}
+  verify :method => :put, :only => [:update], :redirect_to => {:action => 'index'}
   verify :method => :delete, :only => :destroy, :redirect_to => {:action => 'index'}
 
   # Lists all the users added by administrator and

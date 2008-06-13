@@ -20,13 +20,13 @@
 
 category1:
  id:            1
- category_name: categoryname
+ category_name: category1
 
 category2:
  id:            2
- category_name: categoryname
+ category_name: category2
 
 category_uncategorized:
- id:            1
- category_name: categoryname
+ id:            3
+ category_name: Uncategorized
 

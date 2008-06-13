@@ -47,7 +47,6 @@ uses_tiny_mce(:options => {:theme => 'advanced',
           redirect_to dashboard_path}
         format.js{
           render :update do |page|
-            p dashboard_path.to_s
             page.redirect_to dashboard_path
           end}
       end

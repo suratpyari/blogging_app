@@ -88,7 +88,11 @@ class User < ActiveRecord::Base
   end
 
   def name
-    self.first_name+' '+self.last_name
+    if self.last_name.nil?
+      self.first_name
+    else
+      self.first_name+' '+self.last_name
+    end
   end
 
   def before_destroy
