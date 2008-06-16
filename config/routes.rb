@@ -19,13 +19,15 @@ ActionController::Routing::Routes.draw do |map|
   #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
 
   # Sample resource route within a namespace:
-     map.namespace :admin do |admin|
+    map.namespace :admin do |admin|
        # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
-       admin.resources :users, :collection => {:cancel => :get}
-       admin.resources :base
-       admin.resources :posts, :collection => {:cancel => :get}
-       admin.resources :categories, :collection => {:delete => :post, :cancel_new_form => :post}, :member => {:cancel_edit_form => :post}
-     end
+      admin.resources :users, :collection => {:cancel => :get}
+      admin.resources :base
+      admin.resources :posts, :collection => {:cancel => :get} do |post|
+       post.resources :comments, :member => {:accept => :post}
+      end
+      admin.resources :categories, :collection => {:delete => :post, :cancel_new_form => :post}, :member => {:cancel_edit_form => :post}
+    end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   # map.root :controller => "welcome"
@@ -35,7 +37,7 @@ ActionController::Routing::Routes.draw do |map|
   # Install the default routes as the lowest priority.
   
   map.resources :posts do |post|
-    post.resources :comments, :member => {:accept => :post}
+    post.resources :comments
   end
 
   map.resources :users, :collection => { :forgot_password => :get, :send_email => :post, :update_password => :put, :edit_password => :get}

@@ -21,4 +21,8 @@ class PostTest < ActiveSupport::TestCase
     assert_equal "has already been taken" , post.errors.on(:title)
   end
 
+  def test_accepted_comments
+    post = posts(:post1)
+    assert_equal comments(:comment_status_1), post.accepted_comments
+  end
 end

@@ -6,15 +6,6 @@
     <%= @post.created_at.strftime("%B %d, %Y") %> 
     by <%= link_to @post.user.username, user_path(@post.user.username)%>
   </div>
-  <div class="edit_del">
-    <% if session[:user_id] %>
-      <% if is_admin? || @post.user.id == current_user.id %>
-        <%= link_to "edit", edit_admin_post_path(@post) %> / 
-        <%= link_to "delete", admin_post_path(@post), :method => :delete,
-                                               :confirm => 'Are you sure?' %>
-      <% end %>
-    <% end %>
-  </div>
   <div class="postcontent">
     <%= @post.content %>
   </div>
@@ -25,34 +16,19 @@
       <% end %>
     <% end %>
   </div>
-  <div class = "no_of_comment" id = "comment">
-    <%= @post.accepted_comments.size %> no of comments
-  </div>
 </div>
-  <%= textilize("h2. Comments") %>
-  <% if @comments %>
-    <% for comment in @comments %>
+  <h2 id="comments">Comments</h2>
+  <% if @post.comments %>
+    <% for comment in @post.comments %>
       <div class = 'comment' id='comment-<%= comment.id %>' >
         <%= image_tag(gravatar_url_for(comment.email)) %>
         <div class="created">
           <h3><%= comment.author %></h3> on
-          <%= @post.created_at.strftime("%B %d, %Y") %> 
+          <%= comment.created_at.strftime("%B %d, %Y") %> 
         </div>
         <%= textilize(comment.content) %>
-        <% if session[:user_id] %>
-          <%= textilize("by **"+comment.author+"**\n") %>
-        <% end %>
         <% if !comment.author_url.empty? %>
           <h3><%= textilize("Website: _"+comment.author_url+"_\n") %><h3>
-        <% end %>
-        <% if session[:user_id] %>
-          <%= textilize("Email: _"+comment.email+"_\n") %>
-        <% end %>
-        <% if @change_status == true %>
-          <div id='status-<%= comment.id %>' >
-            <%= link_to_remote comment.comment_status, :url => accept_post_comment_path(@post, comment) %>
-          </div>
-          <%= link_to_remote "Delete", :url => post_comment_path(@post, comment), :method => :delete, :confirm => 'Are you sure?' %>
         <% end %>
       </div>
     <% end %>

@@ -16,4 +16,13 @@ class CategoryTest < ActiveSupport::TestCase
     assert user.errors.invalid?(:category_name)
     assert_equal "has already been taken" , user.errors.on(:category_name)
   end
+
+#  def test_defore_destroy
+#    post = posts(:post1)
+#    category = Category.create(:category_name => "category_to_destroy")
+#    post.categories << category
+
+#    assert_equal categories(:category_uncategorized), post.categories
+#  end
+
 end

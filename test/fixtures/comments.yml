@@ -23,11 +23,38 @@
 # two:
 #   column: value
 
-comment1_for_post1 :
- id:               1
- content:          some content in comment
- author:           surat
- email:            surat@vinsol.com
- commentable_type: post
- commentable_id:   1
+comment1_for_post1:
+  id:               1
+  content:          some content in comment
+  author:           surat
+  email:            surat@vinsol.com
+  commentable_type: Post
+  commentable_id:   1
+
+comment_status_1:
+  id:               2
+  content:          some content in comment_status_1
+  author:           surat
+  email:            surat@vinsol.com
+  commentable_type: Post
+  commentable_id:   1
+  status:           1
+
+comment_status_2:
+  id:               3
+  content:          some content in comment_status_2
+  author:           surat
+  email:            surat@vinsol.com
+  commentable_type: Post
+  commentable_id:   1
+  status:           2
+
+comment_status_0:
+  id:               4
+  content:          some content in comment_status_0
+  author:           surat
+  email:            surat@vinsol.com
+  commentable_type: Post
+  commentable_id:   1
+  status:           0
  

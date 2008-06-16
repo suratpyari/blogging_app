@@ -137,13 +137,20 @@ a {
   list-style: none;
 }
 
-#edit_del {
-  clear: both;
-}
-
 #back_dashboard {
   float: right;
   margin: 3%;
   text-align: left;
 }
-
+table{
+  border-collapse: collapse;
+}
+td, th{
+  border: 1px solid #449744;
+}
+.admin_title{
+  width: 250px;
+}
+.admin_no_of_comments{
+  width: 70px;
+}

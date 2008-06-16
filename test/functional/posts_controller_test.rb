@@ -16,12 +16,13 @@ class PostsControllerTest < ActionController::TestCase
   def test_show_unpublished
     get :show, :id => posts(:post_unpublished)
     assert_redirected_to "/"
-    assert_equal "This poat is Unpublished", flash[:msg]
+    assert_equal "This post is Unpublished", flash[:msg]
   end
 
-  def test_show_unpublished_to_admin
-    get :show, {:id => posts(:post_unpublished)}, {:user_id => users(:admin).id}
-    assert_response :success
+  def test_show_wrong_post
+    get :show, :id => 75353
+    assert_redirected_to dashboard_path
+    assert_equal "Post with this id does not exist", flash[:msg]
   end
 
 end

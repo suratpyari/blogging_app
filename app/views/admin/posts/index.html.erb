@@ -1,4 +1,44 @@
-<ul id="dashboard">
-  <li><%= link_to "Home", "/" %></li>
-  <li><%= link_to "New post", new_admin_post_path %></li>
-</ul>
+<% if @posts.empty? %>
+  <div> There is no post</div>
+<% else %>
+  <table>
+    <tr class ="admin_post" id="post-heading">
+      <th class="admin_title">Title</th>
+      <th class="admin_created">Created at</th>
+      <th class="admin_username">Author</th>
+      <th class="admin_status">Status</th>
+      <th class="admin_tags">Tags</th>
+      <th class="admin_no_of_comments">Number of Comments</th>
+      <th class="admin_edit_del"></th>
+    </tr>
+    <% for post in @posts %>
+      <tr class ="admin_post" id = "post-<%= post.id %>" >
+        <td class="admin_title">
+          <%= link_to h(post.title), post_path(post) %>
+        </td>
+        <td class="admin_created">
+          <%= post.created_at.strftime("%B %d, %Y") %>
+        </td>
+        <td class="admin_username">
+          <%= link_to post.user.username, admin_user_path(post.user.username)%>
+        </td>
+        <td class="admin_status">
+          <%= Post::STATUS[post.status][0] %>
+        </td>
+        <td class="admin_tags">
+          <%= post.tag_list %>
+        </td>
+        <td class="admin_no_of_comments">
+          <%= link_to post.comments.size, admin_post_comments_path(post) %>
+        </td>
+        <td class="admin_edit_del">
+          <% if is_admin? || post.user.id == current_user.id %>
+            <%= link_to "edit", edit_admin_post_path(post) %> / 
+            <%= link_to "delete", admin_post_path(post), :method => :delete, :confirm => 'Are you sure?' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+

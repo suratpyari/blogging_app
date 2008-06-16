@@ -10,14 +10,6 @@
         <%= post.created_at.strftime("%B %d, %Y") %> 
         by <%= link_to post.user.username, user_path(post.user.username)%>
       </div>
-      <div class="edit_del">
-      <% if session[:user_id] %>
-        <% if is_admin? || post.user.id == current_user.id %>
-          <%= link_to "edit", edit_admin_post_path(post) %> / 
-          <%= link_to "delete", admin_post_path(post), :method => :delete, :confirm => 'Are you sure?' %>
-        <% end %>
-      <% end %>
-      </div>
       <div class="postcontent">
         <%= truncate(post.content, 500) %>
       </div>
@@ -30,7 +22,7 @@
         <% end %>
       </div>
       <div class="no_of_comment">
-        <%= link_to "#{post.comments.size} comments", post_path(post, :anchor => 'comment') %>
+        <%= link_to "#{post.comments.size} comments", post_path(post, :anchor => 'comments') %>
       </div>
     </div>
   <% end %>

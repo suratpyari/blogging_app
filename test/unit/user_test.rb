@@ -64,7 +64,6 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def test_format_email
-
     user1 = User.new(:email => "suratpyari")
     assert !user1.save
     assert_equal "is invalid" , user1.errors.on(:email)
@@ -80,7 +79,31 @@ class UserTest < ActiveSupport::TestCase
     user4 = User.new(:email => "")
     assert !user4.save
     assert_equal "can't be blank" , user4.errors.on(:email)
-
   end
+
+  def test_authenticate
+    assert_equal false, User.authenticate("wrongusername", "wrongpassword")
+    assert_equal nil, User.authenticate("suratpyari", "wrongpassword")
+    assert_equal users(:surat_pyari), User.authenticate("suratpyari", "suratpyari")
+  end
+
+  def test_image
+    user = users(:surat_pyari)
+    assert_equal "/images/default.jpg", user.image
+    File.new("public/images/profile_images/suratpyari.jpg")
+    assert_equal "public/images/profile_images/suratpyari.jpg", user.image
+    File.delete("public/images/profile_images/suratpyari.jpg")
+  end
+
+  def test_name
+    assert_equal "surat pyari", users(:surat_pyari).name
+    assert_equal "admin", users(:admin).name
+  end
+
+#  def test_before_destroy
+#    File.new("public/images/profile_images/suratpyari.jpg", "w+")
+#    users(:surat_pyari).destroy
+#    assert_equal false, File.exist?("public/images/profile_images/suratpyari.jpg")
+#  end
 
 end

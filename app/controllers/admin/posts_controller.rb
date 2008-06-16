@@ -1,11 +1,28 @@
 class Admin::PostsController < Admin::BaseController
- 
 
   before_filter :verify_post, :except => [:new, :create, :cancel, :index, :validate_user]
   before_filter :validate_user, :except => [:new, :create, :cancel, :index]
   
   def new
     @post = Post.new
+  end
+
+  # Lists the posts  
+  def index
+    # When current user is an administrator then lists all the posts
+    # else lists only those posts which are either published or created by current user
+    if is_admin?
+      @posts = Post.find(:all)
+    else
+      @posts = Post.find(:conditions => ['status = 1 or user_id = ?', current_user.id])
+    end
+  end
+
+  def show
+    if @post.status == 0 && @post.user != current_user && !is_admin
+      flash[:msg] = "You can not see this post."
+      redirect_to admin_posts_path
+    end
   end
 
   # creates a new post

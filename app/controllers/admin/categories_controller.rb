@@ -1,7 +1,7 @@
 class Admin::CategoriesController < Admin::BaseController
+
   skip_before_filter :find_user, :except => 'index'
   before_filter :find_admin, :except => 'index'
-  #before_filter :find_user, :only => :index
 
   def index
     @categories = Category.find(:all)

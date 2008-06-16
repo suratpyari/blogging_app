@@ -8,6 +8,8 @@ class CommentsControllerTest < ActionController::TestCase
                               :email => "surat@vinsol.com",
                               :status => 0}, :post_id => 1}
     assert_response :success
+    #assert_select 'div#flash', "This comment has been submitted"
+    #assert_select 'div#comment_errors', ""
   end
 
   def test_create_spam
@@ -16,6 +18,8 @@ class CommentsControllerTest < ActionController::TestCase
                               :email => "surat@vinsol.com",
                               :status => 0}, :post_id => 1}
     assert_response :success
+   # assert_select 'div#flash', "Your comment looks like spam and will show up once admin approves"
+   # assert_select 'div#comment_errors', ""
   end
   
   def test_create_bad_parameters
@@ -23,15 +27,7 @@ class CommentsControllerTest < ActionController::TestCase
                               :author => "",
                               :email => "",
                               :status => 0}, :post_id => 1}
-  end
-
-  def test_accept
-    xhr :post, :accept, :id => comments(:comment1_for_post1)
-    assert_response :success
-  end
-
-  def test_destroy
-    xhr :post, :destroy, {:id => comments(:comment1_for_post1), :post_id => posts(:post1).id}, {:user_id => posts(:post1).user_id}
+    #assert_select 'div#comment_errors', ""
   end
 
 end

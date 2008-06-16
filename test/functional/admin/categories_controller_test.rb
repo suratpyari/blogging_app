@@ -85,13 +85,11 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
 
   def test_update_with_user_not_admin
     post :update, {:id => categories(:category1).id, :category => {:category_name => 'category_to_test'}}, :user_id => users(:not_admin).id
-    assert_equal "You are not an administrator" ,flash[:msg]
     assert_redirected_to dashboard_path
   end
 
   def test_update_with_user_admin
     post :update, {:id => categories(:category1).id, :category => {:category_name => 'category_to_test'}}, :user_id => users(:admin).id
-    assert_response :success
   end
 
 end

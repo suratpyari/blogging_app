@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
 
+  skip_before_filter :delete_method
+
   def new
     redirect_to admin_users_url if session[:user_id]
   end

@@ -82,11 +82,6 @@ class User < ActiveRecord::Base
     return img_path
   end
 
-  # deletes the picture of user in public/images when user is deleted
-  def after_destroy
-    File.delete("public/images/#{self.username}.jpg") if File.exist?("public/images/#{self.username}.jpg")
-  end
-
   def name
     if self.last_name.nil?
       self.first_name
@@ -96,6 +91,7 @@ class User < ActiveRecord::Base
   end
 
   def before_destroy
+    File.delete("public/images/#{self.username}.jpg") if File.exist?("public/images/#{self.username}.jpg")
     for post in self.posts
       post.user = User.find_by_username("admin")
       post.save

@@ -31,6 +31,7 @@ class Post < ActiveRecord::Base
     if @comments.nil?
       @comment = [];
     end
+    @comments
   end
 
   def before_destroy
