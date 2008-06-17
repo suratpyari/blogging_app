@@ -134,15 +134,4 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_redirected_to dashboard_path
   end
 
-  def test_cancel_without_user
-    get :cancel
-    assert_redirected_to '/'
-    assert_equal "Login required", flash[:msg]    
-  end
-
-  def test_cancel_with_user
-    get :cancel, {}, {:user_id => users(:surat_pyari).id}
-    assert_redirected_to admin_posts_path
-  end
-
 end

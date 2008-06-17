@@ -18,6 +18,7 @@
 class Comment < ActiveRecord::Base
 
   belongs_to :commentable, :polymorphic => true
+  before_create :check_for_spam
   
   attr_protected :status
   validates_presence_of :content, :author, :email
@@ -31,27 +32,28 @@ class Comment < ActiveRecord::Base
     end
   end
 
-  def after_create
-    self.update_attribute('status', 2) if check_comment_for_spam(self.author, self.content)
-  end
-
   protected
-
-  def check_comment_for_spam(author, text)
-    @akismet = Akismet.new('a11d50c9d2ef', 'suratpyari.wordpress.com') 
-
-    return true unless @akismet.verifyAPIKey 
-       
-    return @akismet.commentCheck(request.remote_ip,
-                                 request.user_agent,
-                                 request.env['HTTP_REFERER'],
-                                 '',
-                                 'comment',
-                                 author,
-                                 '',
-                                 '',
-                                 text,
-                                 {})
+  
+  def request=(request)
+   self.user_ip    = request.remote_ip
+   self.user_agent = request.env['HTTP_USER_AGENT']
+   self.referrer   = request.env['HTTP_REFERER']
   end
 
+  def check_for_spam
+   Akismetor.spam?(akismet_attributes(self.author, self.content)) ? self.status = 2 : self.status = 0
+   true # return true so it doesn't stop save
+  end
+
+  def akismet_attributes(author, text)
+   {
+     :key              => 'a11d50c9d2ef',
+     :blog             => 'suratpyari.wordpress.com',
+     :user_ip          =>  user_ip,
+     :user_agent       =>  user_agent,
+     :comment_author   => author,
+     :comment_content  => text
+   }
+  end
+  attr_accessor :user_ip, :user_agent, :referrer
 end

@@ -14,14 +14,7 @@ class Admin::PostsController < Admin::BaseController
     if is_admin?
       @posts = Post.find(:all)
     else
-      @posts = Post.find(:conditions => ['status = 1 or user_id = ?', current_user.id])
-    end
-  end
-
-  def show
-    if @post.status == 0 && @post.user != current_user && !is_admin
-      flash[:msg] = "You can not see this post."
-      redirect_to admin_posts_path
+      @posts = Post.find(:all, :conditions => ['status = 1 or user_id = ?', current_user.id])
     end
   end
 
@@ -63,16 +56,12 @@ class Admin::PostsController < Admin::BaseController
     end
   end
 
-  def cancel
-    redirect_to admin_posts_path
-  end
-
   private 
 
   def validate_user
     if current_user != @post.user && !is_admin?
       flash[:msg] = 'You can not edit/ destroy this post as it is not created by you'
-      redirect_to post_path(@post)
+      redirect_to admin_post_path(@post)
     else
       @post
     end

@@ -90,8 +90,8 @@ class UserTest < ActiveSupport::TestCase
   def test_image
     user = users(:surat_pyari)
     assert_equal "/images/default.jpg", user.image
-    File.new("public/images/profile_images/suratpyari.jpg")
-    assert_equal "public/images/profile_images/suratpyari.jpg", user.image
+    File.new("public/images/profile_images/suratpyari.jpg", 'w+')
+    assert_equal "/images/profile_images/suratpyari.jpg", user.image
     File.delete("public/images/profile_images/suratpyari.jpg")
   end
 
@@ -100,10 +100,16 @@ class UserTest < ActiveSupport::TestCase
     assert_equal "admin", users(:admin).name
   end
 
-#  def test_before_destroy
-#    File.new("public/images/profile_images/suratpyari.jpg", "w+")
-#    users(:surat_pyari).destroy
-#    assert_equal false, File.exist?("public/images/profile_images/suratpyari.jpg")
-#  end
+  def test_before_destroy
+    File.new("public/images/profile_images/suratpyari.jpg", 'w+')
+    user = users(:surat_pyari)
+    post = user.posts
+    user.destroy
+    post.reload
+    for p in post
+      assert_equal users(:admin), p.user
+    end
+    assert_equal false, File.exist?("public/images/profile_images/suratpyari.jpg")
+  end
 
 end

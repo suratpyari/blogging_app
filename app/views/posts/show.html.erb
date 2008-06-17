@@ -23,13 +23,10 @@
       <div class = 'comment' id='comment-<%= comment.id %>' >
         <%= image_tag(gravatar_url_for(comment.email)) %>
         <div class="created">
-          <h3><%= comment.author %></h3> on
+          <h3><%= link_to comment.author, "http://" + comment.author_url %></h3> on
           <%= comment.created_at.strftime("%B %d, %Y") %> 
         </div>
         <%= textilize(comment.content) %>
-        <% if !comment.author_url.empty? %>
-          <h3><%= textilize("Website: _"+comment.author_url+"_\n") %><h3>
-        <% end %>
       </div>
     <% end %>
   <% end %>
@@ -43,7 +40,7 @@
         <div class ="divitem">Your name:</div>
           <div class ="divfield"><%= f.text_field :author %></div>
         <div class ="divitem">Website:</div>
-          <div class ="divfield"><%= f.text_field :author_url %></div>
+          <div class ="divfield">http://<%= f.text_field :author_url %></div>
         <div class ="divitem">Email:</div>
           <div class ="divfield"><%= f.text_field :email %></div>
         <div class ="divitem"><%= f.submit 'post' %></div>

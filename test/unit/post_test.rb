@@ -21,8 +21,16 @@ class PostTest < ActiveSupport::TestCase
     assert_equal "has already been taken" , post.errors.on(:title)
   end
 
-  def test_accepted_comments
-    post = posts(:post1)
-    assert_equal comments(:comment_status_1), post.accepted_comments
+  def test_before_destroy
+    post1 = posts(:post_published)
+    comments = post1.comments
+    tagging1 = taggings(:taggings_004)
+    tagging2 = taggings(:taggings_002)
+    assert post1.taggings.include?(tagging1)
+    assert post1.taggings.include?(tagging2)
+    post1.destroy
+    assert_equal true, Tagging.find_all_by_taggable_id(2).empty?
+    assert_equal true, Comment.find_all_by_commentable_id(2).empty?    
   end
+
 end

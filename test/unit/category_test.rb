@@ -13,8 +13,8 @@ class CategoryTest < ActiveSupport::TestCase
   def test_unique_username
     category = Category.new(:category_name => categories(:category1).category_name)
     assert !category.save
-    assert user.errors.invalid?(:category_name)
-    assert_equal "has already been taken" , user.errors.on(:category_name)
+    assert category.errors.invalid?(:category_name)
+    assert_equal "has already been taken" , category.errors.on(:category_name)
   end
 
   def test_defore_destroy

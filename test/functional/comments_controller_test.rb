@@ -16,7 +16,7 @@ class CommentsControllerTest < ActionController::TestCase
 
   def test_create_spam
     xhr :post, :create, {:comment => {:content => "some content",
-                              :author => "s-u-r-a-t",
+                              :author => "viagra-test-123",
                               :email => "surat@vinsol.com",
                               :status => 0}, :post_id => 1}
     assert_response :success

@@ -22,7 +22,7 @@
         <% end %>
       </div>
       <div class="no_of_comment">
-        <%= link_to "#{post.comments.size} comments", post_path(post, :anchor => 'comments') %>
+        <%= link_to "#{post.accepted_comments.size} comments", post_path(post, :anchor => 'comments') %>
       </div>
     </div>
   <% end %>

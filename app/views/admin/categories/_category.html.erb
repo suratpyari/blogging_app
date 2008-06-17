@@ -2,7 +2,9 @@
   <% if is_admin? %>
     <%= check_box_tag 'selected[]', @cat.id.to_s %>
   <% end %>
-  <%= @cat.category_name %>
-  &nbsp&nbsp&nbsp<%= link_to_remote "edit", :url => edit_admin_category_path(@cat), :html=>{:class => 'edit_del'} %>
+  <%= @cat.category_name %>&nbsp&nbsp&nbsp
+  <% if is_admin? %>
+    <%= link_to_remote "edit", :url => edit_admin_category_path(@cat), :html=>{:class => 'edit_del'} %>
+  <% end %>
 </li>
 

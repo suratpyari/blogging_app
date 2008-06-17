@@ -20,7 +20,7 @@
           <%= post.created_at.strftime("%B %d, %Y") %>
         </td>
         <td class="admin_username">
-          <%= link_to post.user.username, admin_user_path(post.user.username)%>
+          <%= link_to post.user.username, admin_user_path(post.user)%>
         </td>
         <td class="admin_status">
           <%= Post::STATUS[post.status][0] %>
@@ -29,7 +29,7 @@
           <%= post.tag_list %>
         </td>
         <td class="admin_no_of_comments">
-          <%= link_to post.comments.size, admin_post_comments_path(post) %>
+          <%= link_to users_comments(post.id).size, admin_post_comments_path(post) %>
         </td>
         <td class="admin_edit_del">
           <% if is_admin? || post.user.id == current_user.id %>

@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
     post = Post.find(params[:post_id])
     @comment = Comment.new(params[:comment])
     post.comments << @comment
+    params[:comment].merge!({:ip=>request.remote_ip})
     if post.save
       if @comment.status == 2
         msg = "Your comment looks like spam and will show up once admin approves"

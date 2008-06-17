@@ -3,7 +3,6 @@
   <div class = 'error'><%= error_messages_for 'post' %></div>
   <% form_for [:admin, @post] do |f|%>
     <%= render :partial=> 'form' %>
-    <div class ="divitem"><%= link_to "Cancel", cancel_admin_posts_path %></div>
     <div class ="divitem"><%= submit_tag "Create" %></div>
   <% end %>
 </div>

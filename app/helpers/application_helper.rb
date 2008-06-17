@@ -8,7 +8,7 @@ module ApplicationHelper
             :host => 'www.gravatar.com',
             :protocol => 'http://',
             :only_path => false,
-            :controller => 'avatar.php'}.merge(options))  
+            :controller => '/avatar.php'}.merge(options))  
   end
 
   def current(page)
@@ -24,6 +24,15 @@ module ApplicationHelper
       end
       yield tags[i].name, max.to_s+'px'
     end
+  end
+
+  def users_comments(post_id)
+    if is_admin?
+      @comments = Post.find(post_id).comments
+    else
+      @comments = Comment.find(:all, :conditions => ["(commentable_type = 'Post' AND commentable_id = ? ) AND (status = 1 OR commentable_id = ? OR ?)", post_id, current_user.id, is_admin?])
+    end
+    @comments
   end
 
 end
