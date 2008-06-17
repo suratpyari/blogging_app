@@ -13,9 +13,8 @@ class PostsController < ApplicationController
       flash[:msg] = "This post is Unpublished"
       redirect_to "/"
     else
-      @comments = @post.accepted_comments
+      @comment = Comment.new
     end
-    @comment = Comment.new
   end
 
 end

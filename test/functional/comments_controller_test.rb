@@ -8,7 +8,9 @@ class CommentsControllerTest < ActionController::TestCase
                               :email => "surat@vinsol.com",
                               :status => 0}, :post_id => 1}
     assert_response :success
-    #assert_select 'div#flash', "This comment has been submitted"
+ #   p @response.body
+#    assert_select_rjs "#flash"
+    #, "This comment has been submitted"
     #assert_select 'div#comment_errors', ""
   end
 

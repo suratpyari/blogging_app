@@ -18,8 +18,8 @@
   </div>
 </div>
   <h2 id="comments">Comments</h2>
-  <% if @post.comments %>
-    <% for comment in @post.comments %>
+  <% if @post.accepted_comments %>
+    <% for comment in @post.accepted_comments %>
       <div class = 'comment' id='comment-<%= comment.id %>' >
         <%= image_tag(gravatar_url_for(comment.email)) %>
         <div class="created">

@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class CategoryTest < ActiveSupport::TestCase
   
-  fixtures :categories
+  fixtures :categories, :posts, :categories_posts
 
   def test_invalid_with_empty_attributes
     category = Category.new()
@@ -17,12 +17,13 @@ class CategoryTest < ActiveSupport::TestCase
     assert_equal "has already been taken" , user.errors.on(:category_name)
   end
 
-#  def test_defore_destroy
-#    post = posts(:post1)
-#    category = Category.create(:category_name => "category_to_destroy")
-#    post.categories << category
-
-#    assert_equal categories(:category_uncategorized), post.categories
-#  end
+  def test_defore_destroy
+    post = posts(:post1)
+    category = categories(:category1)
+    assert post.categories.include?(category)
+    category.destroy
+    post.reload
+    assert post.categories.include?(categories(:category_uncategorized))
+  end
 
 end
