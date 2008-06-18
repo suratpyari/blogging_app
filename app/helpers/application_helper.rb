@@ -42,4 +42,8 @@ module ApplicationHelper
     @comments
   end
 
+  def recent_posts
+    Post.find(:all, :limit => 10, :order => "created_at DESC")
+  end
+
 end
