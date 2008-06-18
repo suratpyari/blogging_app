@@ -106,9 +106,7 @@ class UserTest < ActiveSupport::TestCase
     post = user.posts
     user.destroy
     post.reload
-    for p in post
-      assert_equal users(:admin), p.user
-    end
+    post.each {|p| (assert_equal users(:admin), p.user)}
     assert_equal false, File.exist?("public/images/profile_images/suratpyari.jpg")
   end
 

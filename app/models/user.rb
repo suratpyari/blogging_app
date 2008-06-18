@@ -91,7 +91,7 @@ class User < ActiveRecord::Base
   end
 
   def before_destroy
-    File.delete("public/images/#{self.username}.jpg") if File.exist?("public/images/#{self.username}.jpg")
+    File.delete("public/images/profile_images/#{self.username}.jpg") if File.exist?("public/images/profile_images/#{self.username}.jpg")
     for post in self.posts
       post.user = User.find_by_username("admin")
       post.save
