@@ -17,7 +17,9 @@ module ApplicationHelper
 
   def build_tag_cloud(tags)
     max, min = 30, 10
-    x = ((max - min) / tags.length)
+    popularity = []
+    tags.each{|t| (popularity << t.popularity)}
+    x = ((max - min) / popularity.uniq.length)
     for i in 0...(tags.length)
       if i != 0 && tags[i - 1].popularity.to_i > tags[i].popularity.to_i
         max=max - x
