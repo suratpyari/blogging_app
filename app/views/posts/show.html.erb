@@ -43,6 +43,7 @@
           <div class ="divfield">http://<%= f.text_field :author_url %></div>
         <div class ="divitem">Email:</div>
           <div class ="divfield"><%= f.text_field :email %></div>
+        <div class ="divitem" id = "captcha"><%= show_simple_captcha %></div>
         <div class ="divitem"><%= f.submit 'post' %></div>
       <% end %>
   </div>

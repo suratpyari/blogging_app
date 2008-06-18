@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => 'b5d8f1af109a7e17c969d221dcfdf677'
 
+  include SimpleCaptcha::ControllerHelpers  
+
   uses_tiny_mce(:options => {:theme => 'advanced',
                              :mode => "specific_textareas",
                              :editor_selector => "mce-editor",
