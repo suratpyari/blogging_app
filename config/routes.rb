@@ -48,6 +48,7 @@ ActionController::Routing::Routes.draw do |map|
   map.logout 'logout', :controller => 'sessions', :action => 'destroy', :method => :delete
   map.admin 'admin', :controller => 'admin/base', :action => 'index'
   map.dashboard 'admin/dashboard', :controller => 'admin/base', :action => 'index'
+  map.recent_comments 'recent_comments', :controller => 'admin/comments', :action => 'recent_comments'
   map.connect '', :controller => '/posts', :action => 'index'
   map.connect ':controller/:id/:action/'
   map.connect ':controller/:id/:action.:format'

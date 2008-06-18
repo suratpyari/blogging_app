@@ -2,20 +2,7 @@
 <h2>Comments</h2>
   <% if users_comments(@post.id) %>
     <% for comment in users_comments(@post.id) %>
-      <div class = 'comment' id='comment-<%= comment.id %>' >
-        <%= image_tag(gravatar_url_for(comment.email)) %>
-        <div class="created">
-          <h3><%= link_to comment.author, "http://" + comment.author_url %></h3> on
-          <%= comment.created_at.strftime("%B %d, %Y") %> 
-        </div>
-        <%= textilize(comment.content) %>
-        <%= textilize("by **"+comment.author+"**\n") %>
-        <%= textilize("Email: _"+comment.email+"_\n") %>
-        <div id='status-<%= comment.id %>' >
-          <%= link_to_remote comment.comment_status, :url => accept_admin_post_comment_path(@post, comment) %>
-        </div>
-        <%= link_to "Delete", admin_post_comment_path(@post, comment), :method => :delete, :confirm => 'Are you sure?' %>
-      </div>
+      <%= render :partial => 'comment_list', :object => comment%>
     <% end %>
   <% end %>
 

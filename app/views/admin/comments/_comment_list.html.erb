@@ -1,0 +1,16 @@
+<div class = 'comment' id='comment-<%= comment_list.id %>' >
+  <%= image_tag(gravatar_url_for(comment_list.email)) %>
+  <div class="created">
+    <h3><%= link_to comment_list.author, "http://" + comment_list.author_url %></h3> on
+    <%= comment_list.created_at.strftime("%B %d, %Y") %> 
+  </div>
+  <%= textilize(comment_list.content) %>
+  <%= textilize("by **"+comment_list.author+"**\n") %>
+  <%= textilize("Email: _"+comment_list.email+"_\n") %>
+  <% if comment_list.commentable.user == current_user || is_admin? %>
+    <div id='status-<%= comment_list.id %>' >
+      <%= link_to_remote comment_list.comment_status, :url => accept_admin_post_comment_path(comment_list.commentable, comment_list) %>
+    </div>
+    <%= link_to "Delete", admin_post_comment_path(comment_list.commentable, comment_list), :method => :delete, :confirm => 'Are you sure?' %>
+  <% end %>
+</div>

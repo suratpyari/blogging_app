@@ -154,3 +154,7 @@ td, th{
 .admin_no_of_comments{
   width: 70px;
 }
+
+#edit_del_user{
+  clear: both;
+}

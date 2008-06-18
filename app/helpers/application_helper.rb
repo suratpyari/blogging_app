@@ -15,24 +15,29 @@ module ApplicationHelper
     'current' if controller.controller_name==page
   end
 
+  # Creates a tag cloud according to the popularity of tags
   def build_tag_cloud(tags)
-    max, min = 30, 10
+    max, min = 30, 10 # font size of tags
     popularity = []
     tags.each{|t| (popularity << t.popularity)}
     x = ((max - min) / popularity.uniq.length)
     for i in 0...(tags.length)
       if i != 0 && tags[i - 1].popularity.to_i > tags[i].popularity.to_i
-        max=max - x
+        max=max - x # Setting font size
       end
       yield tags[i].name, max.to_s+'px'
     end
   end
 
+  # lists those comments which are given either on current user's post or having status 1
+  # admin can see all the comments 
   def users_comments(post_id)
-    if is_admin?
-      @comments = Post.find(post_id).comments
-    else
-      @comments = Comment.find(:all, :conditions => ["(commentable_type = 'Post' AND commentable_id = ? ) AND (status = 1 OR commentable_id = ? OR ?)", post_id, current_user.id, is_admin?])
+    @comments = []
+    comments = Post.find(post_id).comments
+    for comment in comments
+      if (is_admin? || comment.commentable.user == current_user)
+        @comments << comment
+      end
     end
     @comments
   end

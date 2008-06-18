@@ -1,8 +1,8 @@
 <%= render :partial => 'profile' %>
-<div id="edit_del">
+<div id="edit_del_user">
   <% if is_admin? %>
     <%= link_to "Delete", admin_user_path(@user), :method => :delete, :confirm => 'Are you sure?' %> |
     <%= link_to "Edit", edit_admin_user_path(@user) %> | 
   <% end %>
-  <%= link_to "Back", admin_users_path %>
+  <%= link_to "All users", admin_users_path %>
 </div>

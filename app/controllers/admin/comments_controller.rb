@@ -4,6 +4,17 @@ class Admin::CommentsController < Admin::BaseController
   before_filter :find_comment, :only => [:accept, :destroy]
   before_filter :verify_user, :only => [:accept, :destroy]
 
+  # lists all the comments having status = 0 or 2
+  def recent_comments
+    @comments = []
+    comments = Comment.find(:all)
+    for comment in comments
+      if comment.status != 1 && (is_admin? || comment.commentable.user == current_user)
+        @comments << comment
+      end
+    end
+  end  
+
   # Accepts comment
   def index
     @post = Post.find(params[:post_id])
@@ -12,7 +23,7 @@ class Admin::CommentsController < Admin::BaseController
   def accept
     @comment.update_attribute('status', 1)
     render :update do |page|
-      page.replace_html 'status-'+comment.id.to_s, ''
+      page.replace_html 'status-'+@comment.id.to_s, ''
     end
   end
 

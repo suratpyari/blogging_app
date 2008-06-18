@@ -2,6 +2,9 @@ class CommentsController < ApplicationController
 #include ActionView::Helpers::ActiveRecordHelper
   # Creates a new comment and set status as 0
   include SimpleCaptcha::ViewHelpers
+
+  # Creates a new comments
+  # Set status = 2 if comment looks like a spam else 0
   def create
     post = Post.find(params[:post_id])
     @comment = Comment.new(params[:comment])
