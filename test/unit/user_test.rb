@@ -110,4 +110,30 @@ class UserTest < ActiveSupport::TestCase
     assert_equal false, File.exist?("public/images/profile_images/suratpyari.jpg")
   end
 
+  def test_password
+    user = User.new(:password => "surat")
+    assert_equal "surat", user.password
+    assert_equal String, user.hashed_password.class
+    assert_equal String, user.salt.class
+    user = User.new(:password => "")
+    assert_equal "", user.password
+    assert_equal nil, user.hashed_password
+    assert_equal nil, user.salt
+  end
+
+  def test_uploaded_pic_file
+    p File.exists?("/public/images/rails.png")
+    user = User.new(:first_name           => "surat",
+                  :last_name              => "pyari",
+                  :email                  => "surat@vinsol.com",
+                  :password               => "surat",
+                  :password_confirmation  => "surat",
+                  :role                   => 1,
+                  :status                 => 0,
+                  :biodata                => "",
+                  :uploaded_pic_file      => fixture_file_upload('public/images/rails.png', 'image/png'))
+    user.username = "surat"
+    user.save
+    assert_equal false, File.exists?("/public/images/profile_images/surat.jpg")
+  end
 end

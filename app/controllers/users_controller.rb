@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
 
   before_filter :is_user, :only => :show
-
   def show
     render :partial => 'admin/users/profile', :layout => 'application'
   end
@@ -35,7 +34,7 @@ class UsersController < ApplicationController
     if @user
       render :layout => 'application'
     else
-      flash[:msg] = "wrong token"
+      flash[:msg] = "Wrong token"
       redirect_to login_path
     end
   end

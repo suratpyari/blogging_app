@@ -8,6 +8,7 @@ class CommentsControllerTest < ActionController::TestCase
                               :email => "surat@vinsol.com",
                               :status => 0}, :post_id => 1}
     assert_response :success
+  #  assert_equal 0, assigns["comment"].status
  #   p @response.body
 #    assert_select_rjs "#flash"
     #, "This comment has been submitted"
@@ -20,6 +21,7 @@ class CommentsControllerTest < ActionController::TestCase
                               :email => "surat@vinsol.com",
                               :status => 0}, :post_id => 1}
     assert_response :success
+    assert_equal 2, assigns["comment"].status
    # assert_select 'div#flash', "Your comment looks like spam and will show up once admin approves"
    # assert_select 'div#comment_errors', ""
   end

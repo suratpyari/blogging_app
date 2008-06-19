@@ -29,5 +29,28 @@ class UsersControllerTest < ActionController::TestCase
     get :forgot_password
     assert_response :success
   end
-  
+
+  def test_edit_password
+    get :edit_password, {:token => "098305600565767"}
+    assert_response :success
+  end
+
+  def test_edit_password_wrong_token
+    get :edit_password, {:token => "09830560056454786890578667"}
+    assert_redirected_to login_path
+    assert_equal "Wrong token", flash[:msg]
+  end
+
+  def test_update_password
+    post :update_password, {:token => "098305600565767", :user => {:password => "changedpassword", :password_confirmation => "changedpassword"}}
+    assert_equal "password updated", flash[:msg]
+    assert_equal nil, assigns["user"].token
+    assert_redirected_to login_path
+  end
+
+  def test_update_password_wrong_password
+    post :update_password, {:token => "098305600565767", :user => {:password => "changedpassword", :password_confirmation => "wrongpassword"}}
+    assert_template "edit_password"
+  end
+
 end

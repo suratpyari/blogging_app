@@ -132,14 +132,26 @@ class Admin::UsersControllerTest < ActionController::TestCase
     assert_equal "You can not delete this user", flash[:msg]
   end
 
-  def test_cancel_without_login
-    get :cancel
-    assert_redirected_to '/'
-    assert_equal "Login required", flash[:msg]
-  end
-
-  def test_cancel_with_login
-    get :cancel, {}, {:user_id => users(:not_admin).id}
+  def test_show_user_invalid_user
+    post :show, {:id => 3453 }, {:user_id => users(:admin).id}
+    assert_equal "User with id 3453 does not exist", flash[:msg]
     assert_redirected_to admin_users_path
   end
+
+  def test_show_user
+    post :show, {:id => users(:surat_pyari).id }
+    assert_equal "Login required", flash[:msg]
+    assert_redirected_to "/"
+  end
+
+  def test_put_method
+    post :update, {:id => users(:surat_pyari).id, :user => {:first_name => '', :last_name => ''}, "_method" => "delete"}, {:user_id => users(:admin).id}
+    assert_redirected_to dashboard_path
+  end
+
+  def test_delete_method
+    post :destroy, {:id => users(:admin).id, "_method" => "put"}, {:user_id => users(:admin).id}
+    assert_redirected_to dashboard_path
+  end
+
 end

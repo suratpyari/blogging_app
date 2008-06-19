@@ -5,11 +5,8 @@ class Admin::UsersController < Admin::BaseController
   #skip_before_filter :find_user, :only => :show
   before_filter :validate_user, :only => [:show, :destroy]
   before_filter :validate_edit_user, :only => [:edit, :update]
-
-  # Login is required for these actions
-
-  #verify :method => :put, :only => [:update], :redirect_to => {:action => 'index'}
-  #verify :method => :delete, :only => :destroy, :redirect_to => {:action => 'index'}
+  before_filter :put_method, :only => :update
+  before_filter :delete_method, :only => :destroy
 
   # Lists all the users added by administrator and
   def index
@@ -63,10 +60,6 @@ class Admin::UsersController < Admin::BaseController
     else
       flash[:msg] = "You can not delete this user"
     end
-    redirect_to admin_users_path
-  end
-
-  def cancel
     redirect_to admin_users_path
   end
 

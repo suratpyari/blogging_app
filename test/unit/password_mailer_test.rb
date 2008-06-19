@@ -6,8 +6,8 @@ class PasswordMailerTest < ActionMailer::TestCase
   def test_sent
     user = users(:surat_pyari)
     user.update_attribute('token',Digest::SHA1.hexdigest(rand.to_s))
-    url = edit_password_users_path(:token => user.token, :only_path => false) 
-    response = PasswordMailer.create_sent(user)
+    url = "/users/edit_password?token=#{user.token}" 
+    response = PasswordMailer.create_sent(user, url)
     assert_equal("Change your password" , response.subject)
     assert_equal("suratpyari@gmail.com" , response.to[0])
     assert_equal("admin@gmail.com" , response.from[0])
