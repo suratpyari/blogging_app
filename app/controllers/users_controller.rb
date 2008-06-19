@@ -11,7 +11,6 @@ class UsersController < ApplicationController
   def send_email
     user = User.find_by_email(params[:email])
     if user
-      p "1"
       user.update_attribute('token',Digest::SHA1.hexdigest(rand.to_s)) # Token saved
       # Generates a url where user can edit his password
       url = edit_password_users_path(:token => user.token, :only_path => false) 

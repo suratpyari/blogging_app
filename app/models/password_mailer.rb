@@ -1,7 +1,7 @@
 class PasswordMailer < ActionMailer::Base
 
   def sent(user,url)
-    @subject      = ''
+    @subject      = 'Change your password'
     @body["user"] = user
     @body["url"] = url  
     @recipients   = user.email
