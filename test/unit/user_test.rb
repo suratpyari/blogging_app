@@ -122,7 +122,6 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def test_uploaded_pic_file
-    p File.exists?("/public/images/rails.png")
     user = User.new(:first_name           => "surat",
                   :last_name              => "pyari",
                   :email                  => "surat@vinsol.com",
