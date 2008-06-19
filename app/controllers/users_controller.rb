@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   before_filter :is_user, :only => :show
+
   def show
     render :partial => 'admin/users/profile', :layout => 'application'
   end
@@ -54,7 +55,7 @@ class UsersController < ApplicationController
   private
 
   def is_user
-    @user = (User.find_by_username(params[:id]) rescue nil)
+    @user = User.find_by_username(params[:id])
     if @user.nil?
       flash[:msg] = "User with id #{params[:id]} does not exist"
       redirect_to posts_path

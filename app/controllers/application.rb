@@ -100,13 +100,17 @@ class ApplicationController < ActionController::Base
   end
 
   def put_method
+
     if params["_method"] != "put"
+      p "put"
       redirect_to dashboard_path
     end
   end
 
   def delete_method
+
     if params["_method"] != "delete"
+p "delete"
       redirect_to dashboard_path
     end
   end

@@ -53,4 +53,15 @@ class UsersControllerTest < ActionController::TestCase
     assert_template "edit_password"
   end
 
+  def test_show_user_invalid_user
+    get :show, {:id => 3453 }, {:user_id => users(:admin).id}
+    assert_equal "User with id 3453 does not exist", flash[:msg]
+    assert_redirected_to posts_path
+  end
+
+  def test_show_user
+    get :show, {:id => users(:surat_pyari).username }
+    assert_response :success 
+  end
+
 end
