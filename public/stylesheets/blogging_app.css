@@ -145,7 +145,7 @@ a {
 table{
   border-collapse: collapse;
 }
-td, th{
+#post_index td, #post_index th{
   border: 1px solid #449744;
 }
 .admin_title{
@@ -157,4 +157,8 @@ td, th{
 
 #edit_del_user{
   clear: both;
+}
+
+.fieldWithErrors input, .fieldWithErrors textarea, .fieldWithErrors td{
+  border: 1px solid red;
 }

@@ -29,6 +29,7 @@ class CommentsController < ApplicationController
     else
       render :update do |page|
         page.replace_html :comment_errors, @comment.errors.full_messages.join('<br />')
+        page.replace_html :comment_form, :partial => 'comments/form'
         page.replace_html :captcha , "#{show_simple_captcha}"
       end
     end

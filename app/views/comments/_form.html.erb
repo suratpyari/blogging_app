@@ -1,0 +1,10 @@
+<div class ="divitem">Comment:</div>
+  <div class ="divfield"><%= text_area :comment, :content, :rows => 10, :cols => 50 %></div>
+<div class ="divitem">Your name:</div>
+  <div class ="divfield"><%= text_field :comment, :author %></div>
+<div class ="divitem">Website:</div>
+  <div class ="divfield">http://<%= text_field :comment, :author_url %></div>
+<div class ="divitem">Email:</div>
+  <div class ="divfield"><%= text_field :comment, :email %></div>
+<div class ="divitem" id = "captcha"><%= show_simple_captcha %></div>
+<div class ="divitem"><%= submit_tag 'post' %></div>

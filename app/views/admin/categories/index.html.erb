@@ -10,5 +10,12 @@
   <% end %>
 <% end %>
 <% if is_admin? %>
-  <%= render :partial => 'form' %>
+  <div id="catform">
+    <h2>Add new category </h2>
+    <div class = "error" id = "category_error"></div>
+    <br />
+    <% remote_form_for [:admin, @category], :html => {:id => 'category_form'} do |f| %>
+      <%= render :partial => 'form' %>
+    <% end %>
+  </div>
 <% end %>
