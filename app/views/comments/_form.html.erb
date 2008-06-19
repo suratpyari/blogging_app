@@ -6,5 +6,5 @@
   <div class ="divfield">http://<%= text_field :comment, :author_url %></div>
 <div class ="divitem">Email:</div>
   <div class ="divfield"><%= text_field :comment, :email %></div>
-<div class ="divitem" id = "captcha"><%= show_simple_captcha %></div>
+<div class ="divitem" id = "captcha"><%= show_simple_captcha(:label => "human authentication", :image_style => 'embosed_silver') %></div>
 <div class ="divitem"><%= submit_tag 'post' %></div>
