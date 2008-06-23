@@ -2,7 +2,7 @@
   <div class='title'>
     <h1><%= h(@post.title) %></h1>
   </div>
-  <% if is_admin? || @post.user == current_user %>
+  <% if session[:user_id] && (is_admin? || @post.user == current_user) %>
     <div class='edit_del'>
       <%= link_to "edit", edit_admin_post_path(@post) %> / 
       <%= link_to "delete", admin_post_path(@post), :method => :delete, :confirm => 'Are you sure?'  %>

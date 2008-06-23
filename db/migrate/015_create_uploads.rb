@@ -8,7 +8,6 @@ class CreateUploads < ActiveRecord::Migration
       t.column :size, :integer
       t.column :width, :integer
       t.column :height, :integer
-      t.column :post_id, :integer
       t.timestamps
     end
   end

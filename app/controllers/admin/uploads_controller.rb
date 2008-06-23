@@ -10,12 +10,12 @@ class Admin::UploadsController < Admin::BaseController
 
   def create
     @upload = Upload.new(params[:upload])
-  if @upload.save
-    flash[:notice] = 'new file uploaded'
-    redirect_to admin_uploads_url     
-  else
-    render :action => :new
-  end
+    if @upload.save
+      flash[:notice] = 'new file uploaded'
+      redirect_to admin_uploads_url     
+    else
+      render :action => :new
+    end
   end
 
 end
