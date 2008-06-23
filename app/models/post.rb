@@ -28,16 +28,7 @@ class Post < ActiveRecord::Base
   STATUS = [["Unpublished", 0],["Published", 1]]
 
   def before_destroy
-    for tagging in self.taggings
-      tagging.destroy
-    end
+    self.taggings.each{|tagging| tagging.destroy}
   end
-
-  def new_upload_attributes=(upload_attributes)
-    upload_attributes.each do |attributes|
-      uploads.build(attributes)
-    end
-  end
-
 
 end

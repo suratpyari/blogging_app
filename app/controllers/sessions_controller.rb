@@ -14,8 +14,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to dashboard_path
     else
-      flash[:msg] = "You cannot login. Your account id disabled. Please contact to administrator" if user
-      flash[:msg] = "Invalid user/password combination" if !user
+      flash[:msg] = user ? "You cannot login. Your account id disabled. Please contact to administrator" : "Invalid user/password combination"
       render :action => 'new'
     end
   end

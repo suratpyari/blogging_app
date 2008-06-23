@@ -56,7 +56,6 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
 
   def test_delete_category_uncategorized
     post :delete, {:selected => [categories(:category_uncategorized).id.to_s]}, :user_id => users(:admin).id
-    assert_equal "Can not delete category Uncategorized" ,flash[:msg]
     assert_redirected_to admin_categories_path
   end
 

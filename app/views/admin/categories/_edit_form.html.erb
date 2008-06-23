@@ -1,7 +1,7 @@
 <div id="catform">
   <h2>Edit category <%= @category.category_name %></h2>
-    <div class = "error" id = "category_error"></div>
-    <br />
+  <div class = "error" id = "category_error"></div>
+  <br />
   <% remote_form_for [:admin, @category], :method=> :put, :html => {:id => 'category_form'} do |f| %>
     <%= f.text_field :category_name %>
     <%= link_to_remote "cancel", :url => cancel_edit_form_admin_category_path(@category.id), :method => :post %>

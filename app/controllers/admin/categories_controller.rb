@@ -25,19 +25,11 @@ class Admin::CategoriesController < Admin::BaseController
   def delete
     categories = params[:selected]
     if categories.nil?
-      msg = "Select category to delete"
+      flash[:msg] = "Select category to delete"
     else
-      for category in categories
-        cat = Category.find(category.to_i)
-        if cat.category_name == 'Uncategorized'
-          msg = "Can not delete category Uncategorized"
-        else
-          cat.destroy
-          msg = "Selected categories has been deleted"
-        end
-      end
+      categories.each{|category| Category.find(category.to_i).destroy}
+      flash[:msg] = "Selected categories has been deleted"
     end
-    flash[:msg] = msg
     redirect_to admin_categories_path
   end
 
@@ -54,7 +46,7 @@ class Admin::CategoriesController < Admin::BaseController
     @cat.update_attributes(params[:category])
     @category = Category.new
     render :update do |page|
-      page.replace :catform, :partial => 'form'
+      page.replace :catform, :partial => 'new_form'
       page.replace "category-#{@cat.id}", :partial => 'category'
     end
   end

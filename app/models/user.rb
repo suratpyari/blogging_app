@@ -83,19 +83,12 @@ class User < ActiveRecord::Base
   end
 
   def name
-    if self.last_name.nil?
-      self.first_name
-    else
-      self.first_name+' '+self.last_name
-    end
+    self.last_name.nil? ? self.first_name : self.first_name+' '+self.last_name
   end
 
   def before_destroy
     File.delete("public/images/profile_images/#{self.username}.jpg") if File.exist?("public/images/profile_images/#{self.username}.jpg")
-    for post in self.posts
-      post.user = User.find_by_username("admin")
-      post.save
-    end
+    self.posts.each{|post| post.update_attribute('user_id', User.find_by_username("admin").id)}
   end
 
   private

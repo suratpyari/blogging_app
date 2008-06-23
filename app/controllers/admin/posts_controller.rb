@@ -20,11 +20,7 @@ class Admin::PostsController < Admin::BaseController
   def index
     # When current user is an administrator then lists all the posts
     # else lists only those posts which are either published or created by current user
-    if is_admin?
-      @posts = Post.find(:all)
-    else
-      @posts = Post.find(:all, :conditions => ['status = 1 or user_id = ?', current_user.id])
-    end
+    is_admin? ? @posts = Post.find(:all) : @posts = Post.find(:all, :conditions => ['status = 1 or user_id = ?', current_user.id])
   end
 
   # creates a new post
@@ -33,7 +29,6 @@ class Admin::PostsController < Admin::BaseController
     @post.user_id = current_user.id
     # category of post is uncategorized if it is not set by user
     @post.categories << Category.find_by_category_name('Uncategorized') if @post.categories.empty?
-    debugger
     if @post.save
       @post.tag_with params[:tag][:name]
       flash[:msg] = "new post created"
@@ -72,8 +67,6 @@ class Admin::PostsController < Admin::BaseController
     if current_user != @post.user && !is_admin?
       flash[:msg] = 'You can not edit/ destroy this post as it is not created by you'
       redirect_to admin_post_path(@post)
-    else
-      @post
     end
   end
 

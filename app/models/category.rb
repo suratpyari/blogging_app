@@ -18,11 +18,7 @@ class Category < ActiveRecord::Base
   validates_uniqueness_of :category_name
 
   def before_destroy
-    for post in self.posts
-      if post.categories.size == 1
-        post.categories << Category.find_by_category_name('Uncategorized')
-      end
-    end    
+    self.posts.each{|post| post.categories << Category.find_by_category_name('Uncategorized') if post.categories.size == 1}
   end
 
 end

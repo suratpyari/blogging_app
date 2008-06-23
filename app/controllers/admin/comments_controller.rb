@@ -8,11 +8,7 @@ class Admin::CommentsController < Admin::BaseController
   def recent_comments
     @comments = []
     comments = Comment.find(:all)
-    for comment in comments
-      if comment.status != 1 && (is_admin? || comment.commentable.user == current_user)
-        @comments << comment
-      end
-    end
+    comments.each{|comment| @comments << comment if comment.status != 1 && (is_admin? || comment.commentable.user == current_user)}
   end  
 
   # Accepts comment
@@ -29,9 +25,8 @@ class Admin::CommentsController < Admin::BaseController
 
   # Destroy comment 
   def destroy
-    if @comment.destroy
-      redirect_to admin_post_comments_path(@comment.commentable)
-    end
+    @comment.destroy
+    redirect_to admin_post_comments_path(@comment.commentable)
   end
 
   private
@@ -45,9 +40,7 @@ class Admin::CommentsController < Admin::BaseController
   end
 
   def verify_user
-    if @comment.commentable.user != current_user && !is_admin?
-      redirect_to dashboard_path
-    end
+      redirect_to dashboard_path if @comment.commentable.user != current_user && !is_admin?
   end
 
 end

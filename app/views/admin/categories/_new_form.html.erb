@@ -1,0 +1,10 @@
+<div id="catform">
+  <h2>Add new category </h2>
+  <div class = "error" id = "category_error"></div>
+  <br />
+  <% remote_form_for [:admin, @category], :html => {:id => 'category_form'} do |f| %>
+    <%= text_field :category, :category_name %>
+    <%= link_to_remote "cancel", :url => cancel_new_form_admin_categories_path, :method => :post %>
+    <%= submit_tag "Add" %>
+  <% end %>
+</div>

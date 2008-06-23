@@ -23,16 +23,16 @@ class Tag < ActiveRecord::Base
   
   # Set up the polymorphic relationship.
   has_many_polymorphs :taggables, 
-    :from => [:posts], 
-    :through => :taggings, 
-    :dependent => :destroy,
-    :skip_duplicates => false, 
-    :parent_extend => proc {
+                      :from => [:posts], 
+                      :through => :taggings, 
+                      :dependent => :destroy,
+                      :skip_duplicates => false, 
+                      :parent_extend => proc {
       # Defined on the taggable models, not on Tag itself. Return the tagnames associated with this record as a string.
-      def to_s
-        self.map(&:name).sort.join(Tag::DELIMITER)
-      end
-    }
+                          def to_s
+                            self.map(&:name).sort.join(Tag::DELIMITER)
+                          end
+                        }
     
   # Callback to strip extra spaces from the tagname before saving it. If you allow tags to be renamed later, you might want to use the <tt>before_save</tt> callback instead.
   def before_create 
@@ -42,10 +42,10 @@ class Tag < ActiveRecord::Base
 
   def self.cloud
     find(:all, :select => 'tags.*, count(*) as popularity',
-    :limit => 10,
-    :joins => "JOIN taggings ON taggings.tag_id = tags.id",
-    :group => "taggings.tag_id",
-    :order => "popularity DESC" )
+               :limit => 10,
+               :joins => "JOIN taggings ON taggings.tag_id = tags.id",
+               :group => "taggings.tag_id",
+               :order => "popularity DESC" )
   end
 
 

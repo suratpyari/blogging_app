@@ -32,15 +32,6 @@ class ApplicationController < ActionController::Base
                              :theme_advanced_statusbar_location => "bottom",
 	                           :theme_advanced_resizing => true})
 
-  
-#  def spellcheck
-#    @headers['Content-Type'] = 'text/xml'
-#    @headers['charset'] = 'utf-8'
-#    suggestions = check_spelling(params[:check], params[:cmd], params[:lang])
-#    xml = "<?xml version='1.0' encoding='utf-8' ?>#{suggestions}" render :text => xml
-#    return
-#  end
-
   helper_method :current_user, :is_admin?
 
   protected
@@ -107,17 +98,11 @@ class ApplicationController < ActionController::Base
   end
 
   def put_method
-
-    if params["_method"] != "put"
-      redirect_to dashboard_path
-    end
+    redirect_to dashboard_path if params["_method"] != "put"
   end
 
   def delete_method
-
-    if params["_method"] != "delete"
-      redirect_to dashboard_path
-    end
+    redirect_to dashboard_path if params["_method"] != "delete"
   end
 
 end

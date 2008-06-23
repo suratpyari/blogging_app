@@ -9,17 +9,9 @@ class CommentsController < ApplicationController
     post = Post.find(params[:post_id])
     @comment = Comment.new(params[:comment])
     post.comments << @comment
-    if simple_captcha_valid?  
-      @comment.status = 2
-    else
-      @comment.status = 0
-    end
+    simple_captcha_valid? ? @comment.status = 2 : @comment.status = 0
     if post.save
-      if @comment.status == 2
-        msg = "Your comment looks like spam and will show up once admin approves"
-      else
-        msg = "This comment has been submitted"
-      end
+      msg = @comment.status == 2 ? "Your comment looks like spam and will show up once admin approves" : "This comment has been submitted"
       render :update do |page|
         page.replace_html :comment_errors, ''
         page.form.reset('comment_form')
