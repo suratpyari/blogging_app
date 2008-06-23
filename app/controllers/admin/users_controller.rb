@@ -1,5 +1,6 @@
 class Admin::UsersController < Admin::BaseController
   
+  require 'json'
   # Logged user must be an administrator for these actions
   before_filter :find_admin, :only => [:new, :create, :destroy]
   #skip_before_filter :find_user, :only => :show
@@ -63,6 +64,20 @@ class Admin::UsersController < Admin::BaseController
     redirect_to admin_users_path
   end
 
+#  def spellcheck
+#    raw = request.env['RAW_POST_DATA']
+#    req = JSON.parse(raw)
+#    lang = req["params"][0]
+#    if req["method"] == 'checkWords'
+#      text_to_check = req["params"][1].join(" ")
+#    else
+#      text_to_check = req["params"][1]
+#    end
+#    suggestions = check_spelling_new(text_to_check, req["method"], lang)
+#    render :json => {"id" => nil, "result" => suggestions, "error" => nil}.to_json
+#    return
+#  end
+
   private
 
   # If user with given id is editable by current user then returns user and if
@@ -77,5 +92,33 @@ class Admin::UsersController < Admin::BaseController
       redirect_to admin_users_path
     end
   end
+
+#  def check_spelling_new(spell_check_text, command, lang)
+#    json_response_values = Array.new
+#    spell_check_response = `echo "#{spell_check_text}" | aspell -a -l #{lang}`
+#    if (spell_check_response != '')
+#      spelling_errors = spell_check_response.split(' ').slice(1..-1)
+#      if (command == 'checkWords')
+#        i = 0
+#        while i < spelling_errors.length
+#          spelling_errors[i].strip!
+#          if (spelling_errors[i].to_s.index('&') == 0)
+#            match_data = spelling_errors[i + 1]
+#            json_response_values << match_data
+#          end
+#          i += 1
+#        end
+#      elsif (command == 'getSuggestions')
+#        arr = spell_check_response.split(':')
+#        suggestion_string = arr[1]
+#        suggestions = suggestion_string.split(',')
+#        for suggestion in suggestions
+#          suggestion.strip!
+#          json_response_values << suggestion
+#        end
+#      end
+#    end
+#    return json_response_values
+#  end
 
 end

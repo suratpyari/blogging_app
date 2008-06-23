@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 13
+# Schema version: 15
 #
 # Table name: posts
 #
@@ -32,5 +32,12 @@ class Post < ActiveRecord::Base
       tagging.destroy
     end
   end
+
+  def new_upload_attributes=(upload_attributes)
+    upload_attributes.each do |attributes|
+      uploads.build(attributes)
+    end
+  end
+
 
 end

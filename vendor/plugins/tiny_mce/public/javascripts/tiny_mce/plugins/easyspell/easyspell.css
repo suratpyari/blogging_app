@@ -1,0 +1,8 @@
+body {background:#F0F0EE;}
+h2 {font:bold 1.2em Verdana;color:#009;}
+h3 {font:normal .8em Verdana;padding:0px;margin:0px;}
+.complete {text-align:center;}
+#suggestions {width:99%;background:white;}
+#wordbox {width:99%;height:50px;border-style:inset;background:white;}
+#wordbox input {border:none;color:red;font-weight:bold;}
+.bigcell {width:95%;}

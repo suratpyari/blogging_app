@@ -1,0 +1,14 @@
+<h2>Uploaded files</h2>
+<% if @uploads %>
+  <% for upload in @uploads %>
+    <% if upload.id%2 != 0 %>
+      <p>
+        <%= link_to image_tag(upload.public_filename(:thumb)), upload.public_filename %>
+        <%= upload.public_filename %>
+      </p>
+    <% end %>
+  <% end %>
+<% end %>
+<hr />
+<%= link_to "Upload new file", new_admin_upload_path %>
+

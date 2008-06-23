@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   include SimpleCaptcha::ControllerHelpers  
 
   uses_tiny_mce(:options => {:theme => 'advanced',
+                             :plugins => %w{contextmenu paste insertdatetime preview iespell emotions media advhr},
                              :mode => "specific_textareas",
                              :editor_selector => "mce-editor",
                              :browsers => %w{msie gecko},
@@ -23,16 +24,22 @@ class ApplicationController < ActionController::Base
                              :theme_advanced_resize_horizontal => false,
                              :paste_auto_cleanup_on_paste => true,
 	                           :theme_advanced_buttons1 => %w{save newdocument | bold italic underline strikethrough | justifyleft justifycenter justifyright justifyfull | styleselect formatselect fontselect fontsizeselect},
-	                           :theme_advanced_buttons2 => %w{ cut copy paste pastetext pasteword | search replace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image cleanup help code | insertdate inserttime preview | forecolor backcolor},
-	                           :theme_advanced_buttons3 => %w{tablecontrols | hr removeformat visualaid | sub sup | charmap emotions iespell media advhr | print | ltr rtl | fullscreen},
+	                           :theme_advanced_buttons2 => %w{ cut copy paste pastetext pasteword | search replace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image cleanup help code | insertdate inserttime preview | forecolor backcolor |},
+	                           :theme_advanced_buttons3 => %w{tablecontrols | hr removeformat visualaid | sub sup | charmap emotions iespell easyspell spellchecker media advhr},
 	                           #:theme_advanced_buttons4 =>%w{insertlayer moveforward movebackward absolute | styleprops | cite abbr acronym del ins attribs | visualchars nonbreaking template pagebreak},
-                             :plugins => %w{contextmenu paste},
                              :theme_advanced_toolbar_location => "top",
                              :theme_advanced_toolbar_align => "left",
                              :theme_advanced_statusbar_location => "bottom",
 	                           :theme_advanced_resizing => true})
 
-
+  
+#  def spellcheck
+#    @headers['Content-Type'] = 'text/xml'
+#    @headers['charset'] = 'utf-8'
+#    suggestions = check_spelling(params[:check], params[:cmd], params[:lang])
+#    xml = "<?xml version='1.0' encoding='utf-8' ?>#{suggestions}" render :text => xml
+#    return
+#  end
 
   helper_method :current_user, :is_admin?
 
@@ -102,7 +109,6 @@ class ApplicationController < ActionController::Base
   def put_method
 
     if params["_method"] != "put"
-      p "put"
       redirect_to dashboard_path
     end
   end
@@ -110,7 +116,6 @@ class ApplicationController < ActionController::Base
   def delete_method
 
     if params["_method"] != "delete"
-p "delete"
       redirect_to dashboard_path
     end
   end

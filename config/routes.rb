@@ -26,6 +26,7 @@ ActionController::Routing::Routes.draw do |map|
       admin.resources :posts, :collection => {:cancel => :get} do |post|
        post.resources :comments, :member => {:accept => :post}
       end
+      admin.resources :uploads
       admin.resources :categories, :collection => {:delete => :post, :cancel_new_form => :post}, :member => {:cancel_edit_form => :post}
     end
 
@@ -53,5 +54,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:id/:action/'
   map.connect ':controller/:id/:action.:format'
 
-  map.simple_captcha '/simple_captcha/:action', :controller => 'simple_captcha'  
+  map.simple_captcha '/simple_captcha/:action', :controller => 'simple_captcha'
+  map.connect '/spellcheck', :controller => 'admin/users', :action => 'spellcheck'
+
 end
