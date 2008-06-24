@@ -8,7 +8,7 @@
       <th class="admin_username">Author</th>
       <th class="admin_status">Status</th>
       <th class="admin_tags">Tags</th>
-      <th class="admin_no_of_comments">Number of Comments</th>
+      <th class="admin_no_of_comments"># of Comments</th>
       <th class="admin_edit_del"></th>
     </tr>
     <% for post in @posts %>
@@ -43,7 +43,7 @@
 <% end %>
 
 <p>
-<%= link_to "New post", new_admin_post_path %> | 
-<%= link_to "Recent comments", recent_comments_path %>
+<%= link_to "New Post", new_admin_post_path %> | 
+<%= link_to "Recent Comments", recent_comments_path %>
 </p>
 

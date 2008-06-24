@@ -1,11 +1,11 @@
-<h3>List of Users</h3>
+<h2>User Accounts</h2>
 
-<% for @user in @users %>
+<% for user in @users %>
   <div id='list-#{@user.id}'>
-    <%= h(@user.name) %>
-    <%= link_to "Show", admin_user_path(@user) %>
-    <% if is_admin?  && @user != current_user%>
-      <%= link_to "delete", admin_user_path(@user), :method => :delete, :confirm => 'Are you sure?' %>
+    <%= h(user.name) %>
+    <%= link_to "Show", admin_user_path(user) %>
+    <% if is_admin?  && user != current_user%>
+      <%= link_to "delete", admin_user_path(user), :method => :delete, :confirm => 'Are you sure?' %>
     <% end %>
   </div>
 <% end %>

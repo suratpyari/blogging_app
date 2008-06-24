@@ -143,12 +143,8 @@ a:hover
   float: left;
 }
 
-#dashboard li, #categories li {
-/*  color: #449744;*/
-}
-
-#dashboard li,{
-	list-style:;
+#dashboard li{
+	padding:1px;
 }
 
 #categories li {
@@ -171,20 +167,45 @@ table#post_index{
 
 #post_index td, #post_index th{
   border: 1px solid #449744;
+	padding:5px 0px 5px 5px;
 }
 
 #post_index th{
-  background: #ada;
-}
-.admin_title{
-  width: 250px;
-}
-.admin_no_of_comments{
-  width: 70px;
+  background: #AADDAA;
 }
 
-#edit_del_user{
+#post_index .admin_title{
+	width:40%;
+}
+
+#post_index .admin_created{
+	width:10%;
+	text-align:center;
+}
+
+#post_index .admin_username{
+	width:10%;
+	text-align:center;
+}
+
+#post_index .admin_status{
+	width:10%;
+	text-align:center;
+}
+
+#post_index .admin_tags{
+
+}
+
+#post_index .admin_no_of_comments{
+ 	width:5%;
+	text-align:center;
+}
+
+#post_index .admin_edit_del{
   clear: both;
+	width:10%;
+	text-align:center;
 }
 
 .fieldWithErrors input, .fieldWithErrors textarea, .fieldWithErrors td{
