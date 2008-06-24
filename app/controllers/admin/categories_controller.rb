@@ -36,7 +36,7 @@ class Admin::CategoriesController < Admin::BaseController
   def edit
     @category = Category.find(params[:id])
     render :update do |page|
-      if @category.category_name = "Uncategorized"
+      if @category.category_name == "Uncategorized"
         page.replace :flash, "<div id='flash'>Can not edit Uncategorized</div>"
       else
         page.replace :catform, :partial => 'edit_form'
@@ -48,7 +48,7 @@ class Admin::CategoriesController < Admin::BaseController
   def update
     @cat = Category.find(params[:id])
     render :update do |page|
-      if @cat.category_name = "Uncategorized"
+      if @cat.category_name == "Uncategorized"
         page.replace :flash, "<div id='flash'>can not update Uncategorized</div>"
         page.replace :catform, :partial => 'new_form'
       else

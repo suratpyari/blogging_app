@@ -1,3 +1,6 @@
+body{
+  color: #565; 
+}
 .divitem, .divfield{
   width: 35%;
   margin: 0;
@@ -147,6 +150,10 @@ table{
 }
 #post_index td, #post_index th{
   border: 1px solid #449744;
+}
+
+#post_index th{
+  background: #ada;
 }
 .admin_title{
   width: 250px;
