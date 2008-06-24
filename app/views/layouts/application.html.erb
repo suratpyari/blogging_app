@@ -13,9 +13,7 @@
       </div>
       <%= yield :layout %>
     </div>
-    <div id="tags">
-      <%= render(:partial => "shared/side_bar") %>
-    </div>
-      <%= render(:partial => "shared/footer") %>
+    <%= render(:partial => "shared/side_bar") %>
+    <%= render(:partial => "shared/footer") %>
   </body>
 </html>

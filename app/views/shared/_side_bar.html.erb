@@ -1,13 +1,18 @@
-<% cloud = Tag.cloud %>
-<% if cloud.length > 0 %>
-  <h3>Tags:</h3>
-  <% build_tag_cloud(cloud) do |tag, size| %>
-    <%= link_to(truncate(tag, 9), tag_url(tag), {:style => "font-size: #{size}" } ) %>
-  <% end %>
-<% end %>
-<hr />
-<h3>Recent Posts</h3>
+<div id = "sidebar">
+  <div id="tags">
+    <% cloud = Tag.cloud %>
+    <% if cloud.length > 0 %>
+      <h3>Tags:</h3>
+      <% build_tag_cloud(cloud) do |tag, size| %>
+        <%= link_to(truncate(tag, 9), tag_url(tag), {:style => "font-size: #{size}" } ) %>
+      <% end %>
+    <% end %>
+  </div>
+  <div id="recentposts">
+    <h3>Recent Posts</h3>
 
-<% for post in recent_posts %>
-  <%= link_to truncate(post.title, 15), post_path(post) %><br />
-<% end %>
+    <% for post in recent_posts %>
+      <%= link_to truncate(post.title, 15), post_path(post) %><br />
+    <% end %>
+  </div>
+</div>

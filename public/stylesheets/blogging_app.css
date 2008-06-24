@@ -2,13 +2,6 @@ body{
   color: #111111;
 }
 
-.divitem, .divfield{
-  width: 35%;
-  margin: 0;
-  padding: 1%;
-  float: left;
-}
-
 a, h1, h2, h3, hr{
   color: #449744;
 }
@@ -23,9 +16,14 @@ a:hover
 	color:green;
 }
 
+.divitem, .divfield{
+  width: 40%;
+  padding: 1%;
+  float: left;
+}
+
 .divitem{
   clear: both;
-  width: 40%;
 }
 
 #navbar {
@@ -66,16 +64,19 @@ a:hover
   float: left;
 }
 
-#application_body #tags {
-  width: 15%;
-  padding: 3%;
-  margin-top: 3%;
-  margin-bottom: 3%;
-  border: 1px solid #449744;
+#application_body #sidebar {
+  width: 20%;
+  margin: 3% 0%;
   float: right;
 }
 
-#application_body #tags ul{
+#sidebar #tags, #sidebar #recentposts{
+  padding: 1%;
+  margin-bottom: 3%;
+  border: 1px solid #449744;
+}
+
+#application_body #sidebar #tags ul{
   list-style: none;
 }
 
