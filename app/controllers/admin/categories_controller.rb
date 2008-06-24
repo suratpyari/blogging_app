@@ -4,7 +4,7 @@ class Admin::CategoriesController < Admin::BaseController
   before_filter :find_admin, :except => 'index'
 
   def index
-    @categories = Category.find(:all)
+    @categories = Category.find(:all, :conditions => ["category_name != 'Uncategorized'"]) rescue nil
     @category = Category.new if is_admin?
   end
 
@@ -36,18 +36,27 @@ class Admin::CategoriesController < Admin::BaseController
   def edit
     @category = Category.find(params[:id])
     render :update do |page|
-      page.replace :catform, :partial => 'edit_form'
-      page.replace "category-#{@category.id}", "<div id=category-#{@category.id}></div>"
+      if @category.category_name = "Uncategorized"
+        page.replace :flash, "<div id='flash'>Can not edit Uncategorized</div>"
+      else
+        page.replace :catform, :partial => 'edit_form'
+        page.replace "category-#{@category.id}", "<div id=category-#{@category.id}></div>"
+      end
     end
   end
 
   def update
     @cat = Category.find(params[:id])
-    @cat.update_attributes(params[:category])
-    @category = Category.new
     render :update do |page|
-      page.replace :catform, :partial => 'new_form'
-      page.replace "category-#{@cat.id}", :partial => 'category'
+      if @cat.category_name = "Uncategorized"
+        page.replace :flash, "<div id='flash'>can not update Uncategorized</div>"
+        page.replace :catform, :partial => 'new_form'
+      else
+        @cat.update_attributes(params[:category])
+        @category = Category.new
+        page.replace :catform, :partial => 'new_form'
+        page.replace "category-#{@cat.id}", :partial => 'category'
+      end
     end
   end
 
@@ -56,14 +65,14 @@ class Admin::CategoriesController < Admin::BaseController
     @category = Category.new
     render :update do |page|
       page.replace "category-#{@cat.id}", :partial => 'category'
-      page.replace :catform, :partial => 'form'
+      page.replace :catform, :partial => 'new_form'
     end
   end
 
   def cancel_new_form
     @category = Category.new
     render :update do |page|
-      page.replace :catform, :partial => 'form'
+      page.replace :catform, :partial => 'new_form'
     end
   end
 

@@ -134,4 +134,31 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_redirected_to dashboard_path
   end
 
+  def test_show_without_login
+    post :show, {:id => posts(:post1).id}
+    assert_redirected_to "/"
+    assert_equal "Login required", flash[:msg]
+  end
+
+  def test_show_unpublished_post_wrong_user
+    post :show, {:id => posts(:post_unpublished).id}, {:user_id => users(:not_admin).id}
+    assert_redirected_to admin_posts_path
+    assert_equal "This is an unpublished post", flash[:msg]
+  end
+
+  def test_show_unpublished_post_with_admin
+    post :show, {:id => posts(:post_unpublished).id}, {:user_id => users(:admin).id}
+    assert_response :success
+  end
+
+  def test_show_unpublished_post
+    post :show, {:id => posts(:post_unpublished).id}, {:user_id => users(:surat_pyari).id}
+    assert_response :success
+  end
+
+  def test_show_published_post
+    post :show, {:id => posts(:post1).id}, {:user_id => users(:not_admin).id}
+    assert_response :success
+  end
+
 end

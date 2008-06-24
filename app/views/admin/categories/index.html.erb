@@ -1,12 +1,14 @@
-<h2>Categories </h2>
-<% form_tag delete_admin_categories_path do -%>
-  <ul id = "categories">
-    <% for @cat in @categories %>
-      <%= render :partial => 'category' %>
+<% if @categories %>
+  <h2>Categories </h2>
+  <% form_tag delete_admin_categories_path do -%>
+    <ul id = "categories">
+      <% for @cat in @categories %>
+        <%= render :partial => 'category' %>
+      <% end %>
+    </ul>
+    <% if is_admin? %>
+      <%= submit_tag "Delete" %>
     <% end %>
-  </ul>
-  <% if is_admin? %>
-    <%= submit_tag "Delete" %>
   <% end %>
 <% end %>
 <% if is_admin? %>
