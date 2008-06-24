@@ -1,9 +1,5 @@
 body{
-  color: #444; 
-}
-
-#flash{
-  color: #000; 
+  color: #111111;
 }
 
 .divitem, .divfield{
@@ -16,8 +12,15 @@ body{
 a, h1, h2, h3, hr{
   color: #449744;
 }
+
 a {
   text-decoration: none
+}
+
+a:hover
+{
+	text-decoration:underline;
+	color:green;
 }
 
 .divitem{
@@ -117,7 +120,10 @@ a {
 }
 
 .error, #flash {
-  background: #D5DDF3;
+	margin-top:2px;
+	text-align:center;
+	color: #FF0000;
+	font-size:18px;
 }
 
 #login {
@@ -138,10 +144,11 @@ a {
   float: left;
 }
 
-#dashboard li, #categories li {
-  margin-top: 4%;
-  margin-left: 5%;
-  color: #449744;
+#dashboard li{
+	padding:1px;
+}
+
+#categories li {
   list-style: none;
 }
 
@@ -150,26 +157,56 @@ a {
   margin: 3%;
   text-align: left;
 }
+
 table{
   border-collapse: collapse;
 }
+
+table#post_index{
+	width:100%;
+}
+
 #post_index td, #post_index th{
   border: 1px solid #449744;
+	padding:5px 0px 5px 5px;
 }
 
 #post_index th{
-  background: #ada;
-  color: #262;
-}
-.admin_title{
-  width: 250px;
-}
-.admin_no_of_comments{
-  width: 70px;
+  background: #AADDAA;
 }
 
-#edit_del_user{
+#post_index .admin_title{
+	width:40%;
+}
+
+#post_index .admin_created{
+	width:10%;
+	text-align:center;
+}
+
+#post_index .admin_username{
+	width:10%;
+	text-align:center;
+}
+
+#post_index .admin_status{
+	width:10%;
+	text-align:center;
+}
+
+#post_index .admin_tags{
+
+}
+
+#post_index .admin_no_of_comments{
+ 	width:5%;
+	text-align:center;
+}
+
+#post_index .admin_edit_del{
   clear: both;
+	width:10%;
+	text-align:center;
 }
 
 .fieldWithErrors input, .fieldWithErrors textarea, .fieldWithErrors td{
