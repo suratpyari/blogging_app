@@ -14,10 +14,17 @@
   <% end %>
 
   <div class="postcomment">
-  <h3> Leave a comment </h3>  
-    <div class = 'error' id='comment_errors'></div>
-      <% remote_form_for [@post, @comment], :html => { :id => 'comment_form' } do %>
-        <%= render :partial => 'comments/form' %>
-      <% end %>
-  </div>
+    <div id="comment-preview" style="display: none"></div>
+    <h3> Leave a comment </h3>  
+      <div class = 'error' id='comment_errors'></div>
+        <% remote_form_for [@post, @comment], :html => { :id => 'comment_form' } do %>
+          <%= render :partial => 'comments/form' %>
+        <% end %>
+      <%= observe_form 'comment_form',
+                  :url => preview_post_comments_path(@post),
+                  :frequency => 1,
+                  :update => 'comment-preview' ,
+                  :complete => "Element.show('comment-preview')" %>
+
+    </div>
 

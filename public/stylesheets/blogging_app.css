@@ -104,7 +104,7 @@ a:hover
   text-align: right;
 }
 
-.post, .comment {
+.post, .comment, .postcomment #comment-preview {
   padding: 3%;
   border: 1px solid #449744;
   margin-top: 3%;

@@ -26,5 +26,9 @@ class CommentsController < ApplicationController
       end
     end
   end
+  
+  def preview
+    render :layout => false
+  end
 
 end
