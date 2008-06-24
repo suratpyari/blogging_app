@@ -1,6 +1,7 @@
 body{
-  color: #565; 
+  color: #111111;
 }
+
 .divitem, .divfield{
   width: 35%;
   margin: 0;
@@ -13,6 +14,12 @@ a, h1, h2, h3, hr{
 }
 a {
   text-decoration: none
+}
+
+a:hover
+{
+	text-decoration:underline;
+	color:green;
 }
 
 .divitem{
@@ -137,7 +144,14 @@ a {
 }
 
 #dashboard li, #categories li {
-  color: #449744;
+/*  color: #449744;*/
+}
+
+#dashboard li,{
+	list-style:;
+}
+
+#categories li {
   list-style: none;
 }
 

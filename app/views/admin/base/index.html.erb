@@ -1,10 +1,10 @@
 <ul id="dashboard">
-  <li><%= link_to "Home", "/" %></li>
+	<li>Go to site <%= link_to "HomePage", "/" %>
+  <li>There are <%= Post.published.size %> published and <%= Post.unpublished.size %> unpublished posts. Click <%= link_to "here", admin_posts_path %> to view them or <%= link_to "here", new_admin_post_path %> to create a new post.</li>
   <% if is_admin? %>
-    <li><%= link_to "Add New user", new_admin_user_path %></li>
+    <li>There are <%= User.count %> users, Click <%= link_to "here", admin_users_path %> to view them or <%= link_to "here", new_admin_user_path %> to add a new user.</li>
   <% end %>
-  <li><%= link_to "New post", new_admin_post_path %></li>
-  <li><%= link_to "Categories", admin_categories_path %></li>
-  <li><%= link_to "Recent comments", recent_comments_path %></li>
-  <li><%= link_to "Upload new file", new_admin_upload_path %></li>
+  <li>There are <%= Category.count %> categories. Click <%= link_to "here", admin_categories_path %> to view all of them.</li>
+  <li>There are <%= Comment.count %> post comments. Click <%= link_to "here", recent_comments_path %> to view them.</li>
+  <li>There are <%= Upload.count %> uploaded files. Click <%= link_to "here", admin_uploads_path %> to view all files or <%= link_to "here", new_admin_upload_path %> to upload new one.</li>
 </ul>

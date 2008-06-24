@@ -27,6 +27,14 @@ class Post < ActiveRecord::Base
 
   STATUS = [["Unpublished", 0],["Published", 1]]
 
+  def self.published
+    find(:all, :conditions => ["status = 1"])
+  end
+  
+  def self.unpublished
+    find(:all, :conditions => ["status = 1"])
+  end
+  
   def before_destroy
     self.taggings.each{|tagging| tagging.destroy}
   end
