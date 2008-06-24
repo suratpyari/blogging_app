@@ -2,4 +2,6 @@
 db/schema.rb
 config/database.yml
 *~
-
+public/uploads
+public/images/profile_images
+tmp/*

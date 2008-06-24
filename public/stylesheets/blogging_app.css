@@ -1,6 +1,11 @@
 body{
-  color: #565; 
+  color: #444; 
 }
+
+#flash{
+  color: #000; 
+}
+
 .divitem, .divfield{
   width: 35%;
   margin: 0;
@@ -154,6 +159,7 @@ table{
 
 #post_index th{
   background: #ada;
+  color: #262;
 }
 .admin_title{
   width: 250px;

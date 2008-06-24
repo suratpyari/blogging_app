@@ -49,11 +49,12 @@ class Admin::CategoriesController < Admin::BaseController
     @cat = Category.find(params[:id])
     render :update do |page|
       if @cat.category_name == "Uncategorized"
-        page.replace :flash, "<div id='flash'>can not update Uncategorized</div>"
+        page.replace :flash, "<div id='flash'>Can not update Uncategorized</div>"
         page.replace :catform, :partial => 'new_form'
       else
         @cat.update_attributes(params[:category])
         @category = Category.new
+        page.replace :flash, "<div id='flash'>Category updated</div>"
         page.replace :catform, :partial => 'new_form'
         page.replace "category-#{@cat.id}", :partial => 'category'
       end
