@@ -32,7 +32,7 @@ class Post < ActiveRecord::Base
   end
   
   def self.unpublished
-    find(:all, :conditions => ["status = 1"])
+    find(:all, :conditions => ["status = 0"])
   end
   
   def before_destroy
