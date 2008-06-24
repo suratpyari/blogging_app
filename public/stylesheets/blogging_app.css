@@ -112,7 +112,10 @@ a {
 }
 
 .error, #flash {
-  background: #D5DDF3;
+	margin-top:2px;
+	text-align:center;
+	color: #FF0000;
+	font-size:18px;
 }
 
 #login {
@@ -134,8 +137,6 @@ a {
 }
 
 #dashboard li, #categories li {
-  margin-top: 4%;
-  margin-left: 5%;
   color: #449744;
   list-style: none;
 }
@@ -145,9 +146,15 @@ a {
   margin: 3%;
   text-align: left;
 }
+
 table{
   border-collapse: collapse;
 }
+
+table#post_index{
+	width:100%;
+}
+
 #post_index td, #post_index th{
   border: 1px solid #449744;
 }
