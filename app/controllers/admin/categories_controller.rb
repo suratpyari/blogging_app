@@ -16,8 +16,10 @@ class Admin::CategoriesController < Admin::BaseController
         page.form.reset('category_form')
         page.replace_html :flash, "New category created"
         page.replace_html :category_error, ''
+        page.visual_effect(:highlight, "category-#{@cat.id}", :duration => 2)
       else
         page.replace_html :category_error, @cat.errors.full_messages.join('<br />')
+        page.visual_effect :shake, :category_error
       end
     end
   end
@@ -36,27 +38,24 @@ class Admin::CategoriesController < Admin::BaseController
   def edit
     @category = Category.find(params[:id])
     render :update do |page|
-      if @category.category_name == "Uncategorized"
-        page.replace :flash, "<div id='flash'>Can not edit Uncategorized</div>"
-      else
-        page.replace :catform, :partial => 'edit_form'
-        page.replace "category-#{@category.id}", "<div id=category-#{@category.id}></div>"
-      end
+      page.replace :flash, "<div id='flash'></div>"
+      page.replace :catform, :partial => 'edit_form'
+      page.replace "category-#{@category.id}", "<div id=category-#{@category.id}></div>"
     end
   end
 
   def update
     @cat = Category.find(params[:id])
     render :update do |page|
-      if @cat.category_name == "Uncategorized"
-        page.replace :flash, "<div id='flash'>Can not update Uncategorized</div>"
-        page.replace :catform, :partial => 'new_form'
-      else
-        @cat.update_attributes(params[:category])
+      if @cat.update_attributes(params[:category])
         @category = Category.new
         page.replace :flash, "<div id='flash'>Category updated</div>"
         page.replace :catform, :partial => 'new_form'
         page.replace "category-#{@cat.id}", :partial => 'category'
+        page.visual_effect(:highlight, "category-#{@cat.id}", :duration => 2)
+      else
+        page.replace_html :category_error, @cat.errors.full_messages.join('<br />')
+        page.visual_effect :shake, :category_error
       end
     end
   end

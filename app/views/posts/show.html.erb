@@ -8,7 +8,7 @@
           <h3><%= link_to comment.author, "http://" + comment.author_url %></h3> on
           <%= comment.created_at.strftime("%B %d, %Y") %> 
         </div>
-        <%= textilize(comment.content) %>
+        <%= RedCloth.new(comment.content, [:filter_html]).to_html %>
       </div>
     <% end %>
   <% end %>

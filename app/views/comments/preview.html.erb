@@ -1,6 +1,6 @@
 <h3>Preview</h3>
 <p>
-  <%= params[:comment][:content] %>
+  <%= RedCloth.new(params[:comment][:content], [:filter_html]).to_html %>
 <p>
 by
 <%= params[:comment][:author] %>

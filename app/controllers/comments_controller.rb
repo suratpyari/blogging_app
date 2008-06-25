@@ -9,20 +9,27 @@ class CommentsController < ApplicationController
     post = Post.find(params[:post_id])
     @comment = Comment.new(params[:comment])
     post.comments << @comment
-    simple_captcha_valid? ? @comment.status = 2 : @comment.status = 0
+    #simple_captcha_valid? ? @comment.status = 2 : @comment.status = 0
     if post.save
       msg = @comment.status == 2 ? "Your comment looks like spam and will show up once admin approves" : "This comment has been submitted"
       render :update do |page|
         page.replace_html :comment_errors, ''
         page.form.reset('comment_form')
-        page.replace_html :captcha , "#{show_simple_captcha}"
-        page.replace_html :flash , msg
+        page.replace_html :captcha , 
+                            show_simple_captcha(:label => "human authentication",
+                                                :image_style => 'embosed_silver')
+        page.delay(1) do
+          page.alert msg
+        end
       end
     else
       render :update do |page|
         page.replace_html :comment_errors, @comment.errors.full_messages.join('<br />')
+        page.visual_effect :shake, :comment_errors
         page.replace_html :comment_form, :partial => 'comments/form'
-        page.replace_html :captcha , "#{show_simple_captcha}"
+        page.replace_html :captcha , 
+                            show_simple_captcha(:label => "human authentication",
+                                                :image_style => 'embosed_silver')
       end
     end
   end

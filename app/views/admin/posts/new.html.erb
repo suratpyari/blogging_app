@@ -1,6 +1,6 @@
 <div id="new_post">
   <h3> New post</h3>
-  <div class = 'error'><%= error_messages_for 'post' %></div>
+  <div class = 'error' id = 'new_post_errors'><%= error_messages_for 'post' %></div>
   <% form_for [:admin, @post], :html => {:multipart => true, :id => "new-form"} do |f|%>
     <%= render :partial=> 'form' %>
     <div class ="divitem"><%= submit_tag "Create" %></div>
