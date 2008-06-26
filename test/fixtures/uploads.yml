@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 15
+# Schema version: 16
 #
 # Table name: uploads
 #
@@ -11,7 +11,6 @@
 #  size         :integer(11)     
 #  width        :integer(11)     
 #  height       :integer(11)     
-#  post_id      :integer(11)     
 #  created_at   :datetime        
 #  updated_at   :datetime        
 #

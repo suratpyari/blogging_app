@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 15
+# Schema version: 16
 #
 # Table name: posts
 #
@@ -10,6 +10,7 @@
 #  status     :integer(11)     
 #  created_at :datetime        
 #  updated_at :datetime        
+#  version    :integer(11)     
 #
 
 class Post < ActiveRecord::Base
