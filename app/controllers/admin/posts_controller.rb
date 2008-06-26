@@ -52,7 +52,7 @@ class Admin::PostsController < Admin::BaseController
   def destroy
     @post.destroy
     flash[:msg] = "#{@post.title} deleted"
-    redirect_to "/"
+    redirect_to admin_posts_path
   end
   
   def edit
