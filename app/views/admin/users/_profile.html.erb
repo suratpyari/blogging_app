@@ -4,6 +4,6 @@
   Email: <%= h(@user.email) %><br>
   <% if @user.biodata %>
     Biodata :<br>
-    <%=  textilize(@user.biodata) %>
+    <%= RedCloth.new(@user.biodata).to_html %>
   <% end %>
 </div>

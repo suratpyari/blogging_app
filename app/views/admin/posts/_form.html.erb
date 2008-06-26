@@ -14,7 +14,8 @@
   <div class ="divfield">
     <% @category = Category.find(:all, :conditions => ["category_name != 'Uncategorized'"]) %>
     <% for cat in @category %>
-      <%= check_box_tag "post[category_ids][]", "#{cat.id}" %><%= cat.category_name %><br />
+      <%= check_box_tag "post[category_ids][]", "#{cat.id}" %>
+      <%= cat.category_name %><br />
     <% end %>
   </div>
 

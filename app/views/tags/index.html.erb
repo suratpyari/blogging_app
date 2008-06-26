@@ -1,8 +1,6 @@
 <% if @tags %>
   <h3> Tags </h3>
-  <% for tag in @tags %>
-    <%= link_to tag.name, tag_path(tag.name) %><br />
-  <% end %>
+  <%= @tags.collect{|tag| link_to(tag.name, tag_path(tag.name))} %><br />
 <% else %>
   No tags yet
-<% end %> 
+<% end %>

@@ -2,9 +2,7 @@
   <h2>Categories </h2>
   <% form_tag delete_admin_categories_path do -%>
     <ul id = "categories">
-      <% for @cat in @categories %>
-        <%= render :partial => 'category' %>
-      <% end %>
+      <%= @categories.collect{|@cat| render(:partial => 'category')} %>
     </ul>
     <% if is_admin? %>
       <%= submit_tag "Delete" %>

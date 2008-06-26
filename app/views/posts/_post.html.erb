@@ -13,14 +13,12 @@
     by <%= link_to @post.user.username, user_path(@post.user.username)%>
   </div>
   <div class="postcontent">
-    <%= textilize(@post.content) %>
+    <%= RedCloth.new(@post.content).to_html %>
   </div>
   <div class="tags">
     <% if !@post.tags.empty? %>
       Tags:
-      <% for tag in @post.tags %>
-        <%= link_to tag.name, tag_path(tag.name) %>
-      <% end %>
+      <%= post.tags.collect{|tag| link_to(tag.name, tag_path(tag.name))}.join(",")  %>
     <% end %>
   </div>
 </div>

@@ -26,7 +26,7 @@
           <%= Post::STATUS[post.status][0] %>
         </td>
         <td class="admin_tags">
-          <%= post.tag_list %>
+          <%= post.tags.collect{|tag| link_to(tag.name, tag_path(tag.name))}.join(",")  %>
         </td>
         <td class="admin_no_of_comments">
           <%= link_to users_comments(post.id).size, admin_post_comments_path(post) %>

@@ -1,8 +1,6 @@
 <h1><%= @post.title %></h1>
 <h2>Comments</h2>
   <% if users_comments(@post.id) %>
-    <% for comment in users_comments(@post.id) %>
-      <%= render :partial => 'comment_list', :object => comment%>
-    <% end %>
+    <%= users_comments(@post.id).collect{|comment| render(:partial => 'comment_list', :object => comment)} %>
   <% end %>
 
