@@ -23,7 +23,7 @@ ActionController::Routing::Routes.draw do |map|
        # Directs /admin/products/* to Admin::ProductsController (app/controllers/admin/products_controller.rb)
       admin.resources :users, :collection => {:cancel => :get}
       admin.resources :base
-      admin.resources :posts, :collection => {:cancel => :get} do |post|
+      admin.resources :posts, :collection => {:cancel => :get}, :member => {:version => :get} do |post|
        post.resources :comments, :member => {:accept => :post}
       end
       admin.resources :uploads

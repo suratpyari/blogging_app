@@ -1,0 +1,20 @@
+<div class = 'post'>
+
+  <div class='version'>
+    <h2>Version<%= params[:version] %></h2>
+  </div>
+
+  <div class='title'>
+    <h1><%= h(@post_v.title) %></h1>
+  </div>
+
+  <div class="created">on
+    <%= @post_v.created_at.strftime("%B %d, %Y") %>
+  </div>
+
+  <div class="postcontent">
+    <%= RedCloth.new(@post_v.content).to_html %>
+  </div>
+  
+  <%= link_to "Original post", admin_post_path(Post.find(@post_v.post_id)) %>
+</div>

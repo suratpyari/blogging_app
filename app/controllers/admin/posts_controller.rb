@@ -1,6 +1,6 @@
 class Admin::PostsController < Admin::BaseController
 
-  before_filter :verify_post, :only => [:show, :edit, :update, :destroy]
+  before_filter :verify_post, :only => [:show, :edit, :update, :destroy, :version]
   before_filter :verify_user, :only => [:edit, :update, :destroy]
   
   def new
@@ -13,6 +13,15 @@ class Admin::PostsController < Admin::BaseController
       redirect_to admin_posts_path
     else
       render :partial => "posts/post", :layout => "admin"
+    end
+  end
+
+  def version
+    if @post.status == 0 && @post.user != current_user && !is_admin?
+      flash[:msg] = "This is an unpublished post"
+      redirect_to admin_posts_path
+    else
+      @post_v = @post.find_version(params[:version])
     end
   end
 

@@ -10,6 +10,6 @@
   </div>
   <div id="recentposts">
     <h3>Recent Posts</h3>
-    <%= recent_posts.collect{|post| link_to(truncate(post.title, 15), post_path(post))} %><br />
+    <%= recent_posts.collect{|post| link_to(truncate(post.title, 20), post_path(post))}.join("<br />") %>
   </div>
 </div>
