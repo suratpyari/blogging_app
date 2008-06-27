@@ -60,13 +60,13 @@ class Admin::PostsControllerTest < ActionController::TestCase
   def test_destroy_valid_user_not_admin
     post :destroy, {:id => posts(:post1).id, '_method' => 'delete'}, {:user_id => posts(:post1).user_id}
     assert_equal "#{posts(:post1).title} deleted", flash[:msg]
-    assert_redirected_to '/'
+    assert_redirected_to admin_posts_path
   end
 
   def test_destroy_by_admin
     post :destroy, {:id => posts(:post1).id, '_method' => 'delete'}, {:user_id => users(:admin).id}
     assert_equal "title1 deleted", flash[:msg]
-    assert_redirected_to '/'
+    assert_redirected_to admin_posts_path
   end
 
   def test_destroy_wrong_post
