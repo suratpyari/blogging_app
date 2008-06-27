@@ -1,5 +1,7 @@
 class Admin::BaseController < ApplicationController
 
+  before_filter :use_sitealizer
+
   before_filter :find_user
   layout 'admin'
 

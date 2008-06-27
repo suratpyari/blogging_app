@@ -5,6 +5,9 @@ require 'ftools'
 require 'RMagick'
 require 'digest/sha1'
 class ApplicationController < ActionController::Base
+
+  include Sitealizer
+
   helper :all # include all helpers, all the time
 
   # See ActionController::RequestForgeryProtection for details

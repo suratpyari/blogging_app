@@ -56,5 +56,6 @@ ActionController::Routing::Routes.draw do |map|
 
   map.simple_captcha '/simple_captcha/:action', :controller => 'simple_captcha'
   map.connect '/spellcheck', :controller => 'admin/users', :action => 'spellcheck'
+  map.connect '/sitealizer/:action', :controller => 'sitealizer'
 
 end
