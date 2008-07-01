@@ -11,7 +11,7 @@
         by <%= link_to post.user.username, user_path(post.user.username)%>
       </div>
       <div class="postcontent">
-        <%= truncate(post.content, 500) %>
+        <%= highlight(textilize(truncate(post.content, 500))) %>
       </div>
       <div class="tags">
         <% if !post.tags.empty? %>

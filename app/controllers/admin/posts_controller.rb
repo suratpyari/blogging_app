@@ -70,6 +70,12 @@ class Admin::PostsController < Admin::BaseController
     end
   end
 
+  def change_text_field
+    render :update do |page|
+      page.replace_html 'textareapostcontent', text_area(:post, :content, "value" => params[:content])
+    end
+  end
+
   private 
 
   def verify_user

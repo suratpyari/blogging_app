@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
 
   include Sitealizer
 
+
   helper :all # include all helpers, all the time
 
   # See ActionController::RequestForgeryProtection for details
@@ -33,6 +34,7 @@ class ApplicationController < ActionController::Base
                              :theme_advanced_toolbar_location => "top",
                              :theme_advanced_toolbar_align => "left",
                              :theme_advanced_statusbar_location => "bottom",
+                             :verify_html => false,
 	                           :theme_advanced_resizing => true})
 
   helper_method :current_user, :is_admin?

@@ -2,7 +2,9 @@
   <div class ="divfield"><%= text_field :post, :title %></div>
 
 <div class ="divitem">Content:</div>
-  <div class ="divfield"><%= text_area :post, :content, :class => "mce-editor" %></div>
+  <div id='textareapostcontent' class ="divfield">
+      <p>Please click <%= link_to_remote "here", :url => change_text_field_admin_posts_path(:content => @post.content) %>if you want normal text field</p><%= text_area :post, :content, :class => "mce-editor" %>
+  </div>
 
 <div class ="divitem">Tags:</div>
   <div class ="divfield"><%= text_field :tag, :name, :value => "#{@post.tag_list rescue ''}" %></div>

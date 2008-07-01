@@ -1,0 +1,27 @@
+HighlightFu
+===========
+HighlightFu is a simple plugin for highlighting code in your rails applications.
+It uses dp.SyntaxHighlighter to do so.
+
+Usage
+=====
+1. run rake highlight_fu:install to install javascripts and stalesheets
+2. on yor page add <%= highlight_include_assets %> to include javascripts and stylesheets 
+   for example you can place this in the layout template inside the head tag
+3. on the bottom of the page where you want to highlight code put <%= highlight_initialize %>
+4. now in the place you want to highlight code use the highlight helper
+   <%= highlight @post.body %>
+
+The highlight helpers scans for <pre lang="[LANG]>[CODE]</pre> and replaces that with the proper
+highlighting
+
+Available options for highlight
+===============================
+highlight helper can take some options to customize the look and feel of the highlighted code
+:nogutter - does not display line numbers
+:nocontrols - does not display controls (view plain, copy to clipboard, print and ?)
+:collapse - Will collapse the block by default
+:showcolumns - Will show row columns in the first line
+:firstline - a hash ({:firstline => 100) Will begin line count at value. Default value is 1
+
+

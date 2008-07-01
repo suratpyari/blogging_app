@@ -17,7 +17,7 @@
     by <%= link_to @post.user.username, user_path(@post.user.username)%>
   </div>
   <div class="postcontent">
-    <%= RedCloth.new(@post.content).to_html %>
+    <%= highlight(textilize(@post.content)) %>
   </div>
   <div class="tags">
     <% if !@post.tags.empty? %>
