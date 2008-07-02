@@ -5,6 +5,7 @@
     <%= tiny_mce if using_tiny_mce? %>
     <%= javascript_include_tag :defaults %>
     <%= highlight_include_assets %>
+    <%= auto_discovery_link_tag(type => :rss, :url => {:action => 'feed'}) %>
   </head>
   <body id="application_body">
     <%= render :partial => 'shared/header' %>

@@ -20,9 +20,6 @@ class PostsController < ApplicationController
 
   def feed
     @posts = Post.find(:all, :limit => 10, :order => "created_at DESC", :conditions => "status = 1")
-    response.headers['Content-Type'] = 'feed'
-    # Render the feed using an RXML template
-    render :action => 'feed', :layout => false
   end
 
 end
