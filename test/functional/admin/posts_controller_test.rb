@@ -34,7 +34,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
   end
 
   def test_create_with_user
-    post :create, {:post => {:title => 'title', :content => 'content', :status => 1}, :tag => {:name =>"tag1 tag2"}}, {:user_id => users(:surat_pyari).id}
+    post :create, {:post => {:title => 'title', :content => 'content', :status => 1, :parmalink => 'parmalink'}, :tag => {:name =>"tag1 tag2"}}, {:user_id => users(:surat_pyari).id}
     #p post_path(assigns["post"].id).to_s
     #assert_redirected_to post_path(assigns["post"])
     assert_equal "new post created", flash[:msg]
@@ -135,29 +135,29 @@ class Admin::PostsControllerTest < ActionController::TestCase
   end
 
   def test_show_without_login
-    post :show, {:id => posts(:post1).id}
+    post :show, {:id => posts(:post1).parmalink}
     assert_redirected_to "/"
     assert_equal "Login required", flash[:msg]
   end
 
   def test_show_unpublished_post_wrong_user
-    post :show, {:id => posts(:post_unpublished).id}, {:user_id => users(:not_admin).id}
+    post :show, {:id => posts(:post_unpublished).parmalink}, {:user_id => users(:not_admin).id}
     assert_redirected_to admin_posts_path
     assert_equal "This is an unpublished post", flash[:msg]
   end
 
   def test_show_unpublished_post_with_admin
-    post :show, {:id => posts(:post_unpublished).id}, {:user_id => users(:admin).id}
+    post :show, {:id => posts(:post_unpublished).parmalink}, {:user_id => users(:admin).id}
     assert_response :success
   end
 
   def test_show_unpublished_post
-    post :show, {:id => posts(:post_unpublished).id}, {:user_id => users(:surat_pyari).id}
+    post :show, {:id => posts(:post_unpublished).parmalink}, {:user_id => users(:surat_pyari).id}
     assert_response :success
   end
 
   def test_show_published_post
-    post :show, {:id => posts(:post1).id}, {:user_id => users(:not_admin).id}
+    post :show, {:id => posts(:post1).parmalink}, {:user_id => users(:not_admin).id}
     assert_response :success
   end
 

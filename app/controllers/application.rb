@@ -7,7 +7,7 @@ require 'digest/sha1'
 class ApplicationController < ActionController::Base
 
   include Sitealizer
-
+  before_filter :use_sitealizer unless RAILS_ENV == 'test'
 
   helper :all # include all helpers, all the time
 
@@ -84,8 +84,16 @@ class ApplicationController < ActionController::Base
   end
 
   # if post with given id exists it returns post of that id else redirects to posts/index
+  def verify_post_parmalink
+    @post = Post.find_by_parmalink(params[:id])
+    if @post.nil?
+      flash[:msg] = "Post with this id does not exist"
+      redirect_to dashboard_path
+    end
+  end
+
   def verify_post
-    @post = (Post.find(params[:id]) rescue nil)
+    @post = Post.find(params[:id]) rescue nil
     if @post.nil?
       flash[:msg] = "Post with this id does not exist"
       redirect_to dashboard_path

@@ -22,23 +22,26 @@
 #   column: value
 
 post1:
- id:      1
- title:   title1
- content: content1
- user_id: 1
- status:  1
+ id:        1
+ title:     title1
+ content:   content1
+ user_id:   1
+ status:    1
+ parmalink: title1
 
 post_published:
- id:      2
- title:   title for published post
- content: content for published post
- user_id: 1
- status:  1
+ id:        2
+ title:     title for published post
+ content:   content for published post
+ user_id:   1
+ status:    1
+ parmalink: title-for-published-post
 
 post_unpublished:
- id:      3
- title:   title for unpublished post
- content: content for unpublished post
- user_id: 1
- status:  0
+ id:        3
+ title:     title for unpublished post
+ content:   content for unpublished post
+ user_id:   1
+ status:    0
+ parmalink: title-for-unpublished-post
 

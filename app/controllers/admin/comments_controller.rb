@@ -12,9 +12,6 @@ class Admin::CommentsController < Admin::BaseController
   end  
 
   # Accepts comment
-  def index
-    @post = Post.find(params[:post_id])
-  end
 
   def accept
     @comment.update_attribute('status', 1)
@@ -26,7 +23,7 @@ class Admin::CommentsController < Admin::BaseController
   # Destroy comment 
   def destroy
     @comment.destroy
-    redirect_to admin_post_comments_path(@comment.commentable)
+    redirect_to recent_comments_path
   end
 
   private

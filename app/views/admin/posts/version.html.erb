@@ -16,5 +16,6 @@
     <%= RedCloth.new(@post_v.content).to_html %>
   </div>
   
-  <%= link_to "Original post", admin_post_path(Post.find(@post_v.post_id)) %>
+  <% post = Post.find(@post_v.post_id) %>
+  <%= link_to "Original post", admin_post_path(:action => "show", :slug => (post.parmalink ? post.parmalink : "")) %>
 </div>

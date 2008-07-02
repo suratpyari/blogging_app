@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
 
-  before_filter :verify_post, :only => :show
+  before_filter :verify_post_parmalink, :only => :show
+  layout "application", :except => [:feed]
 
   # Lists the posts  
   def index
@@ -15,6 +16,13 @@ class PostsController < ApplicationController
     else
       @comment = Comment.new
     end
+  end
+
+  def feed
+    @posts = Post.find(:all, :limit => 10, :order => "created_at DESC", :conditions => "status = 1")
+    response.headers['Content-Type'] = 'feed'
+    # Render the feed using an RXML template
+    render :action => 'feed', :layout => false
   end
 
 end

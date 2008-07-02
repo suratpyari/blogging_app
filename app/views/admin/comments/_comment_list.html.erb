@@ -4,9 +4,10 @@
     <h3><%= link_to comment_list.author, "http://" + comment_list.author_url %></h3> on
     <%= comment_list.created_at.strftime("%B %d, %Y") %> 
   </div>
-  <%= RedCloth.new(comment_list.content).to_html %>
-  <%= RedCloth.new("by **"+comment_list.author+"**\n").to_html %>
-  <%= RedCloth.new("Email: _"+comment_list.email+"_\n").to_html %>
+  <%= textilize(comment_list.content) %>
+  <%= textilize("by **"+comment_list.author+"**\n") %>
+  <%= textilize("Email: _"+comment_list.email+"_\n") %>
+  on post <%= link_to comment_list.commentable.title, admin_post_path(:action => "show", :slug => (comment_list.commentable.parmalink ? comment_list.commentable.parmalink : "")) %><br />
   <% if comment_list.commentable.user == current_user || is_admin? %>
     <div id='status-<%= comment_list.id %>' >
       <%= link_to_remote comment_list.comment_status, :url => accept_admin_post_comment_path(comment_list.commentable, comment_list) %>

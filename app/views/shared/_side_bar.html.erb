@@ -10,6 +10,6 @@
   </div>
   <div id="recentposts">
     <h3>Recent Posts</h3>
-    <%= recent_posts.collect{|post| link_to(truncate(post.title, 20), post_path(post))}.join("<br />") %>
+    <%= recent_posts.collect{|post| link_to(truncate(post.title, 20), post_path(:action => "show", :slug => (post.parmalink ? post.parmalink : "")))}.join("<br />") %>
   </div>
 </div>

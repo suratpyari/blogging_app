@@ -28,6 +28,7 @@ ActionController::Routing::Routes.draw do |map|
       end
       admin.resources :uploads
       admin.resources :categories, :collection => {:delete => :post, :cancel_new_form => :post}, :member => {:cancel_edit_form => :post}
+      admin.post 'posts/:slug', :controller => 'post', :action => 'show'
     end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
@@ -57,5 +58,6 @@ ActionController::Routing::Routes.draw do |map|
   map.simple_captcha '/simple_captcha/:action', :controller => 'simple_captcha'
   map.connect '/spellcheck', :controller => 'admin/users', :action => 'spellcheck'
   map.connect '/sitealizer/:action', :controller => 'sitealizer'
-
+  map.post 'posts/:slug', :controller => 'post', :action => 'show'
+  map.connect '/feed', :controller => 'posts', :action => 'feed'
 end

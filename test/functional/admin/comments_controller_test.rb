@@ -8,8 +8,8 @@ class Admin::CommentsControllerTest < ActionController::TestCase
   end
 
   def test_destroy
-    post :destroy, {:id => comments(:comment1_for_post1), :post_id => comments(:comment1_for_post1).commentable_id, '_method' => 'delete'}, {:user_id => posts(:post1).user_id}
-    assert_redirected_to admin_post_comments_path(1)
+    post :destroy, {:id => comments(:comment1_for_post1).id, :post_id => comments(:comment1_for_post1).commentable_id, '_method' => 'delete'}, {:user_id => posts(:post1).user_id}
+    assert_redirected_to recent_comments_path
   end
 
   def test_destroy_without_user

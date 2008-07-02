@@ -14,7 +14,7 @@
     <% for post in @posts %>
       <tr class ="admin_post" id = "post-<%= post.id %>" >
         <td class="admin_title">
-          <%= link_to h(post.title), admin_post_path(post) %>
+          <%= link_to h(post.title), admin_post_path(:action => "show", :slug => (post.parmalink ? post.parmalink : "")) %>
         </td>
         <td class="admin_created">
           <%= post.created_at.strftime("%B %d, %Y") %>
